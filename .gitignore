@@ -1,0 +1,35 @@
+# For God so loved the world, that He gave His only begotten Son, that all who believe in Him should not perish but have everlasting life
+
+# Thanks Jesus for a more complete list from https://github.com/brunch/dead-simple/blob/master/.gitignore
+## Uncomment line below if you prefer to
+## keep compiled files out of version control
+dist/
+# Numerous always-ignore extensions
+*.diff
+*.err
+*.orig
+*.log
+*.rej
+*.swo
+*.swp
+*.vi
+*~
+*.sass-cache
+
+# OS or Editor folders
+.DS_Store
+.cache
+.project
+.settings
+.tmproj
+nbproject
+Thumbs.db
+
+# NPM packages folder.
+node_modules/
+
+# Brunch folder for temporary files.
+tmp/
+
+# Brunch output folder.
+public/
