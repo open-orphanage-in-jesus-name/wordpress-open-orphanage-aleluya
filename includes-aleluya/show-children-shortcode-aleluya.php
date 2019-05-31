@@ -98,10 +98,14 @@ ALELUYA;
     $str_aleluya .= "</table></tr></td>";
     $str_aleluya .= "</table>";
 
+
       //$str_aleluya.=get_the_meta();
   endwhile;
 
-  return $str_aleluya . "</div><div style='clear:both'></div><!--Jesus Christ is the Lord-->";
+  $str_aleluya .= "</div><div style='clear:both'></div>";
+
+
+  return $str_aleluya."<!--Jesus Christ is the Lord-->";
 }
 add_shortcode( 'oo_aleluya', 'oo_aleluya_func' );
 

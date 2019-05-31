@@ -24,6 +24,8 @@ function register_oosettings_aleluya() { // whitelist options
   register_setting( 'oo-option-group1-aleluya', 'oo_sponsor_request_ifttt_event_name_aleluya');
   register_setting( 'oo-option-group1-aleluya', 'oo_ifttt_key_aleluya');
   register_setting( 'oo-option-group1-aleluya', 'oo_notify_emails_aleluya');
+  register_setting( 'oo-option-group1-aleluya', 'oo_stripe_pk_key_aleluya');
+  register_setting( 'oo-option-group1-aleluya', 'oo_stripe_sk_key_aleluya');
   //register_setting( 'oo-option-group1-aleluya', 'option_etc' );
 }
 function oo_show_about_Jesus_page_aleluya() {
@@ -93,6 +95,21 @@ do_settings_sections( 'oo-option-group1-aleluya' );
       <td>
         <input type="text" name="oo_ifttt_key_aleluya" value="<?php echo esc_attr( get_option('oo_ifttt_key_aleluya') ); ?>" />
         <p>An <a href="https://www.ifttt.com">IFTTT</a> Webhook key for IFTTT events fired.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+    <th scope="row">Stripe PK Api key:</th>
+      <td>
+        <input type="text" name="oo_stripe_pk_key_aleluya" value="<?php echo esc_attr( get_option('oo_stripe_pk_key_aleluya') ); ?>" />
+        <p>To enable <a href="https://www.stripe.com">Stripe</a> card processing, please place your <a href="https://stripe.com/docs/keys">PK api key</a>.</p>
+      </td>
+    </tr> 
+    <tr valign="top">
+    <th scope="row">Stripe SK Api key:</th>
+      <td>
+        <input type="text" name="oo_stripe_sk_key_aleluya" value="<?php echo esc_attr( get_option('oo_stripe_sk_key_aleluya') ); ?>" />
+        <p>To enable <a href="https://www.stripe.com">Stripe</a> card processing, please also place your <a href="https://stripe.com/docs/keys">SK api key</a>.</p>
       </td>
     </tr>
 

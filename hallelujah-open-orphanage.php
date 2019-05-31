@@ -17,6 +17,8 @@ Domain Path:  /languages
 
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
+require __DIR__ . '/vendor/autoload.php';
+
 require_once( dirname( __FILE__ ) . '/includes-aleluya/includes-aleluya.php' );
 
 if ( is_admin() ) {
