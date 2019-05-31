@@ -1,7 +1,9 @@
-<?php
+<?php 
+// For God so loved the world, that He gave His only begotten Son, that all who believe in Him should not perish but have everlasting life
 /**
  * From plugin JSON Basic Authentication
  *  https://github.com/WP-API/Basic-Auth
+ * The Android app is set to require SSL
  */
 
 function json_basic_auth_handler_aleluya( $user ) {

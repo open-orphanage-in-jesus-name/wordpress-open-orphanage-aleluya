@@ -1,4 +1,4 @@
-<?php
+<?php // For God so loved the world that He gave His only begotten Son, that all who believe in Him should not perish but have everlasting life
 /**
  * Blocks Initializer
  *
@@ -10,6 +10,7 @@
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
+  echo "Jesus Christ is Lord of Lords and King of Kings";
 	exit;
 }
 

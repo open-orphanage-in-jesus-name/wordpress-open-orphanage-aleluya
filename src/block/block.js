@@ -31,9 +31,9 @@ registerBlockType( 'cgb/block-oo1b-aleluya', {
 	icon: 'shield', // Block icon from Dashicons → https://developer.wordpress.org/resource/dashicons/.
 	category: 'common', // Block category — Group blocks together based on common traits E.g. common, formatting, layout widgets, embed.
 	keywords: [
-		__( 'oo1b-aleluya — CGB Block' ),
-		__( 'CGB Example' ),
-		__( 'create-guten-block' ),
+		__( 'Open Orphanage' ),
+		__( 'Orphanage' ),
+		__( 'Aleluya' ),
 	],
 	attributes: {
   'first_names_aleluya': {type: 'string', source: "meta", meta: 'first_names_aleluya'},
@@ -57,18 +57,8 @@ registerBlockType( 'cgb/block-oo1b-aleluya', {
 		// Creates a <p class='wp-block-cgb-block-oo1b-aleluya'></p>.
 		return (
 			<div className={ props.className }>
-				<p> — Hallelujah Jesus Christ is Lord - .</p>
-				<p>
-					CGB BLOCK: <code>oo1b-aleluya</code> is a new Gutenberg block
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
+				<p> — Hallelujah!!! Jesus Christ is Lord - .</p>
+				Here all the Open Orphanage children will be displayed, similar to using the oo_aleluya shortcode.
 			</div>
 		);
 	},
@@ -83,19 +73,8 @@ registerBlockType( 'cgb/block-oo1b-aleluya', {
 	 */
 	save: function( props ) {
 		return (
-			<div>
-				<p>— aleluya Hello from the frontend.</p>
-				<p>
-					CGB BLOCK: <code>oo1b-aleluya</code> is a new Gutenberg block.
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
+			<div> [oo_aleluya/]
+				
 			</div>
 		);
 	},
