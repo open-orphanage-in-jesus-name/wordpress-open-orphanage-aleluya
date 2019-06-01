@@ -33,9 +33,9 @@ ALELUYA;
   $str_aleluya .=<<<ALELUYA
 <script>
 var oo_children_aleluya = [];
-function oo_sponsor_button_clicked_aleluya(id_aleluya) { 
+function oo_sponsor_button_clicked_aleluya(id_aleluya) {
   var email_aleluya = prompt('Please enter your email, we will use this to contact you regarding sponsoring the requested child:');
-  
+
   if (!email_aleluya) return;
   var xhr_aleluya = new XMLHttpRequest();
   xhr_aleluya.open('POST', '/');
@@ -79,18 +79,19 @@ ALELUYA;
     $str_aleluya .= "<tr><td align='center'><table class='oo_child_meta_aleluya'>";
     foreach($public_child_fields_aleluya as $cf_aleluya => $cf_desc_aleluya) {
       $cf_val_aleluya = get_post_meta($id_aleluya, $cf_aleluya)[0];
-      
+
         $str_aleluya .=<<<ALELUYA
         <tr><td class='label_aleluya'>$cf_desc_aleluya: </td><td class='content_aleluya'>
         $cf_val_aleluya
         </td></tr>
 ALELUYA;
-      
+
     }
     $bd_val_aleluya = get_post_meta($id_aleluya, "birth_date_aleluya")[0] . "";
     $bd_date_aleluya = DateTime::createFromFormat('Y/n/j', $bd_val_aleluya);
     $now_aleluya    = new DateTime();
-    $age_aleluya   = $now_aleluya->diff($bd_date_aleluya);
+
+    $age_aleluya   = $bd_date_aleluya ? $now_aleluya->diff($bd_date_aleluya) : "";
 
     $str_aleluya .= "<tr><td class='label_aleluya'>Age: </td><td class='content_aleluya'>";
     $str_aleluya .= $age_aleluya->y ;
