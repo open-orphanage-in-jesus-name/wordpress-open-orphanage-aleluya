@@ -19,7 +19,7 @@ function oo_show_extra_supporter_profile_fields_aleluya( $user ) {
 
   <table class="form-table">
     <tr>
-      <th><label for="year_of_birth"><?php esc_html_e( '🕆 Zipcode', 'crf' ); ?></label></th>
+      <th><label for="zipcode_aleluya"><?php esc_html_e( '🕆 Zipcode', 'crf' ); ?></label></th>
       <td>
         <input type="number"
              min="10000"
@@ -27,7 +27,7 @@ function oo_show_extra_supporter_profile_fields_aleluya( $user ) {
              step="1"
              id="zipcode_aleluya"
              name="zipcode_aleluya"
-             value=""
+             value="<?php echo get_user_meta( get_current_user_id(), 'zipcode_aleluya')[0]?>"
              class="regular-text"
         />
       </td>
@@ -40,15 +40,19 @@ function oo_show_extra_supporter_profile_fields_aleluya( $user ) {
         
           <div class="form-row">
 
-            <div id="card-element">
+            <div id="card-element-aleluya">
               <!-- A Stripe Element will be inserted here. -->
             </div>
 
             <!-- Used to display form errors. -->
-            <div id="card-errors" role="alert"></div>
-                        <label for="card-element">
-              Set New Credit or Debit Card Information via <a href="https://stripe.com">Stripe</a> we do not store this locally.
+            <div id="card-errors-aleluya" role="alert"></div>
+
+            <button id="newcard-button-aleluya">Assign New Card</button>
+
+            <label for="card-element-aleluya">
+              Set New Credit or Debit Card Information via <a href="https://stripe.com">Stripe</a> we will not charge you right now, nor do not store this locally.
             </label>
+            
           </div>
 
          
@@ -83,19 +87,17 @@ function oo_supporter_profile_update_errors_aleluya( $errors, $update, $user ) {
 add_action( 'personal_options_update', 'oo_update_supporter_profile_fields_aleluya' );
 add_action( 'edit_user_profile_update', 'oo_update_supporter_profile_fields_aleluya' );
 
-function oo_update_supporter_profile_fields_aleluya( $user_id ) {
-  if ( ! current_user_can( 'edit_user', $user_id ) ) {
+function oo_update_supporter_profile_fields_aleluya( $user_id_aleluya ) {
+  if ( ! current_user_can( 'edit_user', $user_id_aleluya ) ) {
     return false;
   }
 
-  if ( ! empty( $_POST['year_of_birth'] ) && intval( $_POST['year_of_birth'] ) >= 1900 ) {
-    update_user_meta( $user_id, 'year_of_birth', intval( $_POST['year_of_birth'] ) );
-  }
+  //if ( ! empty( $_POST['zipcode_aleluya'] ) && intval( $_POST['zipcode_aleluya'] ) >= 1900 ) {
+    update_user_meta( get_current_user_id(), 'zipcode_aleluya', $_POST['zipcode_aleluya']  );
+  //}
+
+  stripeCreateOrUpdateCustomer_aleluya(get_current_user_id());
 }
-
-
-/* Describe what the code snippet does so you can remember later on */
-if( get_option('oo_stripe_pk_key_aleluya')  ) 
 
 //Add the stripe api script to the site
 if( get_option('oo_stripe_pk_key_aleluya') ) {
@@ -103,6 +105,8 @@ if( get_option('oo_stripe_pk_key_aleluya') ) {
   add_action( 'admin_enqueue_scripts', function() { wp_enqueue_script( "oo_stripe_aleluya", 'https://js.stripe.com/v3/' ); });
 
 }
+
+
 function oo_stripe_footer_aleluya(){
   ?>
   <script>
@@ -134,7 +138,41 @@ function oo_stripe_footer_aleluya(){
     var card_aleluya = elements_aleluya.create('card', {style: style_aleluya});
 
     // Add an instance of the card Element into the `card-element` <div>.
-    card_aleluya.mount('#card-element');
+    card_aleluya.mount('#card-element-aleluya');
+
+    function oo_stripeTokenHandler_aleluya(token_aleluya) {
+      // Insert the token ID into the form so it gets submitted to the server
+      var form_aleluya = document.getElementById('your-profile');
+      var hiddenInput_aleluya = document.createElement('input');
+      hiddenInput_aleluya.setAttribute('type', 'hidden');
+      hiddenInput_aleluya.setAttribute('name', 'oo_stripe_token_aleluya');
+      hiddenInput_aleluya.setAttribute('value', token_aleluya.id);
+      form_aleluya.appendChild(hiddenInput_aleluya);
+
+      var errorElement_aleluya = document.getElementById('card-errors-aleluya');
+      errorElement_aleluya.textContent = "Hallelujah - the new card will be assigned when you click 'Update Profile'. Thank You and God guide us and bless you in Jesus Holy name.";
+       alert("Hallelujah - the new card will be assigned when you click 'Update Profile'. Thank You and God guide us and bless you in Jesus Holy name.");
+
+    }
+    // Create a token or display an error when the form is submitted.
+    var button_aleluya = document.getElementById('newcard-button-aleluya');
+    button_aleluya.addEventListener('click', function(event_aleluya) {
+      event_aleluya.preventDefault();
+
+      stripe_aleluya.createToken(card_aleluya).then(function(result_aleluya) {
+        if (result_aleluya.error) {
+          // Inform the customer that there was an error.
+          var errorElement_aleluya = document.getElementById('card-errors-aleluya');
+          errorElement_aleluya.textContent = result_aleluya.error.message;
+        } else {
+          // Send the token to your server.
+          oo_stripeTokenHandler_aleluya(result_aleluya.token);
+        }
+      });
+    });
+
+
+
   </script>
   <?php
 };

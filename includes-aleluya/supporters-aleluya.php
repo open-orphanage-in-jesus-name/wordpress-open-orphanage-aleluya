@@ -3,20 +3,21 @@
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
 function stripeCustSkMetaTag_aleluya() {
-  return 'oo_stripe_'+hash('ripemd160', get_option('oo_stripe_sk_key_aleluya') ).'_customer_id_aleluya';
+  return 'oo_stripe_'.hash('ripemd160', get_option('oo_stripe_sk_key_aleluya') ).'_customer_id_aleluya';
 }
-//Creat customer
+
+
+//Create or update Stripe customer
 function stripeCreateOrUpdateCustomer_aleluya($user_id_aleluya) {
+
   if(! get_option('oo_stripe_sk_key_aleluya') ) return null;
   \Stripe\Stripe::setApiKey( get_option('oo_stripe_sk_key_aleluya') );
 
   $current_user_aleluya = get_user_by("id", $user_id_aleluya);
 
-
-  $stripe_customer_id_aleluya = get_user_meta($user_id_aleluya, stripeCustSkMetaTag_aleluya());
+  $stripe_customer_id_aleluya = get_user_meta($user_id_aleluya, stripeCustSkMetaTag_aleluya())[0];
 
   $fields_aleluya = [
-    "id" => $stripe_customer_id_aleluya,
     "description" => "Open Orphanage Customer #".$user_id_aleluya." for ".$current_user_aleluya->user_login." - ".$current_user_aleluya->user_email." on ".get_site_url(),
     "email" => $current_user_aleluya->user_email,
     "name" => $current_user_aleluya->user_firstname." ".$current_user_aleluya->user_lastname,
@@ -30,12 +31,17 @@ function stripeCreateOrUpdateCustomer_aleluya($user_id_aleluya) {
     ]
   ];
 
+  if(isset( $_POST['oo_stripe_token_aleluya'] )) {
+    $token_aleluya = $_POST['oo_stripe_token_aleluya'];
+    $fields_aleluya['source'] = $token_aleluya;
+  }
+
   if( ! $stripe_customer_id_aleluya ) {
     $customer_aleluya = \Stripe\Customer::create([ $fields_aleluya ]);
     update_user_meta($user_id_aleluya, stripeCustSkMetaTag_aleluya() , $customer_aleluya->id);
 
-  } else {    
-    $customer_aleluya = \Stripe\Customer::update( $fields_aleluya );
+  } else { 
+    $customer_aleluya = \Stripe\Customer::update( $stripe_customer_id_aleluya, $fields_aleluya );
 
   }
 
