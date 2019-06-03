@@ -156,7 +156,7 @@ function update_oo1_post_meta_cb_aleluya($value_aleluya, $object_aleluya, $field
         #  'first_name_aleluya'
         #);//[$field_name];//, true);
 #return true;
-error_log(" ALeluya " . $field_name_aleluya . " - $value_aleluya - ".$object_aleluya->ID);
+error_log(" Aleluya " . $field_name_aleluya . " - $value_aleluya - ".$object_aleluya->ID);
         return update_post_meta($object_aleluya->ID, $field_name_aleluya, $value_aleluya)[0];
 }
 

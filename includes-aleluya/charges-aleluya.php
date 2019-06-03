@@ -3,7 +3,9 @@
 // but have everlasting life
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
+/*
 
+// WIP
 
 function chargeStripe_aleluya() {
   if(! get_option('oo_stripe_sk_key_aleluya') ) return null;
@@ -22,5 +24,5 @@ function chargeStripe_aleluya() {
 }
 
 if(isset($_GET['cs_aleluya'])) chargeStripe_aleluya();
-
+*/
 

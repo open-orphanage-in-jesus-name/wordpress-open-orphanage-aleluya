@@ -1,17 +1,32 @@
 # For God So loved the world, that He gave His only begotten Son, that all who believe in Him should not perish but have everlasting life.
 
-Praise Jesus, this is a wordpress plugin. We hope to make many additions, right now it is meant to work alongside the [android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2)
+Praise Jesus, this is a Wordpress plug-in. We hope to make many additions, right now it is meant to work alongside the [Android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2)
 
 ### Mission
-🕆 Serve the Lord, Jesus, by providing free and open source software for orphanages, to help manage their operations and communications and to aid with meeting needs through fundraising and sponsorship.
+🕆 Serve the Lord, Jesus, by providing free and open source software for orphanages, to help manage their operations and communications and to aid with meeting needs through fund raising and sponsorship.
+
+ - [Homepage](https://openorphanage.org)
+ - [Facebook page - hallelujah](https://www.facebook.com/Open-Orphanage-in-Jesus-name-2168084633282357)
 
 
-[homepage](https://openorphanage.org)
-[facebook page - hallelujah](https://www.facebook.com/Open-Orphanage-in-Jesus-name-2168084633282357)
+
+### External Services
+
+The plug-in can optionally work with both IFTTT and with Stripe. 
+
+#### 🕆 Stripe
+Currently the plug-in allows integration with [Stripe](https://www.stripe.com). When a person signs up as a donor, it will create a stripe customer for the donor and attempt to synchronize the stripe customer details from Wordpress to Stripe. We currently are working on the on-site charging mechanism, and currently you are notified by email the child that a sponsor is interested in, and the user's email address. If stripe is not enabled, then you are still forwarded a users email when they indicate interest in a child. These are currently stored clear text in the password and demonstrated to everyone who is an administrator or has access to the database and backup SQL files.
+
+ - View the [Stripe Privacy Policy](https://stripe.com/privacy)
+
+#### 🕆 IFTTT
+If you place an [IFTTT](https://www.ifttt.com) web service key and event name, this will call that IFTTT webservice upon a person being interested in sponsoring a child. We may in the future expand what can be done through this service. These are currently stored clear text in the password and demonstrated to everyone who is an administrator or has access to the database and backup SQL files.
+
+ - View the [IFTTT Privacy Policy](https://ifttt.com/privacy)
+ 
 
 
-
-## Additional notes:
+## Additional Development Notes:
 
 This project was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block).
 

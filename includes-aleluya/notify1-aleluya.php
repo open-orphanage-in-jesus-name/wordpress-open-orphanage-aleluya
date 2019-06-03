@@ -5,6 +5,8 @@ defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
 function ifttt_post_notify_aleluya($v1_aleluya, $v2_aleluya, $v3_aleluya) {
 
+  //nonce verified outside of this function from oo_notify_init_aleluya
+
   update_option('oo_sponsor_request_ifttt_event_name_aleluya','new_cpnh_child_sponsor_request_aleluya');
   $eventName_aleluya = get_option('oo_sponsor_request_ifttt_event_name_aleluya');
   $eventKey_aleluya  = get_option('oo_ifttt_key_aleluya');
@@ -17,25 +19,29 @@ function ifttt_post_notify_aleluya($v1_aleluya, $v2_aleluya, $v3_aleluya) {
   );
 
   // Setup cURL
-  $ch_aleluya = curl_init("https://maker.ifttt.com/trigger/$eventName_aleluya/with/key/$eventKey_aleluya");
-  curl_setopt_array($ch_aleluya, array(
-      CURLOPT_POST => TRUE,
-      CURLOPT_RETURNTRANSFER => TRUE,
-      CURLOPT_HTTPHEADER => array(
-      //    'Authorization: '.$authToken,
-          'Content-Type: application/json'
-      ),
-      CURLOPT_POSTFIELDS => json_encode($postData_aleluya)
-  ));
 
-  // Send the request
-  $response_aleluya = curl_exec($ch_aleluya);
+  $body_aleluya = json_encode($postData_aleluya);
+
+  $args_aleluya = [
+    'body' => $body_aleluya,
+    'timeout' => 50,
+    'redirection' => 4,
+    'blocking' => true,
+    'httpversion' => '1.0',
+    'headers' => array(
+      'Content-Type: application/json'
+    ),
+    'cookies' => array()
+  ];
+
+  $response_aleluya = wp_remote_post( "https://maker.ifttt.com/trigger/$eventName_aleluya/with/key/$eventKey_aleluya" );
+
 
   // Check for errors
-  if($response_aleluya === FALSE){
-      die(curl_error($ch_aleluya));
-  }
-  echo "Success!";//" $response_aleluya"; 
+  //if($response_aleluya === FALSE){
+  //    die(curl_error($ch_aleluya));
+  //}
+  echo "Hallelujah - " . $response_aleluya["response"]["message"];
 
   // Decode the response
   //$responseData = json_decode($response, TRUE);
@@ -46,14 +52,28 @@ function ifttt_post_notify_aleluya($v1_aleluya, $v2_aleluya, $v3_aleluya) {
 }
 
 /** This is called from the front end */
+//Helps so that nonce function available etc
+add_action( 'init', 'oo_notify_init_aleluya' );
 
-if(isset($_POST["oo_email_aleluya"])) {
-  $email_aleluya = $_POST["oo_email_aleluya"];
-  $oo_id_aleluya = $_POST["oo_email_id_aleluya"];
-  $oo_nicknames_aleluya = get_post_meta($oo_id_aleluya,"nick_names_aleluya")[0];
-  if( get_option('oo_sponsor_request_ifttt_event_name_aleluya') ) ifttt_post_notify_aleluya($oo_id_aleluya, $oo_nicknames_aleluya, $email_aleluya);
-  error_log("✝ Aleluya sending mail" .
-  mail( get_option('oo_notify_emails_aleluya') ,"hallelujah - new request to Sponsor Child","✝ Child ID: $oo_id_aleluya - ✝ Child Nicknames: $oo_nicknames_aleluya - ✝ Reply to Email: $email_aleluya"));
-  echo "Great we have received your request for ".$oo_nicknames_aleluya." and will be contacting you soon, please bear with us as we are developing the system. God willing we hope to reply within 24-48 hours to $email_aleluya . Praise God for you in Jesus name";
-  exit;
+function oo_notify_init_aleluya() {
+  if(isset($_POST["oo_email_aleluya"])) {
+
+    wp_verify_nonce($_POST['wpchild_register_request_nonce_aleluya'], 'wpchild_register_request_nonce_aleluya');
+    $email_aleluya = sanitize_email( $_POST["oo_email_aleluya"] );
+    $oo_id_aleluya = intval( $_POST["oo_email_id_aleluya"] );
+    $oo_nicknames_aleluya = get_post_meta( $oo_id_aleluya, "nick_names_aleluya" )[0];
+
+    if( get_option('oo_sponsor_request_ifttt_event_name_aleluya') ) ifttt_post_notify_aleluya($oo_id_aleluya, $oo_nicknames_aleluya, $email_aleluya);
+
+    error_log("✝ Aleluya sending mail - " .
+        mail( get_option('oo_notify_emails_aleluya') ,
+              "hallelujah - new request to Sponsor Child","✝ Child ID: $oo_id_aleluya - ✝ Child Nicknames: $oo_nicknames_aleluya - ✝ Reply to Email: $email_aleluya"
+            )
+      );
+
+    // This is currently used as an ajax alert response
+    echo "Great we have received your request for ".$oo_nicknames_aleluya." and will be contacting you soon, please bear with us as we are developing the system. God willing we hope to reply within 24-48 hours to $email_aleluya . Praise God for you in Jesus name";
+
+    exit;
+  }
 }

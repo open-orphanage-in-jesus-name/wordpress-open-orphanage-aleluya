@@ -12,7 +12,7 @@ if ( is_admin() ){ // admin actions
 function add_oomenu_aleluya() {
 	//create new top-level menu
   add_menu_page('Open Orphanage Settings', '✝ Open Orphanage', 'administrator', 'oo_show_option_page1_aleluya', 'oo_show_option_page1_aleluya', "https://perffection.com/img/favicon32-aleluya.png?7aleluya" );
-  add_submenu_page( 'oo_show_option_page1_aleluya', '✝ About Jesus', 'About Jesus Christ', 'administrator', 'oo_about_Jesus_aleluya', 'oo_show_about_Jesus_page_aleluya' );
+  //add_submenu_page( 'oo_show_option_page1_aleluya', '✝ About Jesus', 'About Jesus Christ', 'administrator', 'oo_about_Jesus_aleluya', 'oo_show_about_Jesus_page_aleluya' );
 	//call register settings function
 	//add_action( 'admin_init', 'register_oosettings_aleluya' );
 }
@@ -28,6 +28,8 @@ function register_oosettings_aleluya() { // whitelist options
   register_setting( 'oo-option-group1-aleluya', 'oo_stripe_sk_key_aleluya');
   //register_setting( 'oo-option-group1-aleluya', 'option_etc' );
 }
+
+/*
 function oo_show_about_Jesus_page_aleluya() {
 ?>
 <div class="wrap">
@@ -36,6 +38,9 @@ function oo_show_about_Jesus_page_aleluya() {
 </div>
 <?
 }
+*/
+
+
 //
 function oo_show_option_page1_aleluya() {
 ?>
@@ -43,7 +48,10 @@ function oo_show_option_page1_aleluya() {
 
 <div class="wrap">
 <h1>✝ Open Orphanage Plugin Options</h1>
+
 <p>Welcome to the <a href="https://openorphanage.org">Open Orphanage</a> administrator for <a href="https://wordpress.org">Wordpress</a> in <a href="https://www.jesusfilm.org/watch/jesus.html/english.html">Jesus</a> name, Hallelujah.
+</p>
+
 <form method="post" action="options.php">
 <?php
 settings_fields( 'oo-option-group1-aleluya' );
