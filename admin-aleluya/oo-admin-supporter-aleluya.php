@@ -72,9 +72,6 @@ function oo_show_extra_supporter_profile_fields_aleluya( $user_aleluya ) {
 
       </td>
     </tr>
-
-
-ALELUYA;
   </table>
   <?php
 }
@@ -197,12 +194,66 @@ function oo_stripe_footer_aleluya(){
 add_action( 'show_user_profile', 'oo_show_child_support_profile_fields_aleluya' );
 add_action( 'edit_user_profile', 'oo_show_child_support_profile_fields_aleluya' );
 
+
+
 function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
-  $children_supported_json_aleluya = get_user_meta($user_aleluya->ID, "children_supported_json_aleluya")[0];
+  
+  $children_supported_aleluya = oo_get_user_children_supported_aleluya($user_aleluya);
   
   ?>
   <h3><?php esc_html_e( '🕆 Children I am Supporting (Hallelujah)', 'crf' ); ?></h3>
-  <p>Section coming soon God willing.</p>
+
+  <?php
+  if( empty( $children_supported_aleluya["children_aleluya"] ) ) { 
+    ?>
+    <p>You currently are not registered as a supporter of any children with this orphanage.</p>
+
+    <?php
+  } else {
+  ?>
+  <style>
+    img.oo_avatar_aleluya {height:128px;width:128px;text-align: top;padding:2px;border: 1px solid black; border-radius: 4px; box-shadow: 1px 1px 1px white;margin: 8px;}
+  </style>
+  <table class="form-table">
+
+  <?php
+    foreach( $children_supported_aleluya["children_aleluya"] as $child_aleluya ) {
+      $nick_names_aleluya = get_post_meta($child_aleluya["id_aleluya"],"nick_names_aleluya",true);
+      $avatar_media_id_aleluya = get_post_meta($child_aleluya['id_aleluya'], 'avatar_media_id_aleluya',true);
+      $avatar_media_url_aleluya =  !$avatar_media_id_aleluya ? "" : wp_get_attachment_url( $avatar_media_id_aleluya );
+
+    ?>
+    
+      <tr valign="top">
+
+      <th scope="row"><?php echo $nick_names_aleluya; ?></th>
+        <td>
+          <img src="<?php echo $avatar_media_url_aleluya; ?>" align="left" class="oo_avatar_aleluya"/>
+          <?php
+          if($child_aleluya["sponsorship_code"] == "requesting") {
+            ?>
+            <p>You are in the process of sponsoring this child</p>
+            <p> <input type="checkbox" name="accept_sponsorship_aleluya"/> check here and save profile to begin sponsorship at 40$ a month! </p>
+
+            <?php
+          } else if($child_aleluya["sponsorship_code"] == "sponsored") { ?>
+            <p>Hallelujah! You are currently sponsoring this child! </p>
+            <p><em><input type="checkbox" name="cancel_sponsorship_aleluya"/> check here and save profile to cancel your sponsorship, you will no longer be charged 40$ a month.</em></p>
+
+         
+            <?php
+          } else { ?>
+            <p>You have canceled sponsoring this child.</p> 
+
+          <?php 
+        } 
+        ?>
+        </td>
+      </tr>
+    <?php
+    }
+  }
+  ?>
   </table>
   <?php
 }

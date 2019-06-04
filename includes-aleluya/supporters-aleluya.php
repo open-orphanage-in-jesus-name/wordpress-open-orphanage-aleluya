@@ -7,6 +7,25 @@ function stripeCustSkMetaTag_aleluya() {
 }
 
 
+//Hallelujah
+function oo_get_user_children_supported_aleluya($user_aleluya) {
+  $children_supported_json_aleluya = get_user_meta($user_aleluya->ID, "children_supported_json_aleluya", true);
+
+  if($children_supported_json_aleluya) {
+    $children_supported_aleluya = json_decode($children_supported_json_aleluya, true);
+  } else {
+    $children_supported_aleluya = array(
+      "children_aleluya" => array()
+    );
+  }
+  return $children_supported_aleluya;
+}
+
+function oo_set_user_children_supported_aleluya($user_aleluya, $children_supported_aleluya) {
+  update_user_meta($user_aleluya->ID, "children_supported_json_aleluya", json_encode($children_supported_aleluya) );
+  return $children_supported_aleluya;
+}
+
 //Create or update Stripe customer
 function stripeCreateOrUpdateCustomer_aleluya($user_id_aleluya) {
 

@@ -95,14 +95,14 @@ ALELUYA;
   } else {
     //If here, then we are logged in and we should assign the child to the user
     $email_aleluya = wp_get_current_user()->user_email;
-
+    $profile_page_aleluya = get_edit_user_link(); ;
     //WIP
     $str_aleluya .=<<<ALELUYA
       <script>
       var oo_children_aleluya = [];
       function oo_sponsor_button_clicked_aleluya(id_aleluya) {
         var email_aleluya = "$email_aleluya";
-        alert('Please be patient as we work things out, we will register this child with your email: ' + email_aleluya);
+        alert('We are registering this child with you, please confirm your sponsorship and details in the back end. ');
 
         if (!email_aleluya) return;
         var xhr_aleluya = new XMLHttpRequest();
@@ -111,9 +111,10 @@ ALELUYA;
         xhr_aleluya.onload = function() {
           if (xhr_aleluya.status === 200) {
               alert('Hallelujah: ' + xhr_aleluya.responseText);
+              window.location="$profile_page_aleluya";
           }
           else {
-              alert('Hallelujah Request failed.  Returned status of ' + xhr_aleluya.status);
+              window.location="$profile_page_aleluya";
           }
         };
           xhr_aleluya.send(encodeURI( 
