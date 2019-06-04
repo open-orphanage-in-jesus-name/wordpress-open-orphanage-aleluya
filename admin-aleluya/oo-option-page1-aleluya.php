@@ -26,6 +26,7 @@ function register_oosettings_aleluya() { // whitelist options
   register_setting( 'oo-option-group1-aleluya', 'oo_notify_emails_aleluya');
   register_setting( 'oo-option-group1-aleluya', 'oo_stripe_pk_key_aleluya');
   register_setting( 'oo-option-group1-aleluya', 'oo_stripe_sk_key_aleluya');
+  register_setting( 'oo-option-group1-aleluya', 'oo_stripe_plan_code1_aleluya');
 }
 
 //
@@ -86,7 +87,7 @@ do_settings_sections( 'oo-option-group1-aleluya' );
 
 
     <tr valign="top">
-    <th scope="row">IFTTT User webhook key:</th>
+    <th scope="row">IFTTT User Webhook key:</th>
       <td>
         <input type="text" name="oo_ifttt_key_aleluya" value="<?php echo esc_attr( get_option('oo_ifttt_key_aleluya') ); ?>" />
         <p>An <a href="https://www.ifttt.com">IFTTT</a> Webhook key for IFTTT events fired.</p>
@@ -105,6 +106,13 @@ do_settings_sections( 'oo-option-group1-aleluya' );
       <td>
         <input type="text" name="oo_stripe_sk_key_aleluya" value="<?php echo esc_attr( get_option('oo_stripe_sk_key_aleluya') ); ?>" />
         <p>To enable <a href="https://www.stripe.com">Stripe</a> card processing, please also place your <a href="https://stripe.com/docs/keys">SK api key</a>.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+    <th scope="row">Stripe Subcription Child Plan Code:</th>
+      <td>
+        <input type="text" name="oo_stripe_plan_code1_aleluya" value="<?php echo esc_attr( get_option('oo_stripe_plan_code1_aleluya') ); ?>" />
+        <p>The <a href="https://stripe.com/docs/billing/subscriptions/creating">subscription plan code</a> that has been set up with <a href="https://www.stripe.com">Stripe</a> for monthly card processing, it looks something like <b>plan_ABq4Gg4zLGXq6e</b>.</p>
       </td>
     </tr>
 

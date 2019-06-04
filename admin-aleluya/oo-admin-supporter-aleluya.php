@@ -20,7 +20,7 @@ add_action( 'show_user_profile', 'oo_show_extra_supporter_profile_fields_aleluya
 add_action( 'edit_user_profile', 'oo_show_extra_supporter_profile_fields_aleluya' );
 
 function oo_show_extra_supporter_profile_fields_aleluya( $user_aleluya ) {
-  $last4_aleluya = get_user_meta($user_aleluya->ID, "last4_".stripeCustSkMetaTag_aleluya(), $last4_aleluya)[0];
+  $last4_aleluya = get_user_meta($user_aleluya->ID, "last4_".stripeCustSkMetaTag_aleluya())[0];
   ?>
   <h3><?php esc_html_e( '🕆 Personal Information', 'crf' ); ?></h3>
 
@@ -191,5 +191,19 @@ function oo_stripe_footer_aleluya(){
 };
 
 /**
- * Child support section
+ * Child support section, hallelujah
  */
+
+add_action( 'show_user_profile', 'oo_show_child_support_profile_fields_aleluya' );
+add_action( 'edit_user_profile', 'oo_show_child_support_profile_fields_aleluya' );
+
+function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
+  $children_supported_json_aleluya = get_user_meta($user_aleluya->ID, "children_supported_json_aleluya")[0];
+  
+  ?>
+  <h3><?php esc_html_e( '🕆 Children I am Supporting (Hallelujah)', 'crf' ); ?></h3>
+  <p>Section coming soon God willing.</p>
+  </table>
+  <?php
+}
+
