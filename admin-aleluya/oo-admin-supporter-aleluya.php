@@ -20,7 +20,7 @@ add_action( 'show_user_profile', 'oo_show_extra_supporter_profile_fields_aleluya
 add_action( 'edit_user_profile', 'oo_show_extra_supporter_profile_fields_aleluya' );
 
 function oo_show_extra_supporter_profile_fields_aleluya( $user_aleluya ) {
-  $last4_aleluya = get_user_meta($user_aleluya->ID, "last4_".stripeCustSkMetaTag_aleluya())[0];
+  $last4_aleluya = get_user_meta($user_aleluya->ID, "last4_".stripeCustSkMetaTag_aleluya(), true);
   ?>
   <h3><?php esc_html_e( '🕆 Personal Information', 'crf' ); ?></h3>
 
@@ -191,10 +191,118 @@ function oo_stripe_footer_aleluya(){
  * Child support section, hallelujah
  */
 
+add_action( 'user_profile_update_errors', 'oo_child_support_update_errors_aleluya', 10, 3 );
+
+
+function oo_child_support_update_errors_aleluya( $errors, $update, $user_aleluya ) {
+  if ( ! $update ) {
+    return;
+  }
+
+  $last4_aleluya = get_user_meta($user_aleluya->ID, "last4_".stripeCustSkMetaTag_aleluya(), true); 
+
+  //We cannot accept a sponsorship with no card details
+  if( !empty($_POST['accept_sponsorship_aleluya']) && !$last4_aleluya ) {
+    $errors->add( 'accept_sponsorship_aleluya', __( '<strong>ERROR</strong>: You must first add your card above.', 'crf' ) );
+  }
+
+  /*if ( empty( $_POST['zipcode_aleluya'] ) ) {
+    
+  }*/
+
+  
+}
+
+
+add_action( 'personal_options_update', 'oo_child_support_fields_aleluya' );
+add_action( 'edit_user_profile_update', 'oo_child_support_fields_aleluya' );
+
+function oo_child_support_fields_aleluya( $user_id_aleluya ) {
+  if ( ! current_user_can( 'edit_user', $user_id_aleluya ) ) {
+    return false;
+  }
+
+  if(!empty($_POST['cancel_sponsorship_aleluya'])) {
+    foreach($_POST['cancel_sponsorship_aleluya'] as $id_aleluya) {
+      $oo_currently_sponsored = update_post_meta( $id_aleluya, "sponsored_by_id_aleluya", false );
+      $children_supported_aleluya = oo_get_user_children_supported_aleluya( wp_get_current_user() );
+      $child_aleluya = array(
+        "id_aleluya" => $id_aleluya,
+        "sponsorship_code" => "cancelled"
+      );
+      $children_supported_aleluya["children_aleluya"]["aleluya_".$id_aleluya] = $child_aleluya;
+      error_log( wp_get_current_user()->ID." - Cancelled - ".json_encode($children_supported_aleluya));
+      oo_stripe_stop_subscription( get_current_user_id(), $id_aleluya );
+      oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
+          
+    }
+  }
+
+  if(!empty($_POST['accept_sponsorship_aleluya'])) {
+    foreach($_POST['accept_sponsorship_aleluya'] as $id_aleluya) {
+      //Safety check, make sure child is not also being canceled
+      $cancel_aleluya = false;
+      if(!empty($_POST['cancel_sponsorship_aleluya'])) {
+        foreach($_POST['cancel_sponsorship_aleluya'] as $idc_aleluya) {
+          if($idc_aleluya == $id_aleluya) $cancel_aleluya = true;
+        }
+      }
+
+      if(! $cancel_aleluya ) {
+        //Ok child is being accepted, begin subscription!
+        
+        $children_supported_aleluya = oo_get_user_children_supported_aleluya( wp_get_current_user() );
+        $sub_code_aleluya = oo_stripe_start_subscription( get_current_user_id(), $id_aleluya );
+        $child_aleluya = array(
+          "id_aleluya" => $id_aleluya,
+          "sponsorship_code" => "sponsored"
+        );
+        $children_supported_aleluya["children_aleluya"]["aleluya_".$id_aleluya] = $child_aleluya;
+        error_log( wp_get_current_user()->ID." - Cancelled - ".json_encode($children_supported_aleluya));
+        oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
+        
+
+      }
+    }
+  }
+
+}
+
+
+
 add_action( 'show_user_profile', 'oo_show_child_support_profile_fields_aleluya' );
 add_action( 'edit_user_profile', 'oo_show_child_support_profile_fields_aleluya' );
 
+function oo_stripe_start_subscription( $user_id_aleluya, $child_id_aleluya) {
+  if(! get_option('oo_stripe_sk_key_aleluya') ) return null;
+  \Stripe\Stripe::setApiKey( get_option('oo_stripe_sk_key_aleluya') );
 
+  $customer_code_aleluya = get_user_meta($user_id_aleluya, stripeCustSkMetaTag_aleluya(), true );
+  $plan_code_aleluya     = get_option("oo_stripe_plan_code1_aleluya");
+
+  $sub_aleluya = \Stripe\Subscription::create([
+    "customer" => $customer_code_aleluya,
+    "items" => [
+      [
+        "plan" => $plan_code_aleluya,
+      ],
+    ]
+  ]);
+
+  $sub_code_aleluya = $sub_aleluya["id"];
+  update_post_meta($child_id_aleluya, 'stripe_sub_code_aleluya', $sub_code_aleluya );
+  return $sub_code_aleluya;
+}
+
+function oo_stripe_stop_subscription( $user_id_aleluya, $child_id_aleluya) {
+  if(! get_option('oo_stripe_sk_key_aleluya') ) return null;
+  \Stripe\Stripe::setApiKey( get_option('oo_stripe_sk_key_aleluya') );
+
+  $sub_code_aleluya = get_post_meta($child_id_aleluya, 'stripe_sub_code_aleluya', true);
+  $sub_aleluya = \Stripe\Subscription::retrieve($sub_code_aleluya);
+  $sub_aleluya->cancel();
+
+}
 
 function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
   
@@ -233,12 +341,13 @@ function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
           if($child_aleluya["sponsorship_code"] == "requesting") {
             ?>
             <p>You are in the process of sponsoring this child</p>
-            <p> <input type="checkbox" name="accept_sponsorship_aleluya"/> check here and save profile to begin sponsorship at 40$ a month! </p>
+            <p> <input type="checkbox" name="accept_sponsorship_aleluya[]" value="<?php echo $child_aleluya["id_aleluya"] ?>"/> check here and save profile to begin sponsorship at 40$ a month! </p>
+            <p><em><input type="checkbox" name="cancel_sponsorship_aleluya[]" value="<?php echo $child_aleluya["id_aleluya"] ?>"/> check here and save profile to cancel sponsorship request.</em>
 
             <?php
           } else if($child_aleluya["sponsorship_code"] == "sponsored") { ?>
             <p>Hallelujah! You are currently sponsoring this child! </p>
-            <p><em><input type="checkbox" name="cancel_sponsorship_aleluya"/> check here and save profile to cancel your sponsorship, you will no longer be charged 40$ a month.</em></p>
+            <p><em><input type="checkbox" name="cancel_sponsorship_aleluya[]" value="<?php echo $child_aleluya["id_aleluya"] ?>"/> check here and save profile to cancel your sponsorship, you will no longer be charged 40$ a month.</em></p>
 
          
             <?php
