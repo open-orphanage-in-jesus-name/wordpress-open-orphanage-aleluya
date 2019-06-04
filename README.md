@@ -24,8 +24,7 @@ If you place an [IFTTT](https://www.ifttt.com) web service key and event name, t
 
  - View the [IFTTT Privacy Policy](https://ifttt.com/privacy)
  
-
-
+ 
 ## Additional Development Notes:
 
 This project was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block).

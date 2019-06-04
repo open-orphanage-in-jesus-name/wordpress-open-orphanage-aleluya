@@ -32,7 +32,7 @@ function stripeCreateOrUpdateCustomer_aleluya($user_id_aleluya) {
   ];
 
   if(isset( $_POST['oo_stripe_token_aleluya'] )) {
-    $token_aleluya = $_POST['oo_stripe_token_aleluya'];
+    $token_aleluya = sanitize_text_field( $_POST['oo_stripe_token_aleluya'] ); //seems like the most apt method, we need base64 chars and underscore i think, while i can't see a particular danger right now with this field, sanitizing is a good overall practice.
     $fields_aleluya['source'] = $token_aleluya;
   }
 

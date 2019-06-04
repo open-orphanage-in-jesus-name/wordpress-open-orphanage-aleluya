@@ -12,7 +12,7 @@ if ( is_admin() ){ // admin actions
 function add_oomenu_aleluya() {
 	//create new top-level menu
   add_menu_page('Open Orphanage Settings', '✝ Open Orphanage', 'administrator', 'oo_show_option_page1_aleluya', 'oo_show_option_page1_aleluya', "https://perffection.com/img/favicon32-aleluya.png?7aleluya" );
-  //add_submenu_page( 'oo_show_option_page1_aleluya', '✝ About Jesus', 'About Jesus Christ', 'administrator', 'oo_about_Jesus_aleluya', 'oo_show_about_Jesus_page_aleluya' );
+  //reference on adding submenus: add_submenu_page( 'oo_show_option_page1_aleluya', '✝ About Jesus', 'About Jesus Christ', 'administrator', 'oo_about_Jesus_aleluya', 'oo_show_about_Jesus_page_aleluya' );
 	//call register settings function
 	//add_action( 'admin_init', 'register_oosettings_aleluya' );
 }
@@ -26,20 +26,7 @@ function register_oosettings_aleluya() { // whitelist options
   register_setting( 'oo-option-group1-aleluya', 'oo_notify_emails_aleluya');
   register_setting( 'oo-option-group1-aleluya', 'oo_stripe_pk_key_aleluya');
   register_setting( 'oo-option-group1-aleluya', 'oo_stripe_sk_key_aleluya');
-  //register_setting( 'oo-option-group1-aleluya', 'option_etc' );
 }
-
-/*
-function oo_show_about_Jesus_page_aleluya() {
-?>
-<div class="wrap">
-  <h1>About Jesus Christ the Lord of Lords</h1>
-<div class="arc-cont"><iframe src="https://api.arclight.org/videoPlayerUrl?refId=1_529-jf-0-0&apiSessionId=5c54ed1f415d58.03282961&player=bc.vanilla5&dtm=0&playerStyle=default" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe><style>.arc-cont{position:relative;display:block;margin:10px auto;width:100%}.arc-cont:after{padding-top:59%;display:block;content:""}.arc-cont>iframe{position:absolute;top:0;bottom:0;right:0;left:0;width:98%;height:98%;border:0}</style></div>
-</div>
-<?
-}
-*/
-
 
 //
 function oo_show_option_page1_aleluya() {
