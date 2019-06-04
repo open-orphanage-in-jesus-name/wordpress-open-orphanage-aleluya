@@ -2,6 +2,13 @@
 // For God so loved the world, that He gave His only begotten Son, that all who believe in Him should not perish
 // but have everlasting life
 
+/**
+ * This file enabled custom profile fields for a user. Some fields store a users address and other
+ * details that would help with communication and stripe charges. We also use this to interface
+ * with the card details for a user. These are not stored nor transferred through our app, but 
+ * are handled fully by stripe.
+ */
+
 
 //thanks Jesus for https://www.cssigniter.com/how-to-add-a-custom-user-field-in-wordpress/
 
@@ -12,8 +19,8 @@
 add_action( 'show_user_profile', 'oo_show_extra_supporter_profile_fields_aleluya' );
 add_action( 'edit_user_profile', 'oo_show_extra_supporter_profile_fields_aleluya' );
 
-function oo_show_extra_supporter_profile_fields_aleluya( $user ) {
-  $year = get_the_author_meta( 'year_of_birth', $user->ID );
+function oo_show_extra_supporter_profile_fields_aleluya( $user_aleluya ) {
+  $last4_aleluya = get_user_meta($user_aleluya->ID, "last4_".stripeCustSkMetaTag_aleluya(), $last4_aleluya)[0];
   ?>
   <h3><?php esc_html_e( '🕆 Personal Information', 'crf' ); ?></h3>
 
@@ -34,7 +41,7 @@ function oo_show_extra_supporter_profile_fields_aleluya( $user ) {
     </tr>
 
     <tr>
-      <th><label for="year_of_birth"><?php esc_html_e( '🕆 Credit Card Info', 'crf' ); ?></label></th>
+      <th><label for=""><?php esc_html_e( '🕆 Credit Card Info', 'crf' ); ?></label></th>
       <td>
 
         
@@ -47,10 +54,16 @@ function oo_show_extra_supporter_profile_fields_aleluya( $user ) {
             <!-- Used to display form errors. -->
             <div id="card-errors-aleluya" role="alert"></div>
 
-            <button id="newcard-button-aleluya">Assign New Card</button>
+            <button id="newcard-button-aleluya">Assign <?php if ($last4_aleluya) { echo "New"; }?> Card</button>
 
             <label for="card-element-aleluya">
-              Set New Credit or Debit Card Information via <a href="https://stripe.com">Stripe</a> we will not charge you right now, nor do not store this locally.
+              <p>Set <?php if ($last4_aleluya) { echo "New"; }?> Credit or Debit Card Information via <a href="https://stripe.com">Stripe</a> we will not charge you right now, we do not store nor transmit this on this site.</p>
+              <?php
+              if( $last4_aleluya ) {
+?>
+                <p>Currently, <a href="https://www.stripe.com">Stripe</a> reported the card you have registered with us ends in <?php echo $last4_aleluya?>.</p>
+<?php
+              }?>
             </label>
             
           </div>
@@ -69,18 +82,18 @@ ALELUYA;
 
 
 add_action( 'user_profile_update_errors', 'oo_supporter_profile_update_errors_aleluya', 10, 3 );
+
+
 function oo_supporter_profile_update_errors_aleluya( $errors, $update, $user ) {
   if ( ! $update ) {
     return;
   }
 
   if ( empty( $_POST['zipcode_aleluya'] ) ) {
-    $errors->add( 'zipcode_aleluya', __( '<strong>ERROR</strong>: Please enter your zipcode.', 'crf' ) );
+    $errors->add( 'zipcode_aleluya', __( '<strong>ERROR</strong>: Please enter your postal or zipcode.', 'crf' ) );
   }
 
-  if ( ! empty( $_POST['zipcode_aleluya'] ) && ( intval( $_POST['zipcode_aleluya'] ) < 10000 || intval( $_POST['zipcode_aleluya'] ) > 99999 )   ) {
-    $errors->add( 'zipcode_aleluya', __( '<strong>ERROR</strong>: zipcode must be 5 digits.', 'crf' ) );
-  }
+  
 }
 
 

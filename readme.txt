@@ -62,7 +62,7 @@ And other things. If you use this please [get in touch with us](mailto:aleluya@o
 The plug-in can optionally work with both IFTTT and with Stripe. 
 
 #### 🕆 Stripe
-Currently, the plug-in allows integration with [Stripe](https://www.stripe.com). When a person signs up as a donor, it will create a stripe customer for the donor and attempt to synchronize the stripe customer details from WordPress to Stripe. We are working on the on-site charging mechanism, at this time you are notified by email the child that a sponsor is interested in, and the user's email address. If stripe is not enabled, then you are still forwarded a users email when they indicate interest in a child. Please note that the stripe API keys are stored right now in clear text, and demonstrated to other administrators and those who have access to the database and backup SQL files.
+Currently, the plug-in allows integration with [Stripe](https://www.stripe.com). When a person signs up as a donor, it will create a stripe customer for the donor and attempt to synchronize the stripe customer details from WordPress to Stripe. We are working on the on-site charging mechanism, at this time you are notified by email the child that a sponsor is interested in, and the user's email address. If stripe is not enabled, then you are still forwarded a users email when they indicate interest in a child. No card information is handled by the plugin other than contact information. Please note that the stripe API keys are stored right now in clear text, and demonstrated to other administrators and those who have access to the database and backup SQL files.
 
  - View the [Stripe Privacy Policy](https://stripe.com/privacy)
 
@@ -91,6 +91,10 @@ Yes, there is no plan to charge for the software.
 = How far along is this? =
 
 At this point: you can enter children, display them, get emailed by interested sponsors, and link these sponsors as stripe customers. 
+
+= Are any financial details handled or stored by the plugin? =
+
+Only details regarding a users address are stored on site. Stripe handles the storage of card information, and it is not handled by the plugin. 
 
 == Screenshots ==
 

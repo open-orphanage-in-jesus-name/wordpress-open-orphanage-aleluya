@@ -45,6 +45,9 @@ function stripeCreateOrUpdateCustomer_aleluya($user_id_aleluya) {
 
   }
 
+  $last4_aleluya = $customer_aleluya->sources->data[0]->last4;
+  update_user_meta($user_id_aleluya, "last4_".stripeCustSkMetaTag_aleluya(), $last4_aleluya);
+
   return $customer_aleluya;
 
 }
