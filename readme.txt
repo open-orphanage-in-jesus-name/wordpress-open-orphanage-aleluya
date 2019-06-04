@@ -17,10 +17,11 @@ Praise Jesus, a plugin that works with an Android app, to help orphanages with t
 
 🕆 Serve the Lord, [Jesus Christ](https://www.jesusfilm.org/watch/jesus.html/english.html), by providing free and open source software for orphanages, to help manage their operations and communications and to aid with meeting needs through fundraising and sponsorship.
 
- - [Homepage](https://openorphanage.org)
+ - [Homepage - hallelujah](https://openorphanage.org)
+ - [WP Github Repo - praise the Lord Jesus Christ](https://github.com/open-orphanage-in-jesus-name/wordpress-open-orphanage-aleluya)
+ - [Android App - hallelujah](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2)
  - [Facebook page - hallelujah](https://www.facebook.com/Open-Orphanage-in-Jesus-name-2168084633282357)
-
-
+ 
 
 ### How does this work?
 
