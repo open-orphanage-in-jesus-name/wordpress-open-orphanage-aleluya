@@ -5,6 +5,8 @@
 ## keep compiled files out of version control
 dist/
 vendor/
+svn-aleluya/
+
 # Numerous always-ignore extensions
 *.diff
 *.err
@@ -16,6 +18,7 @@ vendor/
 *.vi
 *~
 *.sass-cache
+
 
 # OS or Editor folders
 .DS_Store
