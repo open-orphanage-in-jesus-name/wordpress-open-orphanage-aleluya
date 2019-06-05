@@ -78,7 +78,8 @@ If you place an [IFTTT](https://www.ifttt.com) web service key and event name, t
 1. Upload the plugin files to the `/wp-content/plugins/open-orphanage` directory, or install the plugin through the WordPress plugins screen directly.
 1. Activate the plugin through the 'Plugins' screen in WordPress
 1. Use the Settings->✝ Open Orphanage screen to configure the plugin, the fields all have descriptions. 
-1. If you want to incorporate IFTTT or Stripe you will need to sign up with those services and provide the valid API keys. With stripe please start with the test API keys to get a feel for everything.
+1. If you want to incorporate IFTTT or Stripe you will need to sign up with those services and provide the valid API keys. With Stripe please start with the test API keys to get a feel for everything.
+1. Create a monthly plan for Stripe in their control panel, and enter the code and amount of dollars that plan charges per month in the 🕆 Open Orphanage settings page.
 
 == Frequently Asked Questions ==
 
@@ -91,7 +92,7 @@ Yes, there is no plan to charge for the software.
 
 = How far along is this? =
 
-At this point: you can enter children, display them, get emailed by interested sponsors, and link these sponsors as stripe customers. 
+At this point: you can enter children, display them, get emailed by interested sponsors, link these sponsors as stripe customers, and start and stop support subscriptions. 
 
 = Are any financial details handled or stored by the plugin? =
 
@@ -103,10 +104,16 @@ Only details regarding a users address are stored on site. Stripe handles the st
 
 == Changelog ==
 
+= 0.1.20190604a =
+* Praise Jesus, a supporter can now choose a child, and become a sponsor to that child within the website if a plan code has been set. Sponsorship can also be cancelled. 
+
 = 0.1.20190603 =
 * Hallelujah, First version on wordpress.com
 
 == Upgrade Notice ==
+
+= 0.1.20190604a =
+No changes required
 
 = 0.1.20190603 =
 First wordpress.com version, no upgrade path.

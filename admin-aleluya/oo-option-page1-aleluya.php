@@ -27,6 +27,7 @@ function register_oosettings_aleluya() { // whitelist options
   register_setting( 'oo-option-group1-aleluya', 'oo_stripe_pk_key_aleluya');
   register_setting( 'oo-option-group1-aleluya', 'oo_stripe_sk_key_aleluya');
   register_setting( 'oo-option-group1-aleluya', 'oo_stripe_plan_code1_aleluya');
+  register_setting( 'oo-option-group1-aleluya', 'stripe_plan1_dl_aleluya');
 }
 
 //
@@ -113,6 +114,13 @@ do_settings_sections( 'oo-option-group1-aleluya' );
       <td>
         <input type="text" name="oo_stripe_plan_code1_aleluya" value="<?php echo esc_attr( get_option('oo_stripe_plan_code1_aleluya') ); ?>" />
         <p>The <a href="https://stripe.com/docs/billing/subscriptions/creating">subscription plan code</a> that has been set up with <a href="https://www.stripe.com">Stripe</a> for monthly card processing, it looks something like <b>plan_ABq4Gg4zLGXq6e</b>.</p>
+      </td>
+    </tr>
+    <tr valign="top">
+    <th scope="row">Stripe Subcription Child Plan Code:</th>
+      <td>
+        <input type="number" name="stripe_plan1_dl_aleluya" value="<?php echo esc_attr( get_option('stripe_plan1_dl_aleluya', 40) ); ?>" />
+        <p>The amount of dollars per month that the plan above bills. It is not automatically populated and should match what you have made for the plan.</p>
       </td>
     </tr>
 

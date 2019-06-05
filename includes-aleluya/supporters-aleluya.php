@@ -26,6 +26,8 @@ function oo_set_user_children_supported_aleluya($user_aleluya, $children_support
   return $children_supported_aleluya;
 }
 
+
+
 //Create or update Stripe customer
 function stripeCreateOrUpdateCustomer_aleluya($user_id_aleluya) {
 
