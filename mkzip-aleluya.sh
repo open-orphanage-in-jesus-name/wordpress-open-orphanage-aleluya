@@ -3,7 +3,7 @@ rm ../../../open-orphanage-aleluya.zip
 zip -r ../../../open-orphanage-aleluya.zip * --exclude='./node_modules*' --exclude='*.sh' --exclude='./*.md' --exclude='./svn-aleluya*'
 cd svn-aleluya/trunk
 if [ $? = 0 ]; then
-	rm * -rf
+	#rm * -rf
   unzip ../../../../../open-orphanage-aleluya.zip
   mv assets/* ../assets
 fi

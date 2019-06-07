@@ -3,13 +3,13 @@
 Plugin Name:  ✝ Open Orphanage
 Plugin URI:   https://openorphanage.org
 Description:  Basic Open Source Orphanage Management - Currently used alongside https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2
-Version:      0.1.20190604a
+Version:      0.1.20190606a
 Author:       loveJesus in Jesus name
 Author URI:   https://perffection.com
 License:      GPL2
 License URI:  https://www.gnu.org/licenses/gpl-2.0.html
-Text Domain:  ooorg_aleluya
-Domain Path:  /languages
+Text Domain:  open-orphanage
+Domain Path:  /languages-aleluya
 */
 
 /* For God so loved the world, that He gave His only begotten Son
@@ -18,6 +18,13 @@ Domain Path:  /languages
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
 require __DIR__ . '/vendor/autoload.php';
+
+function load_plugin_textdomain_aleluya() {
+  load_plugin_textdomain('open-orphanage', false, basename( dirname( __FILE__ ) ) . '/languages-aleluya/' );
+}
+
+add_action( 'plugins_loaded', 'load_plugin_textdomain_aleluya' );
+
 
 require_once( dirname( __FILE__ ) . '/includes-aleluya/includes-aleluya.php' );
 

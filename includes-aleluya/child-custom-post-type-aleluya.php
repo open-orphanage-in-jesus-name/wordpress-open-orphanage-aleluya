@@ -27,6 +27,7 @@ $child_fields_aleluya = array(
   'grade_aleluya',
   'favorite_color_aleluya',
   'desired_profesion_aleluya',
+  'internal_notes_aleluya'
 );
 
 $public_child_fields_aleluya = array(
@@ -47,6 +48,7 @@ $public_child_fields_aleluya = array(
   'desired_profesion_aleluya' => __("Profesion"),
   //'description_aleluya' => __("Description"),
 );
+add_action("init","create_oo1_post_type_aleluya");
 function create_oo1_post_type_aleluya() {
   global $child_fields_aleluya;
 
@@ -57,7 +59,7 @@ function create_oo1_post_type_aleluya() {
         'singular_name' => __( 'Child' )
       ),
       'supports' => array_merge(
-        array( 'title', 'editor', 'custom-fields', 'thumbnail', 'comments', 'author', 'excerpt'),
+        array( 'title', 'editor', 'custom-fields', 'thumbnail', 'comments', 'author', 'excerpt', 'revisions'),
         array_merge(
           $child_fields_aleluya,
           array("avatar_media_url_aleluya")
@@ -68,7 +70,7 @@ function create_oo1_post_type_aleluya() {
       'has_archive' => true,
       'description' => 'Children to aid - aleluya',
       'menu_position' => 20,
-      'template' =>  array(
+    /*  'template' =>  array(
             array( 'core/image', array(
                 'align' => 'left',
             ) ),
@@ -83,14 +85,137 @@ function create_oo1_post_type_aleluya() {
             array( 'core/paragraph', array(
                 'placeholder' => 'Add Description...',
               ) ),
-          ),
+          ),*/
 
       //'template_lock' => 'all',
     )
   );
 }
 
-add_action( 'init', 'create_oo1_post_type_aleluya' );
+
+//Thanks You Jesus for https://www.taniarascia.com/wordpress-part-three-custom-fields-and-metaboxes/
+function oo_add_child_fields_meta_box_aleluya() {
+  add_meta_box(
+    'oo_child_fields_meta_box_aleluya', // $id
+    'Child Custom Fields - Hallelujah', // $title
+    'oo_show_child_fields_meta_box_aleluya', // $callback
+    'child_aleluya', // $screen
+    'normal', // $context
+    'high' // $priority
+  );
+}
+add_action( 'add_meta_boxes', 'oo_add_child_fields_meta_box_aleluya' );
+
+function oo_show_child_fields_meta_box_aleluya() {
+  global $post;
+  $show_child_fields_aleluya = array(
+    'first_names_aleluya',
+    'sur_names_aleluya',
+    'nick_names_aleluya',
+    'other_names_aleluya',
+    'description_aleluya',
+    'school_aleluya',
+    'birth_place_aleluya',
+    'birth_place_district_aleluya',
+    'mother_full_names_aleluya',
+    'mother_contact_info_aleluya',
+    'favorite_color_aleluya',
+    'desired_profesion_aleluya'
+  );
+  //'gender_aleluya',
+  //'grade_aleluya',
+  //'mother_is_alive_aleluya',
+  //'avatar_media_id_aleluya',
+  //'birth_date_aleluya',
+  
+  $meta = get_post_meta( $post->ID, 'your_fields', true ); ?>
+
+  <input type="hidden" name="oo_child_meta_box_nonce_aleluya" value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>">
+  <!-- All fields will go here -->
+  <table>
+  <?php 
+
+  foreach($show_child_fields_aleluya as $cf_aleluya) {
+  ?>
+  <tr>
+    <td align="right"><label for="<?php echo $cf_aleluya?>"><?php  _e($cf_aleluya,'open-orphanage')?>: </label>
+    <td><input type="text" name="<?php echo $cf_aleluya?>" id="<?php echo $cf_aleluya?>" class="regular-text" value="<?php echo get_post_meta($post->ID, $cf_aleluya, true); ?>"/></td>
+  </tr>
+
+  <?php
+  }?>
+  <tr><?php $cf_aleluya = "gender_aleluya";?>
+    <td align="right"><label for="<?php echo $cf_aleluya?>"><?php  _e($cf_aleluya,'open-orphanage')?>: </label>
+    <td>      
+      <input type="radio" name="<?php echo $cf_aleluya?>" id="<?php echo $cf_aleluya?>"  value="Female" <?php echo (get_post_meta($post->ID, $cf_aleluya, true) == "Female" ? 'checked="checked"' : ''); ?>/> Female
+      <input type="radio" name="<?php echo $cf_aleluya?>" id="<?php echo $cf_aleluya?>"  value="Male" <?php echo (get_post_meta($post->ID, $cf_aleluya, true) == "Male" ? 'checked="checked"' : ''); ?>/> Male
+    </td>
+  </tr>
+  <tr><?php $cf_aleluya = "grade_aleluya";?>
+    <td align="right"><label for="<?php echo $cf_aleluya?>"><?php  _e($cf_aleluya,'open-orphanage')?>: </label>
+    <td><input type="text" name="<?php echo $cf_aleluya?>" id="<?php echo $cf_aleluya?>" class="regular-text" value="<?php echo get_post_meta($post->ID, $cf_aleluya, true); ?>"/></td>
+  </tr>
+  <tr><?php $cf_aleluya = "mother_is_alive_aleluya";?>
+    <td align="right"><label for="<?php echo $cf_aleluya?>"><?php  _e($cf_aleluya,'open-orphanage')?>: </label>
+    <td>
+      <input type="radio" name="<?php echo $cf_aleluya?>" id="<?php echo $cf_aleluya?>" value="Yes" <?php echo (get_post_meta($post->ID, $cf_aleluya, true) == "Yes" ? 'checked="checked"' : ''); ?>/> Yes
+      <input type="radio" name="<?php echo $cf_aleluya?>" id="<?php echo $cf_aleluya?>" value="No" <?php echo (get_post_meta($post->ID, $cf_aleluya, true) == "No" ? 'checked="checked"' : ''); ?>/> No
+    </td>
+  </tr>
+  <tr><?php $cf_aleluya = "birth_date_aleluya";?>
+    <td align="right"><label for="<?php echo $cf_aleluya?>"><?php  _e($cf_aleluya,'open-orphanage')?>: </label>
+    <td><input type="text" name="<?php echo $cf_aleluya?>" id="<?php echo $cf_aleluya?>" class="regular-text" value="<?php echo get_post_meta($post->ID, $cf_aleluya, true); ?>"/></td>
+  </tr>
+  <tr><?php $cf_aleluya = "internal_notes_aleluya";?>
+    <td align="right"><label for="<?php echo $cf_aleluya?>"><?php  _e($cf_aleluya,'open-orphanage')?>: </label>
+    <td>
+      <textarea name="<?php echo $cf_aleluya?>" id="<?php echo $cf_aleluya?>"  ><?php echo get_post_meta($post->ID, $cf_aleluya, true); ?></textarea>
+    </td>
+  </tr>
+ 
+</table>
+<?php
+
+}
+
+function save_child_fields_meta_aleluya( $post_id_aleluya ) {
+  global $child_fields_aleluya;
+  // verify nonce
+  if ( !wp_verify_nonce( $_POST['oo_child_meta_box_nonce_aleluya'], basename(__FILE__) ) ) {
+    return $post_id_aleluya;
+  }
+  // check autosave
+  if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+    return $post_id_aleluya;
+  }
+  // check permissions and post type
+  if ( 'child_aleluya' === $_POST['post_type'] ) {
+    if ( !current_user_can( 'edit_page', $post_id_aleluya ) ) {
+      return $post_id_aleluya;
+    } elseif ( !current_user_can( 'edit_post', $post_id_aleluya ) ) {
+      return $post_id_aleluya;
+    }
+  } else {
+    return $post_id_aleluya;
+  }
+
+  //Loop through fields, hallelujah
+
+  foreach($child_fields_aleluya as $cf_aleluya) {
+    $old_aleluya = get_post_meta( $post_id_aleluya, $cf_aleluya, true );
+    $new_aleluya = sanitize_text_field( $_POST[$cf_aleluya] );
+
+    if ( $new_aleluya && $new_aleluya !== $old_aleluya ) {
+      update_post_meta( $post_id_aleluya, $cf_aleluya, $new_aleluya );
+    } elseif ( '' === $new_aleluya && $old_aleluya ) {
+      delete_post_meta( $post_id_aleluya, $cf_aleluya, $old_aleluya );
+    }
+  }
+
+  update_post_meta( $post_id_aleluya, "avatar_media_id_aleluya", get_post_thumbnail_id());
+}
+add_action( 'save_post', 'save_child_fields_meta_aleluya' );
+
 function add_oo1_custom_fields_aleluya()
 {
   global $child_fields_aleluya;
@@ -120,6 +245,8 @@ function add_oo1_custom_fields_aleluya()
     );
 
   }
+
+  //The url is automatically generated from the id
   register_meta( 'post', "avatar_media_url_aleluya", $args_aleluya );
   register_meta( 'child_aleluya', "avatar_media_url_aleluya", $args_aleluya );
 

@@ -104,6 +104,9 @@ Only details regarding a users address are stored on site. Stripe handles the st
 
 == Changelog ==
 
+= 0.1.201906046a =
+* Praise the Lord: You can now add children and edit them from within wordpress. Also you can add notes. The picture used is the featured image (Please upload a square image for now.). Beginning of Internationalization.
+
 = 0.1.20190604a =
 * Praise Jesus, a supporter can now choose a child, and become a sponsor to that child within the website if a plan code has been set. Sponsorship can also be cancelled. 
 
@@ -111,6 +114,9 @@ Only details regarding a users address are stored on site. Stripe handles the st
 * Hallelujah, First version on wordpress.com
 
 == Upgrade Notice ==
+
+= 0.1.20190604a =
+Changing featured image on a child changes that child's media image ID.
 
 = 0.1.20190604a =
 No changes required
