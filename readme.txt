@@ -25,10 +25,10 @@ Praise Jesus, a plugin that works with an Android app, to help orphanages with t
 
 ### How does this work?
 
-The project is still in early stages. We have an [Android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2) that we are hoping to make it easier for on-site people at the orphanage to keep the children on site updated and able to communicate with sponsors. Right now it allows the creation of children, their listing on a page, and some routing for sponsors to sign up to the site. It can email the website owners about which child a sponsor is interested in, as well as signing up sponsors as stripe customers to register for monthly sponsorships. Currently, no payments are taken on site but we hope to incorporate this in our next release.
+The project is still in early stages. We have are working on an [Android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2) that we are hoping to make it easier for on-site people at the orphanage to keep the children on site updated and able to communicate with sponsors. Right now it allows the creation of children, their listing on a page, and some routing for sponsors to sign up to the site. It can email the website owners about which child a sponsor is interested in, as well as signing up sponsors as stripe customers to register for monthly sponsorships. Currently, no payments are taken on site but we hope to incorporate this in our next release.
 
 The basic flow after installing is.
-1. Create the children through the [Android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2), fill the fields you can, there is a nickname field so real names are not necessarily displayed publically. The picture must have finished uploading before you save the child at this point.
+1. Create the children through the administrator, or soon via the [Android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2) (it still has some work to go). Fill the fields you can, please use the format mentioned for dates for now, you can use an estimated date for Birthday if needed. There is a nickname field so real names are not necessarily displayed publically. In the android app, the picture must have finished uploading before you save the child at this point. 
 2. Use either the Guten block, or the [oo_aleluya/] shortcode to insert the list of children on a page or post.
 3. When a sponsor sees the children, he can click on 'sponsor this child'.
 4. Depending on if Stripe is enabled, and public registrations are allowed, 
@@ -52,9 +52,9 @@ We hope Eventually
  - Newsletter sending and advertising
  - Connect with materials about adoptions.
  - More communication facilities.
- - Provide links to other methods of fundraising (Gofundme,  Bitcoin,  Paypal, etc...)
+ - Provide links to other methods of fundraising (Gofundme,  Paypal, etc...)
 
-And other things. If you use this please [get in touch with us](mailto:aleluya@openorphanage.org).
+And other things. If you use this please [get in touch with us](mailto:loveJesus@openorphanage.org).
 
 
 
@@ -104,6 +104,9 @@ Only details regarding a users address are stored on site. Stripe handles the st
 
 == Changelog ==
 
+= 0.1.201906046b =
+* Hallelujah, praise Jesus Christ - You can now set a new cropped image from the wordpress admin (Thanks [Darren](https://wordpress.stackexchange.com/a/302962) ). Additionally, it now uses the description field for the mini post, which can link fully to the child, Hallelujah.  
+
 = 0.1.201906046a =
 * Praise the Lord: You can now add children and edit them from within wordpress. Also you can add notes. The picture used is the featured image (Please upload a square image for now.). Beginning of Internationalization.
 
@@ -114,6 +117,9 @@ Only details regarding a users address are stored on site. Stripe handles the st
 * Hallelujah, First version on wordpress.com
 
 == Upgrade Notice ==
+
+= 0.1.20190604b =
+Now we store the url to the avatar image instead of the id because of the cropping mechanism.
 
 = 0.1.20190604a =
 Changing featured image on a child changes that child's media image ID.

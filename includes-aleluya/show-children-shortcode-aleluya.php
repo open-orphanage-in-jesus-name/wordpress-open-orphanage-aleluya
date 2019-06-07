@@ -23,7 +23,7 @@ function oo_aleluya_func( $atts ) {
     div.oo_aleluya td.label_aleluya { width:112px; font-weight:900; text-align: right;padding-right: 8px;}
     div.oo_aleluya td.content_aleluya {}
     div.oo_aleluya td { vertical-align: top; border:0px; padding: 0px; }
-    div.oo_aleluya img.child_avatar_aleluya { display: inline-block; vertical-align:top;  height:224px; max-width:224px; width:224px; border-radius: 4px; border: 1px solid black; padding: 1px;margin: 2px;}
+    div.oo_aleluya img.child_avatar_aleluya { display: inline-block; vertical-align:top;  height:224px; max-width:224px; width:224px;  border-radius: 4px; border: 1px solid black; padding: 1px;margin: 2px;}
     div.oo_aleluya .new_child_aleluya  { float: left; max-width:256px; border-radius:8px; margin: 2px; padding-top:2px; border: 1px solid #888; display: block-inline; }
     div.oo_aleluya .oo_child_meta_aleluya, .oo_child_desc_aleluya  { margin:4px; padding: 0px; border: 0px; vertical-align: top; width: 240px; margin-top: 0px; display: inline-block;}
     div.oo_aleluya td.name_aleluya {text-align: center; font-weight: 900;font-size:larger;}
@@ -127,9 +127,15 @@ ALELUYA;
       </script>
 ALELUYA;
     }
-    $str_aleluya .= "<div class='oo_aleluya'>";
 
     $str_aleluya .=<<<ALELUYA
+    <script>
+    function oo_viewmore_button_clicked_aleluya(url_aleluya) {
+      window.location=url_aleluya;
+    }
+    </script>
+    <div class='oo_aleluya'>
+
     <div class='oo_chooser_aleluya'>
     <span class='oo_label_aleluya'>Sort By:</span><select><option>Recent</option><option>Age</option><option>Coming soon God Willing</option></select>
     </div>
@@ -141,13 +147,14 @@ ALELUYA;
     $loop_aleluya->the_post();
     $id_aleluya  = get_the_ID();
     $str_aleluya.="<table class='new_child_aleluya' align='center'>";
-    $str_aleluya.='<tr><td class="child_img_holder_aleluya"><img class="child_avatar_aleluya" src="' . wp_get_attachment_url( get_post_meta( $id_aleluya,  'avatar_media_id_aleluya')[0]) . '"/></td></tr>';
-    $str_aleluya .= "<tr><td colspan='2' class='name_aleluya'>" . get_post_meta($id_aleluya, "nick_names_aleluya")[0] . "</td></tr>";
+    $str_aleluya.='<tr><td class="child_img_holder_aleluya"><img class="child_avatar_aleluya" src="' . get_post_meta( $id_aleluya,  'avatar_media_url_aleluya',true) . '"/></td></tr>';
+    $str_aleluya .= "<tr><td colspan='2' class='name_aleluya'>" . get_post_meta($id_aleluya, "nick_names_aleluya", true) . "</td></tr>";
 
     $str_aleluya .= "<tr><td align='center'><table class='oo_child_desc_aleluya'><tr/>";
     $str_aleluya .= "<td>";
-    $str_aleluya .= '<div class="child_description_aleluya" >'. get_the_content().'</div><br/>';
+    $str_aleluya .= '<div class="child_description_aleluya" >'. get_post_meta($id_aleluya, "description_aleluya", true).'</div><br/>';
     $str_aleluya .= '<div class="show_content" align="center"><button class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(' .$id_aleluya. ');">Sponsor this Child</button></div>';
+     
     $str_aleluya .= "</td></tr>";
     $str_aleluya .= "</table></tr></td>";
 
@@ -172,6 +179,7 @@ ALELUYA;
     $str_aleluya .= $age_aleluya->y ;
     $str_aleluya .= "</td></tr>";
     $str_aleluya .= "</table></tr></td>";
+    $str_aleluya .= '<tr><td><div class="show_content" align="center"><button class="btn btn-secondary" onclick="oo_viewmore_button_clicked_aleluya(\'' .esc_url(get_post_permalink($id_aleluya)). '\');">More About this Child </button><br/><br/></div></tr></td>';
     $str_aleluya .= "</table>";
 
 

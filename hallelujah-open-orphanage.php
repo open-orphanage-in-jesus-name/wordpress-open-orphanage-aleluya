@@ -3,7 +3,7 @@
 Plugin Name:  ✝ Open Orphanage
 Plugin URI:   https://openorphanage.org
 Description:  Basic Open Source Orphanage Management - Currently used alongside https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2
-Version:      0.1.20190606a
+Version:      0.1.20190606b
 Author:       loveJesus in Jesus name
 Author URI:   https://perffection.com
 License:      GPL2
