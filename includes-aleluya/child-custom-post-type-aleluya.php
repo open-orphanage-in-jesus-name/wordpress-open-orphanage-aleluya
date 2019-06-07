@@ -348,3 +348,4 @@ error_log(" Aleluya " . $field_name_aleluya . " - $value_aleluya - ".$object_ale
 }
 
 add_action( 'rest_api_init', 'add_oo1_custom_fields_aleluya' );
+

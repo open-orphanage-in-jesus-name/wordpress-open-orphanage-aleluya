@@ -73,10 +73,17 @@ function stripeCreateOrUpdateCustomer_aleluya($user_id_aleluya) {
 
 }
 
+add_action( 'register_form', 'oo_registration_form_aleluya' );
+function oo_registration_form_aleluya() { 
+  // We should have a $_GET['child_id_aleluya']
+
+}
+
 
 /* If we have a stripe key, this will also create a stripe customer for that key, it creates a new customer for the same user if the key changes (for testing and live customers for example) */
 add_action( 'user_register', 'oo_registration_save_aleluya', 10, 1 );
 function oo_registration_save_aleluya( $user_id_aleluya ) {
+
   stripeCreateOrUpdateCustomer_aleluya($user_id_aleluya);
 }
 

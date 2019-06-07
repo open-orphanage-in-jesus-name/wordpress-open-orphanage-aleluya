@@ -104,7 +104,6 @@ if( !$alltrue_aleluya ) {
 
   <?php
 }
-
 ?>
 <p>Welcome to the <a href="https://openorphanage.org">Open Orphanage</a> administrator for <a href="https://wordpress.org">Wordpress</a> in <a href="https://www.jesusfilm.org/watch/jesus.html/english.html">Jesus</a> name, Hallelujah.
 </p>
