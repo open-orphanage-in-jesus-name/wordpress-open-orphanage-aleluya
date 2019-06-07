@@ -365,8 +365,7 @@ function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
   <?php
     foreach( $children_supported_aleluya["children_aleluya"] as $child_aleluya ) {
       $nick_names_aleluya = get_post_meta($child_aleluya["id_aleluya"],"nick_names_aleluya",true);
-      $avatar_media_id_aleluya = get_post_meta($child_aleluya['id_aleluya'], 'avatar_media_id_aleluya',true);
-      $avatar_media_url_aleluya =  !$avatar_media_id_aleluya ? "" : wp_get_attachment_url( $avatar_media_id_aleluya );
+      $avatar_media_url_aleluya =  get_post_meta($child_aleluya['id_aleluya'], 'avatar_media_url_aleluya',true);
 
     ?>
     
