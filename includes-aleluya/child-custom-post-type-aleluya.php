@@ -64,7 +64,7 @@ function oo_load_wp_media_files_aleluya( $page_aleluya ) {
     wp_enqueue_media();
     // Enqueue custom script that will interact with wp.media
     wp_enqueue_script( 'oo_child_admin_aleluya_js', plugins_url( '/public-aleluya/js-aleluya/oo-child-admin-aleluya.js' , __DIR__.'../'), array('jquery'), '0.1' );
-     error_log("Praise Jesus");
+    error_log("Praise Jesus");
   }
 }
 
