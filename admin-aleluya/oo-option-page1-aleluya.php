@@ -18,6 +18,7 @@ function add_oomenu_aleluya() {
 }
 
 function register_oosettings_aleluya() { // whitelist options
+
   register_setting( 'oo-option-group1-aleluya', 'oo_email_address_from_address_aleluya' );
   register_setting( 'oo-option-group1-aleluya', 'oo_email_address_from_name_aleluya' );
   register_setting( 'oo-option-group1-aleluya', 'oo_administrator_logo_aleluya' );
@@ -38,6 +39,61 @@ function oo_show_option_page1_aleluya() {
 <div class="wrap">
 <h1>✝ Open Orphanage Plugin Options</h1>
 
+<?php if ( get_option('oo_stripe_plan_code1_aleluya') && strpos(get_option('oo_stripe_plan_code1_aleluya'),"plan_") !== 0 ) { 
+  delete_option('oo_stripe_plan_code1_aleluya');?>
+  <div class="notice notice-error is-dismissible">
+    <p><b>God is good!</b>  <br/>
+    <strong>ERROR</strong>: the code provided by stripe starts with plan_ , you had <?php echo get_option('oo_stripe_plan_code1_aleluya')?> </p>
+  </div>
+<?php } ?>
+<?php if ( get_option('oo_stripe_sk_key_aleluya') && strpos(get_option('oo_stripe_sk_key_aleluya'),"sk_") !== 0 ) { 
+  delete_option('oo_stripe_sk_key_aleluya');?>
+  <div class="notice notice-error is-dismissible">
+    <p><b>God is good!</b>  <br/>
+    <strong>ERROR</strong>: the code provided by stripe starts with sk_ , you had <?php echo get_option('oo_stripe_sk_key_aleluya')?> </p>
+  </div>
+<?php } ?>
+<?php if ( get_option('oo_stripe_pk_key_aleluya') && strpos(get_option('oo_stripe_pk_key_aleluya'),"pk_") !== 0 ) { 
+  delete_option('oo_stripe_pk_key_aleluya');?>
+  <div class="notice notice-error is-dismissible">
+    <p><b>God is good!</b>  <br/>
+    <strong>ERROR</strong>: the code provided by stripe starts with pk_ , you had <?php echo get_option('oo_stripe_pk_key_aleluya')?> </p>
+  </div>
+<?php } ?>
+
+<?php
+if ( ! get_option( 'users_can_register' ) ) {
+?>
+<script>
+  function enable_user_registration_aleluya() {
+    alert("Work in Progress - Praise Jesus");
+
+  }
+</script>
+
+  <div class="notice notice-success is-dismissible">
+    <p><b>God is good!</b>  <br/>
+      We recommend that you enable User Registration in the General Site settings, and set the initial type to Donor/Sponsor, in order that individuals can register as supporters of Children, to help automate payments and communication. Would you like us to do it for you? <button onclick="enable_user_registration_aleluya();">Enable User Registration</button></p>
+  </div>
+
+<?php
+}
+
+$opts_aleluya = array('oo_stripe_pk_key_aleluya', 'oo_stripe_sk_key_aleluya', 'oo_stripe_plan_code1_aleluya', 'stripe_plan1_dl_aleluya');
+$alltrue_aleluya = true;
+foreach( $opts_aleluya as $opt_aleluya ) $alltrue_aleluya = ($alltrue_aleluya && get_option($opt_aleluya));
+if( !$alltrue_aleluya ) { 
+  ?>
+  
+  <div class="notice notice-success is-dismissible">
+    <p><b>Praise Jesus for His Kindness</b> <br/> 
+      If you want to maximize the benefit of the program, please sign up with <a href="https://www.stripe.com">Stripe</a> and fill out all the fields below.</p>
+  </div>
+
+  <?php
+}
+
+?>
 <p>Welcome to the <a href="https://openorphanage.org">Open Orphanage</a> administrator for <a href="https://wordpress.org">Wordpress</a> in <a href="https://www.jesusfilm.org/watch/jesus.html/english.html">Jesus</a> name, Hallelujah.
 </p>
 
@@ -117,7 +173,7 @@ do_settings_sections( 'oo-option-group1-aleluya' );
       </td>
     </tr>
     <tr valign="top">
-    <th scope="row">Stripe Subcription Child Plan Code:</th>
+    <th scope="row">Stripe Subcription Monthly Cost:</th>
       <td>
         <input type="number" name="stripe_plan1_dl_aleluya" value="<?php echo esc_attr( get_option('stripe_plan1_dl_aleluya', 40) ); ?>" />
         <p>The amount of dollars per month that the plan above bills. It is not automatically populated and should match what you have made for the plan.</p>

@@ -84,8 +84,9 @@ ALELUYA;
         function oo_sponsor_button_clicked_aleluya(id_aleluya) {
           alert('We will send you to the registration page, where you can create a user for yourself. If you already have a user then Log In Instead please.');
 ALELUYA;
-
-          $str_aleluya .='window.location="'.esc_url( wp_registration_url() ).'";';
+          $reg_url_aleluya = wp_registration_url();
+          $reg_url_aleluya .= (( strpos($reg_url_aleluya, "?" ) === false ) ? '?' : '&' ) . 'child_id_aleluya=';
+           $str_aleluya .='window.location="'.esc_url( $reg_url_aleluya ).'" + id_aleluya;';
           $str_aleluya .=<<<ALELUYA
         }
         </script>
@@ -102,7 +103,7 @@ ALELUYA;
       var oo_children_aleluya = [];
       function oo_sponsor_button_clicked_aleluya(id_aleluya) {
         var email_aleluya = "$email_aleluya";
-        alert('We are registering this child with you, please confirm your sponsorship and details in the back end. ');
+        //alert('We are registering this child with you, please confirm your sponsorship and details in the back end. ');
 
         if (!email_aleluya) return;
         var xhr_aleluya = new XMLHttpRequest();
@@ -110,7 +111,7 @@ ALELUYA;
         xhr_aleluya.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
         xhr_aleluya.onload = function() {
           if (xhr_aleluya.status === 200) {
-              alert('Hallelujah: ' + xhr_aleluya.responseText);
+              console.log('Hallelujah: ' + xhr_aleluya.responseText);
               window.location="$profile_page_aleluya";
           }
           else {
