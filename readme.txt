@@ -104,6 +104,11 @@ Only details regarding a users address are stored on site. Stripe handles the st
 
 == Changelog ==
 
+= 0.1.20190607a =
+ * Hallelujah - register child button on that child's page
+ * Hallelujah - warning messages and enabling user registration switch from the OO aleluya page
+ * Hallelujah - admin error messages, flow of registration changes
+
 = 0.1.201906046b =
 * Hallelujah, praise Jesus Christ - You can now set a new cropped image from the wordpress admin (Thanks [Darren](https://wordpress.stackexchange.com/a/302962) ). Additionally, it now uses the description field for the mini post, which can link fully to the child, Hallelujah.  
 
@@ -118,10 +123,13 @@ Only details regarding a users address are stored on site. Stripe handles the st
 
 == Upgrade Notice ==
 
-= 0.1.20190604b =
+= 0.1.20190607a =
+You will see a button on the child's page. There are not as many alerts when registering a child. More WP admin notices and help.
+
+= 0.1.20190606b =
 Now we store the url to the avatar image instead of the id because of the cropping mechanism.
 
-= 0.1.20190604a =
+= 0.1.20190606a =
 Changing featured image on a child changes that child's media image ID.
 
 = 0.1.20190604a =
