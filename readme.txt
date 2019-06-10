@@ -104,6 +104,9 @@ Only details regarding a users address are stored on site. Stripe handles the st
 
 == Changelog ==
 
+= 0.1.20190609a =
+ * Hallelujah - one time charge, sorter fix, no limit to 10 children on a page
+
 = 0.1.20190607a =
  * Hallelujah - register child button on that child's page
  * Hallelujah - warning messages and enabling user registration switch from the OO aleluya page
@@ -122,6 +125,9 @@ Only details regarding a users address are stored on site. Stripe handles the st
 * Hallelujah, First version on wordpress.com
 
 == Upgrade Notice ==
+
+= 0.1.20190609a =
+Hallelujah - It should work better.
 
 = 0.1.20190607a =
 You will see a button on the child's page. There are not as many alerts when registering a child. More WP admin notices and help.

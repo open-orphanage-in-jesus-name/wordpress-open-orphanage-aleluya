@@ -3,26 +3,25 @@
 // but have everlasting life
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
-/*
+/**
+ * Charge a stripe customer a price in dollars and tag with description
+ * Return the Stripe charge object
+ **/
 
-// WIP
-
-function chargeStripe_aleluya() {
-  if(! get_option('oo_stripe_sk_key_aleluya') ) return null;
+function chargeStripeCustomer_aleluya($customer_code_aleluya, $price_aleluya, $description_aleluya) {
+  if(! get_option('oo_stripe_sk_key_aleluya') ) return false;
 
   \Stripe\Stripe::setApiKey( get_option('oo_stripe_sk_key_aleluya') );
 
-  $charge = \Stripe\Charge::create([
-      'amount' => 999,
+  $charge_aleluya = \Stripe\Charge::create([
+      'amount' => $price_aleluya,
       'currency' => 'usd',
-      'source' => 'tok_visa',
-      'receipt_email' => 'aleluya.jenny.rosen@example.com',
+      'customer' => $customer_code_aleluya,
+      'description' => $description_aleluya,
   ]);
 
-  echo "ALELUYA";
-  exit();
+  return $charge_aleluya;
+
 }
 
-if(isset($_GET['cs_aleluya'])) chargeStripe_aleluya();
-*/
 

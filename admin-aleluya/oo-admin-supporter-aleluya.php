@@ -72,11 +72,76 @@ function oo_show_extra_supporter_profile_fields_aleluya( $user_aleluya ) {
 
       </td>
     </tr>
+    <tr>
+      <th><label for="one_time_donation_aleluya">Support Us with a One Time Charge: </label></th>
+      <td>
+        <?php if (!$last4_aleluya) { echo "Please first insert your credit card information above and click save."; } else { ?>
+          <style>
+            #oo_one_time_donation_aleluya {background: #beeece; border-radius: 2px; border: 1px solid black; box-shadow: 1px 1px 1px black; }
+          </style>
+          <script>
+            function oo_one_time_donation_button_clicked_aleluya(){
+               var data_aleluya = {
+                  action: 'oo_one_time_supporter_donation_aleluya',
+                  purpose_aleluya: jQuery("#oo_one_time_donation_purpose_aleluya").val(),
+                  price_aleluya: jQuery("#oo_one_time_donation_price_aleluya").val()
+                };
+
+                jQuery.post(ajaxurl, data_aleluya, function(response_aleluya) {
+                  console.log("Hallelujah - " + JSON.stringify(response_aleluya));
+                  if(response_aleluya.success === true) {
+                    jQuery("#oo_one_time_donation_notice_aleluya").html("<b>"+response_aleluya.data.html_aleluya+"</b>");
+                  } else {
+                    jQuery("#oo_one_time_donation_notice_aleluya").html( "The Lord is good - error processing your card: <b> " + response_aleluya.data +"</b>");
+                  }
+                });
+            }
+          </script>
+
+          <table id="oo_one_time_donation_aleluya">
+            <tr>
+              <td align="right">Donation in Dollars: </td>
+              <td><input type="number"
+                     min="0"
+                     max="9999"
+                     step="1"
+                     id="oo_one_time_donation_price_aleluya"
+                     name="oo_one_time_donation_price_aleluya"
+                     value="0"
+                     class="regular-text"/></td>
+            </tr><tr>
+              <td align="right">Donation Note or Purpose: </td>
+              <td><input type="text" name="oo_one_time_donation_purpose_aleluya" id="oo_one_time_donation_purpose_aleluya" /></td>
+            </tr>
+            <tr>             
+              <td id="oo_one_time_donation_notice_aleluya"></td>
+              <td><button id="oo_one_time_donation_button_aleluya" onclick="oo_one_time_donation_button_clicked_aleluya();"  type="button">Please Charge my Card Above Amount</button></td>
+          </table>
+          <br/>
+        <?php } ?>
+      </td>
+    </tr>
+
   </table>
   <?php
 }
 
-
+add_action( 'wp_ajax_oo_one_time_supporter_donation_aleluya', 'wp_ajax_oo_one_time_supporter_donation_aleluya'   );
+function wp_ajax_oo_one_time_supporter_donation_aleluya() {
+  $description_aleluya = sanitize_text_field($_POST["purpose_aleluya"]);
+  $price_aleluya = intval($_POST["price_aleluya"]) ;
+  $customer_code_aleluya = get_user_meta(get_current_user_id(), stripeCustSkMetaTag_aleluya(), true);
+  try {
+    if( ! chargeStripeCustomer_aleluya($customer_code_aleluya, $price_aleluya * 100, $description_aleluya) ) {
+      wp_send_json_error();
+    } else {
+      $data_aleluya = array("html_aleluya" => __("Hallelujah - your card has been charged ").  "$".$price_aleluya);
+      wp_send_json_success( $data_aleluya );
+    }
+  } catch (Exception $e_aleluya) {
+    wp_send_json_error($e_aleluya->getMessage());
+  }
+}
 
 add_action( 'user_profile_update_errors', 'oo_supporter_profile_update_errors_aleluya', 10, 3 );
 
@@ -111,6 +176,7 @@ function oo_update_supporter_profile_fields_aleluya( $user_id_aleluya ) {
 
 //Add the stripe api script to the site
 if( get_option('oo_stripe_pk_key_aleluya') ) {
+  error_log("Hallelujah - stripe enque");
   add_action('admin_footer', 'oo_stripe_footer_aleluya');
   add_action( 'admin_enqueue_scripts', function() { wp_enqueue_script( "oo_stripe_aleluya", 'https://js.stripe.com/v3/' ); });
 

@@ -106,12 +106,8 @@ ALELUYA;
       window.location=url_aleluya;
     }
     </script>
-    <div class='oo_aleluya'>
-
-    <div class='oo_chooser_aleluya'>
-    <span class='oo_label_aleluya'>Sort By:</span><select><option>Recent</option><option>Age</option><option>Coming soon God Willing</option></select>
-    </div>
 ALELUYA;
+
   return $str_aleluya;
 }
 
@@ -145,12 +141,17 @@ function oo_aleluya_func( $atts ) {
 ALELUYA;
 
   $str_aleluya .= oo_child_register_js_aleluya();
-
+  $str_aleluya .=<<<ALELUYA
+<div class='oo_aleluya'>
+  <div class='oo_chooser_aleluya'>
+  <span class='oo_label_aleluya'>Sort By:</span><select><option>Recent</option><option>Age</option><option>Coming soon God Willing</option></select>
+</div>
+ALELUYA;
 
  
 
 //Thanks You Jesus for Milo @ https://wordpress.stackexchange.com/q/191093
-  $loop_aleluya = new WP_Query( array('post_type' => 'child_aleluya') );
+  $loop_aleluya = new WP_Query( array('post_type' => 'child_aleluya', 'posts_per_page'   => -1) );
   while ( $loop_aleluya->have_posts() ) :
     $loop_aleluya->the_post();
     $id_aleluya  = get_the_ID();

@@ -18,7 +18,6 @@ function add_oomenu_aleluya() {
 }
 
 function register_oosettings_aleluya() { // whitelist options
-
   register_setting( 'oo-option-group1-aleluya', 'oo_email_address_from_address_aleluya' );
   register_setting( 'oo-option-group1-aleluya', 'oo_email_address_from_name_aleluya' );
   register_setting( 'oo-option-group1-aleluya', 'oo_administrator_logo_aleluya' );
@@ -76,7 +75,7 @@ if ( ! get_option( 'users_can_register' ) ) {
       if(response_aleluya.success === true) {
         jQuery("#enable-registration-notice-aleluya").html(response_aleluya.data.html_aleluya);
       } else {
-        alert("Error  - Aleluya " + JSON.stringify(response_aleluya))
+        alert("Error  - Aleluya " + response_aleluya.data)
       }
     });
 
