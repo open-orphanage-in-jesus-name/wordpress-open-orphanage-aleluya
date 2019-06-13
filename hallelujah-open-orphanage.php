@@ -19,6 +19,8 @@ defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
 require __DIR__ . '/vendor/autoload.php';
 
+$oo_dir_aleluya = plugin_dir_url(__FILE__);
+
 function load_plugin_textdomain_aleluya() {
   load_plugin_textdomain('open-orphanage', false, basename( dirname( __FILE__ ) ) . '/languages-aleluya/' );
 }

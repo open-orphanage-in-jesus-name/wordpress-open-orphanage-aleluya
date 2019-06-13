@@ -155,6 +155,8 @@ ALELUYA;
   while ( $loop_aleluya->have_posts() ) :
     $loop_aleluya->the_post();
     $id_aleluya  = get_the_ID();
+
+    oo_make_child_thumb_aleluya($id_aleluya);
     $str_aleluya.="<table class='new_child_aleluya' align='center'>";
     $str_aleluya.='<tr><td class="child_img_holder_aleluya"><img class="child_avatar_aleluya" src="' . get_post_meta( $id_aleluya,  'avatar_media_url_aleluya',true) . '"/></td></tr>';
     $str_aleluya .= "<tr><td colspan='2' class='name_aleluya'>" . get_post_meta($id_aleluya, "nick_names_aleluya", true) . "</td></tr>";

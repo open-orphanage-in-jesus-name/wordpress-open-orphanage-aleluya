@@ -10,6 +10,7 @@ require_once( dirname( __FILE__ ) . '/show-children-shortcode-aleluya.php');
 require_once( dirname( __FILE__ ) . '/notify1-aleluya.php');
 require_once( dirname( __FILE__ ) . '/charges-aleluya.php');
 require_once( dirname( __FILE__ ) . '/supporters-aleluya.php');
+require_once( dirname( __FILE__ ) . '/bible-verse-widget-aleluya.php');
 /** Admin from filter, thank You Lord Jesus for https://www.wpbeginner.com/plugins/how-to-change-sender-name-in-outgoing-wordpress-email/ */
 // Function to change email address
 

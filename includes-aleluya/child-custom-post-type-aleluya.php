@@ -236,6 +236,53 @@ function oo_show_child_fields_meta_box_aleluya() {
 
 }
 
+function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
+  global $oo_dir_aleluya;
+  //Hallelujah, get resized thumbnail
+  if( get_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true) ) return;
+  $url_aleluya = get_post_meta( $child_post_id_aleluya, "avatar_media_url_aleluya", true );
+  if(!$url_aleluya) return false;
+
+  
+  error_log("Hallelujah working with ".$url_aleluya);
+  
+  $editor_aleluya = wp_get_image_editor( $url_aleluya, array() );
+ 
+  if (is_wp_error($editor_aleluya)) {    
+    error_log("Praise Jesus Christ He is Lord - ".$editor_aleluya->get_error_message()." - Error starting image editor for ".$fn_aleluya."\n");
+    return;
+     
+  }
+  // Get the dimensions for the size of the current image.
+  $dimensions_aleluya = $editor_aleluya->get_size();
+  $width_aleluya = $dimensions_aleluya['width'];
+  $height_aleluya = $dimensions_aleluya['height'];
+  error_log("Aleluya osize $width_aleluya x $height_aleluya");
+  // Calculate the new dimensions for the image.
+  $newWidth_aleluya = 192;
+  $newHeight_aleluya = 192;
+  // Resize the image.
+  $result_aleluya = $editor_aleluya->resize($newWidth_aleluya, $newHeight_aleluya, false);
+
+  // If there's no problem, save it; otherwise, print the problem.
+  if (!is_wp_error($result_aleluya)) {
+    if (!file_exists( __DIR__."/../public-aleluya/thumbs-aleluya")) {
+        mkdir(__DIR__."/../public-aleluya/thumbs-aleluya", 0777, true);
+    }
+    $newFile_aleluya = __DIR__."/../public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-aleluya.jpg";//$editor_aleluya->generate_filename();
+    $newUrl_aleluya = $oo_dir_aleluya. "public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-aleluya.jpg";
+    error_log("Aleluya - ".$newUrl_aleluya);
+    $editor_aleluya->save($newFile_aleluya);
+
+    update_post_meta($child_post_id_aleluya, "avatar_media_url_aleluya", $newUrl_aleluya);
+    update_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true);
+  } else {
+     // Handle the problem however you deem necessary.
+    error_log("Praise Jesus Christ He is Lord - ".$result_aleluya->get_error_message(). " Error resizing image for ".$url_aleluya);
+  }
+}
+
+
 function save_child_fields_meta_aleluya( $post_id_aleluya ) {
   global $child_fields_aleluya;
   // verify nonce
@@ -269,7 +316,11 @@ function save_child_fields_meta_aleluya( $post_id_aleluya ) {
     }
   }
 
+  update_post_meta( $post_id_aleluya, "avatar_noremake_aleluya", false);
+
   update_post_meta( $post_id_aleluya, "avatar_media_id_aleluya", get_post_thumbnail_id());
+
+
 }
 add_action( 'save_post', 'save_child_fields_meta_aleluya' );
 
