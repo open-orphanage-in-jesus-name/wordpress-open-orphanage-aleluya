@@ -104,6 +104,10 @@ Only details regarding a users address are stored on site. Stripe handles the st
 
 == Changelog ==
 
+= 0.1.20190612a =
+ * Hallelujah - create 192x192 thumbnail version of children
+ * Hallelujah - add random Bible verse widget
+
 = 0.1.20190609a =
  * Hallelujah - one time charge, sorter fix, no limit to 10 children on a page
 
@@ -126,23 +130,26 @@ Only details regarding a users address are stored on site. Stripe handles the st
 
 == Upgrade Notice ==
 
+= 0.1.20190612a =
+ * Praise Jesus - This will downsize thumbs to 192x192 pixels
+
 = 0.1.20190609a =
-Hallelujah - It should work better.
+ * Hallelujah - It should work better.
 
 = 0.1.20190607a =
-You will see a button on the child's page. There are not as many alerts when registering a child. More WP admin notices and help.
+ * You will see a button on the child's page. There are not as many alerts when registering a child. More WP admin notices and help.
 
 = 0.1.20190606b =
-Now we store the url to the avatar image instead of the id because of the cropping mechanism.
+ * Now we store the url to the avatar image instead of the id because of the cropping mechanism.
 
 = 0.1.20190606a =
-Changing featured image on a child changes that child's media image ID.
+ * Changing featured image on a child changes that child's media image ID.
 
 = 0.1.20190604a =
-No changes required
+ * No changes required
 
 = 0.1.20190603 =
-First wordpress.com version, no upgrade path.
+ * First wordpress.com version, no upgrade path.
 
 == Arbitrary section ==
 
