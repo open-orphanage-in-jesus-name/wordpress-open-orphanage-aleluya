@@ -104,6 +104,9 @@ Only details regarding a users address are stored on site. Stripe handles the st
 
 == Changelog ==
 
+= 0.1.20190612b =
+ * Hallelujah - bugfix to not overwrite original url in db
+
 = 0.1.20190612a =
  * Hallelujah - create 192x192 thumbnail version of children
  * Hallelujah - add random Bible verse widget

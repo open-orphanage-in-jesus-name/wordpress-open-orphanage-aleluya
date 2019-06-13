@@ -239,7 +239,7 @@ function oo_show_child_fields_meta_box_aleluya() {
 function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
   global $oo_dir_aleluya;
   //Hallelujah, get resized thumbnail
-  if( get_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true) ) return;
+  if( get_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true) == 2 ) return;
   $url_aleluya = get_post_meta( $child_post_id_aleluya, "avatar_media_url_aleluya", true );
   if(!$url_aleluya) return false;
 
@@ -269,13 +269,13 @@ function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
     if (!file_exists( __DIR__."/../public-aleluya/thumbs-aleluya")) {
         mkdir(__DIR__."/../public-aleluya/thumbs-aleluya", 0777, true);
     }
-    $newFile_aleluya = __DIR__."/../public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-aleluya.jpg";//$editor_aleluya->generate_filename();
-    $newUrl_aleluya = $oo_dir_aleluya. "public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-aleluya.jpg";
+    $newFile_aleluya = __DIR__."/../public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-192x192-aleluya.jpg";//$editor_aleluya->generate_filename();
+    //$newUrl_aleluya = $oo_dir_aleluya. "public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-192x192-aleluya.jpg";
     error_log("Aleluya - ".$newUrl_aleluya);
     $editor_aleluya->save($newFile_aleluya);
 
-    update_post_meta($child_post_id_aleluya, "avatar_media_url_aleluya", $newUrl_aleluya);
-    update_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true);
+    //update_post_meta($child_post_id_aleluya, "avatar_media_url_aleluya", $newUrl_aleluya);
+    update_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", 2);
   } else {
      // Handle the problem however you deem necessary.
     error_log("Praise Jesus Christ He is Lord - ".$result_aleluya->get_error_message(). " Error resizing image for ".$url_aleluya);
