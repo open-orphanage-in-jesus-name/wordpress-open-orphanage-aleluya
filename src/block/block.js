@@ -1,3 +1,5 @@
+// For God so loved the world, that He gave His only begotten Son, that all who belive in Him should not perish but have everlasting life
+
 /**
  * BLOCK: oo1b-aleluya
  *

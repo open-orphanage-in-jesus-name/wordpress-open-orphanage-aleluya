@@ -7,6 +7,7 @@ require_once( dirname( __FILE__ ) . '/child-custom-post-type-aleluya.php' );
 require_once( dirname( __FILE__ ) . '/roles-aleluya.php' );
 require_once( dirname( __FILE__ ) . '/basic-auth-aleluya.php' );
 require_once( dirname( __FILE__ ) . '/show-children-shortcode-aleluya.php');
+require_once( dirname( __FILE__ ) . '/donation-block-shortcode-aleluya.php');
 require_once( dirname( __FILE__ ) . '/notify1-aleluya.php');
 require_once( dirname( __FILE__ ) . '/charges-aleluya.php');
 require_once( dirname( __FILE__ ) . '/supporters-aleluya.php');
