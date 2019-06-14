@@ -105,6 +105,8 @@ Only details regarding a users address are stored on site. Stripe handles the st
 1. ✝ Displaying the children
 
 == Changelog ==
+= 0.1.20190613b =
+ * Hallelujah - bugfix, autosave yes as default on new donation form, allow multiple stripe donation forms same page.
 
 = 0.1.20190613a =
  * Hallelujah - Insert payment form from outside Admin:  Can create a payment form using Gutenberg or shortcode. It optionally can display the form after button click, and stores which is the purpose of the donation, as well as allowing the supporter to input additional notes, name, etc.
@@ -139,6 +141,9 @@ Only details regarding a users address are stored on site. Stripe handles the st
 * Hallelujah, First version on wordpress.com
 
 == Upgrade Notice ==
+
+= 0.1.20190613a =
+ * Hallelujah - bugfix.
 
 = 0.1.20190613a =
  * Hallelujah - Should work well. You now have a new shortcode and gutenberg block you can put in pages.

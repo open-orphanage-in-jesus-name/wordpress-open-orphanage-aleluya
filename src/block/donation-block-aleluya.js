@@ -41,7 +41,7 @@ registerBlockType( 'cgb/block-oo-donation-aleluya', {
   ],
   attributes: {
     'purpose_aleluya': {type: 'string'},
-    'expandable_aleluya': {type: 'string'},
+    'expandable_aleluya': {type: 'string', default: "yes"},
     //'color_aleluya': {type: 'string', source: "meta", meta: 'color_aleluya'}
 
   },

@@ -104,7 +104,7 @@ ALELUYA;
     $str_aleluya .= <<<ALELUYA
   <script>
     var oo_block_stripe_aleluya = Stripe('$stripe_pk_aleluya');
-    var oo_block_elements_aleluya = oo_block_stripe_aleluya.elements();
+    
   </script>
   <style>
     .card-element-card-aleluya, .card-element-aleluya { padding: 4px; margin: 3px; background: #fefefe; border: 1px solid black; border-radius: 4px;}
@@ -184,8 +184,10 @@ ALELUYA;
     }
   };
 
+  var oo_block_elements_aleluya_$rand_aleluya = oo_block_stripe_aleluya.elements();
+
   // Create an instance of the card Element.
-  var card_aleluya_$rand_aleluya = oo_block_elements_aleluya.create('card', {style: style_aleluya});
+  var card_aleluya_$rand_aleluya = oo_block_elements_aleluya_$rand_aleluya.create('card', {style: style_aleluya});
 
   // Add an instance of the card Element into the `card-element` <div>.
   card_aleluya_$rand_aleluya.mount('#card-element-aleluya-$rand_aleluya');
