@@ -57,18 +57,18 @@
 
 // Ajax request to refresh the image preview
 function Refresh_Image_aleluya(the_id_aleluya){
-        var data_aleluya = {
-            action: 'oo_child_get_image_aleluya',
-            id_aleluya: the_id_aleluya
-        };
+    var data_aleluya = {
+        action: 'oo_child_get_image_aleluya',
+        id_aleluya: the_id_aleluya
+    };
 
-        jQuery.get(ajaxurl, data_aleluya, function(response_aleluya) {
-        console.log("Hallelujah - " + JSON.stringify(response_aleluya));
-            if(response_aleluya.success === true) {
+    jQuery.get(ajaxurl, data_aleluya, function(response_aleluya) {
+    console.log("Hallelujah - " + JSON.stringify(response_aleluya));
+        if(response_aleluya.success === true) {
 
-                jQuery('#oo-child-preview-image-aleluya').replaceWith( response_aleluya.data.image_aleluya );
-            }
-        });
+            jQuery('#oo-child-preview-image-aleluya').replaceWith( response_aleluya.data.image_aleluya );
+        }
+    });
 }
 
 

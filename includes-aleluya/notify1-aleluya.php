@@ -59,7 +59,7 @@ function ifttt_post_notify_aleluya($v1_aleluya, $v2_aleluya, $v3_aleluya) {
 add_action( 'init', 'oo_notify_init_aleluya' );
 
 function oo_notify_init_aleluya() {
-  if(isset($_POST["oo_email_aleluya"])) {
+  if( !isset($_POST["oo_name_aleluya"]) && isset($_POST["oo_email_aleluya"])  ) {
 
 
     wp_verify_nonce($_POST['wpchild_register_request_nonce_aleluya'], 'wpchild_register_request_nonce_aleluya');

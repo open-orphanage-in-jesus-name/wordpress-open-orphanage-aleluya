@@ -3,6 +3,13 @@
  * He gave His only begotten Son, that all who believe in Him should not perish but have everlasting life; */
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
+
+add_action( 'wp_enqueue_scripts', function() {
+  wp_enqueue_script( 'oo_aleluya_js', plugins_url( '/public-aleluya/js-aleluya/oo-aleluya.js' , __DIR__.'../'), array('jquery'), '0.1' );
+  wp_localize_script( 'oo_aleluya_js', 'oo_ajax_aleluya',
+            array( 'ajax_url_aleluya' => admin_url( 'admin-ajax.php' ) ) );
+} );
+
 require_once( dirname( __FILE__ ) . '/child-custom-post-type-aleluya.php' );
 require_once( dirname( __FILE__ ) . '/roles-aleluya.php' );
 require_once( dirname( __FILE__ ) . '/basic-auth-aleluya.php' );

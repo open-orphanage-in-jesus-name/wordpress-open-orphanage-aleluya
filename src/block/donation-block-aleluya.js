@@ -40,10 +40,14 @@ registerBlockType( 'cgb/block-oo-donation-aleluya', {
     __( 'Sponsor' ),
   ],
   attributes: {
-  'purpose_aleluya': {type: 'string', source: "meta", meta: 'purpose_aleluya'}
+    'purpose_aleluya': {type: 'string'},
+    'expandable_aleluya': {type: 'string'},
+    //'color_aleluya': {type: 'string', source: "meta", meta: 'color_aleluya'}
 
   },
 
+
+  // Thank You Jesus for https://getflywheel.com/layout/wordpress-gutenberg-blocks-custom/
   /**
    * The edit function describes the structure of your block in the context of the editor.
    * This represents what the editor will render when the block is used.
@@ -52,14 +56,37 @@ registerBlockType( 'cgb/block-oo-donation-aleluya', {
    *
    * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
    */
-  edit: function( props ) {
-    // Creates a <p class='wp-block-cgb-block-oo1b-aleluya'></p>.
+  edit: function( props_aleluya ) {
+
+    function updatePurpose_aleluya(event_aleluya) {
+      var val_aleluya = event_aleluya.target.value;
+      props_aleluya.setAttributes({purpose_aleluya: val_aleluya})
+    }
+
+    function updateExpandable_aleluya(event_aleluya) {
+      props_aleluya.setAttributes({expandable_aleluya: event_aleluya.target.value})
+    }
+    /*function updateColor_aleluya(value_aleluya) {
+      props_aleluya.setAttributes({color_aleluya: value_aleluya.hex})
+    }*/
     return (
-      <div className={ props.className }>
-        <p> — Hallelujah!!! Jesus Christ is Lord - .</p>
-        Here we will place a Stripe donation field. It will work with people who are not registered.
+      <div class="oo_donation_block_editor_aleluya">
+        <h3>🕆 Donate For {props_aleluya.attributes.purpose_aleluya || "Cause"}</h3>
+        <table>
+          <tr><td>Purpose: </td><td><input onChange={updatePurpose_aleluya} value={props_aleluya.attributes.purpose_aleluya} type="text"/></td></tr>
+          <tr><td>Expandable:  </td><td>
+            <select onChange={updateExpandable_aleluya} value={props_aleluya.attributes.expandable_aleluya}>
+              <option value="yes">yes</option>
+              <option value="no">no</option>
+            </select>
+          </td></tr>
+        </table>
+
       </div>
     );
+    // React.createElement("input", { type: "text", value: props_aleluya.attributes.purpose_aleluya, onChange: updatePurpose_aleluya }),
+     // React.createElement(wp.components.ColorPicker, { color_aleluya: props_aleluya.attributes.color, onChangeComplete: updateColor_aleluya })
+
   },
 
   /**
@@ -70,10 +97,10 @@ registerBlockType( 'cgb/block-oo-donation-aleluya', {
    *
    * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
    */
-  save: function( props ) {
+  save: function( props_aleluya ) {
     return (
       <div class="oo_donation_block_aleluya"> 
-        [oo_donation_block_aleluya/]        
+        [oo_donation_block_aleluya purpose_aleluya="{props_aleluya.attributes.purpose_aleluya}" expandable_aleluya="{props_aleluya.attributes.expandable_aleluya}"/]        
       </div>
     );
   },

@@ -24,4 +24,27 @@ function chargeStripeCustomer_aleluya($customer_code_aleluya, $price_aleluya, $d
 
 }
 
+function chargeStripeWithToken_aleluya($token_aleluya, $price_aleluya, $name_aleluya, $email_aleluya, $phone_aleluya, $description_aleluya, $notes_aleluya, $req_uri_aleluya) {
+  if(! get_option('oo_stripe_sk_key_aleluya') ) return false;
+
+  \Stripe\Stripe::setApiKey( get_option('oo_stripe_sk_key_aleluya') );
+
+  $charge_aleluya = \Stripe\Charge::create([
+      'amount' => $price_aleluya,
+      'currency' => 'usd',
+      'source' => $token_aleluya,
+      'metadata' => array(
+        "email_aleluya" => $email_aleluya,
+        "name_aleluya" => $name_aleluya,
+        "phone_aleluya" => $phone_aleluya,
+        "notes_aleluya" => $notes_aleluya,
+        "req_uri_aleluya" => $req_uri_aleluya,
+      ),
+      'description' => $description_aleluya,
+  ]);
+
+  return $charge_aleluya;
+
+}
+
 
