@@ -6,14 +6,14 @@ defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
 function oo_child_register_js_aleluya() {
    /**
-   * add a nonce for the registration 
+   * add a nonce for the registration
    */
 
   $wpchild_register_request_nonce_aleluya = wp_create_nonce('wpchild_register_request_nonce_aleluya');
   $str_aleluya = '<script> var wpchild_register_request_nonce_aleluya = "' .$wpchild_register_request_nonce_aleluya.'"; </script>';
 
 
-  
+
   if( ! is_user_logged_in() ) {
     // If the user is not logged in, check to see if registrations are enabled
     //Thanks Jesus for Robert hue  @ https://wordpress.stackexchange.com/a/167834
@@ -37,7 +37,7 @@ function oo_child_register_js_aleluya() {
                 alert('Hallelujah Request failed.  Returned status of ' + xhr_aleluya.status);
             }
           };
-          xhr_aleluya.send(encodeURI( 
+          xhr_aleluya.send(encodeURI(
             'oo_email_id_aleluya='+id_aleluya+
             '&oo_email_aleluya='+email_aleluya+
             '&wpchild_register_request_nonce_aleluya='+wpchild_register_request_nonce_aleluya
@@ -47,7 +47,7 @@ function oo_child_register_js_aleluya() {
         </script>
 ALELUYA;
 
-    } else { 
+    } else {
       // Ok we can register so send to registration page
       $str_aleluya .=<<<ALELUYA
         <script>
@@ -62,7 +62,7 @@ ALELUYA;
         }
         </script>
 ALELUYA;
-    }  
+    }
 
   } else {
     //If here, then we are logged in and we should assign the child to the user
@@ -89,7 +89,7 @@ ALELUYA;
               window.location="$profile_page_aleluya";
           }
         };
-          xhr_aleluya.send(encodeURI( 
+          xhr_aleluya.send(encodeURI(
             'oo_email_id_aleluya='+id_aleluya+
             '&oo_email_aleluya='+email_aleluya+
             '&wpchild_register_request_nonce_aleluya='+wpchild_register_request_nonce_aleluya
@@ -126,29 +126,33 @@ function oo_aleluya_func( $atts ) {
    */
   $str_aleluya .=<<<ALELUYA
   <style>
-    div.oo_aleluya {}
-    div.oo_aleluya td.label_aleluya { width:112px; font-weight:900; text-align: right;padding-right: 8px;}
-    div.oo_aleluya td.content_aleluya {}
-    div.oo_aleluya td { vertical-align: top; border:0px; padding: 0px; }
-    div.oo_aleluya img.child_avatar_aleluya { display: inline-block; vertical-align:top;  height:224px; max-width:224px; width:224px;  border-radius: 4px; border: 1px solid black; padding: 1px;margin: 2px;}
-    div.oo_aleluya .new_child_aleluya  { float: left; max-width:256px; border-radius:8px; margin: 2px; padding-top:2px; border: 1px solid #888; display: block-inline; }
-    div.oo_aleluya .oo_child_meta_aleluya, .oo_child_desc_aleluya  { margin:4px; padding: 0px; border: 0px; vertical-align: top; width: 240px; margin-top: 0px; display: inline-block;}
-    div.oo_aleluya td.name_aleluya {text-align: center; font-weight: 900;font-size:larger;}
-    div.oo_aleluya div.child_description_aleluya { line-height: 2.5ex;  text-align: justify; height: 10ex; min-height: 10ex; overflow: hidden;
+    div.oo_children_aleluya { display:         flex;
+  flex-wrap:       wrap;
+	justify-content: center;
+    }
+    div.oo_children_aleluya td.label_aleluya { width:112px; font-weight:900; text-align: right;padding-right: 8px;}
+    div.oo_children_aleluya td.content_aleluya {}
+    div.oo_children_aleluya td { vertical-align: top; border:0px; padding: 0px; }
+    div.oo_children_aleluya img.child_avatar_aleluya { display: inline-block; vertical-align:top;  height:224px; max-width:224px; width:224px;  border-radius: 4px; border: 1px solid black; padding: 1px;margin: 2px;}
+    div.oo_children_aleluya .new_child_aleluya  { dispay: block-inline; max-width:256px; border-radius:8px; margin: 2px; padding-top:2px; border: 1px solid #888; display: block-inline; }
+    div.oo_children_aleluya .oo_child_meta_aleluya, .oo_child_desc_aleluya  { margin:4px; padding: 0px; border: 0px; vertical-align: top; width: 240px; margin-top: 0px; display: inline-block;}
+    div.oo_children_aleluya td.name_aleluya {text-align: center; font-weight: 900;font-size:larger;}
+    div.oo_children_aleluya div.child_description_aleluya { line-height: 2.5ex;  text-align: justify; height: 10ex; min-height: 10ex; overflow: hidden;
     text-overflow: ellipsis;}
-    div.oo_aleluya td.child_img_holder_aleluya {text-align: center}
+    div.oo_children_aleluya td.child_img_holder_aleluya {text-align: center}
   </style>
 ALELUYA;
 
-  $str_aleluya .= oo_child_register_js_aleluya();
-  $str_aleluya .=<<<ALELUYA
+	$str_aleluya .= oo_child_register_js_aleluya();
+	$str_aleluya .= '<div class="oo_children_aleluya">';
+ /* $str_aleluya .=<<<ALELUYA
 <div class='oo_aleluya'>
   <div class='oo_chooser_aleluya'>
   <span class='oo_label_aleluya'>Sort By:</span><select><option>Recent</option><option>Age</option><option>Coming soon God Willing</option></select>
 </div>
 ALELUYA;
+	*/
 
- 
 
 //Thanks You Jesus for Milo @ https://wordpress.stackexchange.com/q/191093
   $loop_aleluya = new WP_Query( array('post_type' => 'child_aleluya', 'posts_per_page'   => -1) );
@@ -166,7 +170,7 @@ ALELUYA;
     $str_aleluya .= "<td>";
     $str_aleluya .= '<div class="child_description_aleluya" >'. get_post_meta($id_aleluya, "description_aleluya", true).'</div><br/>';
     $str_aleluya .= '<div class="show_content" align="center"><button class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(' .$id_aleluya. ');">Sponsor this Child</button></div>';
-     
+
     $str_aleluya .= "</td></tr>";
     $str_aleluya .= "</table></tr></td>";
 
@@ -208,7 +212,7 @@ add_shortcode( 'oo_aleluya', 'oo_aleluya_func' );
 
 //Thank You Jesus for https://www.wpbeginner.com/wp-tutorials/how-add-signature-ads-post-content-wordpress/
 function oo_after_child_post_content_aleluya($in_content_aleluya){
-    //if (is_single()) {  
+    //if (is_single()) {
     if( get_post_type() == "child_aleluya" ) {
         $in_content_aleluya = oo_child_register_js_aleluya().'<button  class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(' .get_the_ID(). ');">Sponsor this Child</button>' . $in_content_aleluya;
     }

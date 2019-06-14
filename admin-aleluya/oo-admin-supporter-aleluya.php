@@ -5,7 +5,7 @@
 /**
  * This file enabled custom profile fields for a user. Some fields store a users address and other
  * details that would help with communication and stripe charges. We also use this to interface
- * with the card details for a user. These are not stored nor transferred through our app, but 
+ * with the card details for a user. These are not stored nor transferred through our app, but
  * are handled fully by stripe.
  */
 
@@ -44,7 +44,7 @@ function oo_show_extra_supporter_profile_fields_aleluya( $user_aleluya ) {
       <th><label for=""><?php esc_html_e( '🕆 Credit Card Info', 'crf' ); ?></label></th>
       <td>
 
-        
+
           <div class="form-row">
 
             <div id="card-element-aleluya">
@@ -65,10 +65,10 @@ function oo_show_extra_supporter_profile_fields_aleluya( $user_aleluya ) {
 <?php
               }?>
             </label>
-            
+
           </div>
 
-         
+
 
       </td>
     </tr>
@@ -113,7 +113,7 @@ function oo_show_extra_supporter_profile_fields_aleluya( $user_aleluya ) {
               <td align="right">Donation Note or Purpose: </td>
               <td><input type="text" name="oo_one_time_donation_purpose_aleluya" id="oo_one_time_donation_purpose_aleluya" /></td>
             </tr>
-            <tr>             
+            <tr>
               <td id="oo_one_time_donation_notice_aleluya"></td>
               <td><button id="oo_one_time_donation_button_aleluya" onclick="oo_one_time_donation_button_clicked_aleluya();"  type="button">Please Charge my Card Above Amount</button></td>
           </table>
@@ -155,7 +155,7 @@ function oo_supporter_profile_update_errors_aleluya( $errors, $update, $user ) {
     $errors->add( 'zipcode_aleluya', __( '<strong>ERROR</strong>: Please enter your postal or zipcode.', 'crf' ) );
   }
 
-  
+
 }
 
 
@@ -265,13 +265,13 @@ function oo_child_support_update_errors_aleluya( $errors, $update, $user_aleluya
     return;
   }
 
-  $last4_aleluya = get_user_meta($user_aleluya->ID, "last4_".stripeCustSkMetaTag_aleluya(), true); 
+  $last4_aleluya = get_user_meta($user_aleluya->ID, "last4_".stripeCustSkMetaTag_aleluya(), true);
 
   //We cannot accept a sponsorship with no card details
   if( !empty($_POST['accept_sponsorship_aleluya']) && !$last4_aleluya ) {
     $errors->add( 'accept_sponsorship_aleluya', __( '<strong>ERROR</strong>: You must first add your card above.', 'crf' ) );
   }
-  
+
 }
 
 
@@ -296,7 +296,7 @@ function oo_child_support_fields_aleluya( $user_id_aleluya ) {
       error_log( wp_get_current_user()->ID." - Cancelled - ".json_encode($children_supported_aleluya));
       oo_stripe_stop_subscription( get_current_user_id(), $id_aleluya );
       oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
-          
+
     }
   }
 
@@ -313,7 +313,7 @@ function oo_child_support_fields_aleluya( $user_id_aleluya ) {
       if(! $cancel_aleluya ) {
         //Ok child is being accepted, begin subscription!
         update_user_meta(get_current_user_id(), 'begin_sponsorship_aleluya', true);
-        
+
         $children_supported_aleluya = oo_get_user_children_supported_aleluya( wp_get_current_user() );
         $sub_code_aleluya = oo_stripe_start_subscription( get_current_user_id(), $id_aleluya );
         $child_aleluya = array(
@@ -324,7 +324,7 @@ function oo_child_support_fields_aleluya( $user_id_aleluya ) {
         $children_supported_aleluya["children_aleluya"]["aleluya_".$id_aleluya] = $child_aleluya;
         error_log( wp_get_current_user()->ID." - New Subscription - ".json_encode($children_supported_aleluya));
         oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
-        
+
 
       }
     }
@@ -398,10 +398,15 @@ function oo_stripe_stop_subscription( $user_id_aleluya, $child_id_aleluya) {
   if(! get_option('oo_stripe_sk_key_aleluya') ) return null;
   \Stripe\Stripe::setApiKey( get_option('oo_stripe_sk_key_aleluya') );
 
-  $sub_code_aleluya = get_post_meta($child_id_aleluya, 'stripe_sub_code_aleluya', true);
-  $sub_aleluya = \Stripe\Subscription::retrieve($sub_code_aleluya);
-  $sub_aleluya->cancel();
+	try {
+		$sub_code_aleluya = get_post_meta($child_id_aleluya, 'stripe_sub_code_aleluya', true);
+		$sub_aleluya = \Stripe\Subscription::retrieve($sub_code_aleluya);
+		$sub_aleluya->cancel();
+	} catch (Exception $e_aleluya) {
+		error_log("Hallelujah - Stripe error in oo_stripe_stop_subscription : ".$e_aleluya->getMessage());
 
+	}
+  delete_post_meta($child_id_aleluya, 'stripe_sub_code_aleluya');
   $end_subscription_aleluya = true;
 
 
@@ -409,14 +414,14 @@ function oo_stripe_stop_subscription( $user_id_aleluya, $child_id_aleluya) {
 }
 
 function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
-  
+
   $children_supported_aleluya = oo_get_user_children_supported_aleluya($user_aleluya);
-  
+
   ?>
   <h3><?php esc_html_e( '🕆 Children I am Supporting (Hallelujah)', 'crf' ); ?></h3>
 
   <?php
-  if( empty( $children_supported_aleluya["children_aleluya"] ) ) { 
+  if( empty( $children_supported_aleluya["children_aleluya"] ) ) {
     ?>
     <p>You currently are not registered as a supporter of any children with this orphanage.</p>
 
@@ -434,7 +439,7 @@ function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
       $avatar_media_url_aleluya =  get_post_meta($child_aleluya['id_aleluya'], 'avatar_media_url_aleluya',true);
 
     ?>
-    
+
       <tr valign="top">
 
       <th scope="row"><?php echo $nick_names_aleluya; ?></th>
@@ -452,13 +457,13 @@ function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
             <p>Hallelujah! You are currently sponsoring this child! </p>
             <p><em><input type="checkbox" name="cancel_sponsorship_aleluya[]" value="<?php echo $child_aleluya["id_aleluya"] ?>"/> check here and save profile to cancel your sponsorship, you will no longer be charged <?php echo get_option('stripe_plan1_dl_aleluya')?>$ a month.</em></p>
 
-         
+
             <?php
           } else { ?>
-            <p>You have canceled sponsoring this child.</p> 
+            <p>You have canceled sponsoring this child.</p>
 
-          <?php 
-        } 
+          <?php
+        }
         ?>
         </td>
       </tr>
