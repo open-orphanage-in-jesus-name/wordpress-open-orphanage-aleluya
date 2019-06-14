@@ -214,9 +214,16 @@ add_shortcode( 'oo_aleluya', 'oo_aleluya_func' );
 function oo_after_child_post_content_aleluya($in_content_aleluya){
     //if (is_single()) {
     if( get_post_type() == "child_aleluya" ) {
-        $in_content_aleluya = oo_child_register_js_aleluya().'<button  class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(' .get_the_ID(). ');">Sponsor this Child</button>' . $in_content_aleluya;
+      $nick_names_aleluya = get_post_meta( get_the_ID(), "nick_names_aleluya", true );
+        $fin_content_aleluya = oo_child_register_js_aleluya().'<button  class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(' .get_the_ID(). ');">Sponsor this Child</button>';
+
+        $fin_content_aleluya .= oo_donation_block_shortcode_aleluya_func( array( "heading_aleluya" => "p", "expandable_aleluya" => "yes", "purpose_aleluya" => $nick_names_aleluya ) );
+
+        return $fin_content_aleluya . $in_content_aleluya;
+    } else {
+      return $in_content_aleluya;
     }
-    return $in_content_aleluya;
+    
 }
 add_filter( "the_content", "oo_after_child_post_content_aleluya" );
 

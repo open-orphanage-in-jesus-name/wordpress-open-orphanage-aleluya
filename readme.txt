@@ -22,7 +22,6 @@ Praise Jesus, a plugin that works with an Android app, to help orphanages with t
  - [Android App - hallelujah](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2)
  - [Facebook page - hallelujah](https://www.facebook.com/Open-Orphanage-in-Jesus-name-2168084633282357)
  
-
 ### How does this work?
 
 The project is still in early stages. We have are working on an [Android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2) that we are hoping to make it easier for on-site people at the orphanage to keep the children on site updated and able to communicate with sponsors. Right now it allows the creation of children, their listing on a page, and some routing for sponsors to sign up to the site. It can email the website owners about which child a sponsor is interested in, as well as signing up sponsors as stripe customers to register for monthly sponsorships. Currently, no payments are taken on site but we hope to incorporate this in our next release.
@@ -96,15 +95,28 @@ Yes, there is no plan to charge for the software.
 
 At this point: you can enter children, display them, get emailed by interested sponsors, link these sponsors as stripe customers, start and stop support subscriptions, easily create forms in any page to donate to arbitrary needs without user signing up.
 
-= Are any financial details handled or stored by the plugin? =
+= What Requirements does this have? =
 
-Only details regarding a users address are stored on site. Stripe handles the storage of card information, and it is not handled by the plugin. 
+It should run on a website served over https and must be able to communicate (make REST calls) from the server. PHP should also have gd or imagemagick installed.
 
+= What financial details handled or stored by the plugin? =
+
+Only details regarding a users email address and name are stored on site. Stripe handles the storage of card information, and it is not handled by the plugin. 
+
+= Does this rely on another plugin? Any Javascripts? =
+
+God be praised, the makes of wordpress have been doing an excellent job and it should work just fine out of the box. It does rely on JQuery and the Stripe JS.
 == Screenshots ==
 
 1. ✝ Displaying the children
 
 == Changelog ==
+
+= 0.1.20190614a =
+ * Hallelujah - Automatically place 1 time donation boxes in children and some profile information.
+ * Hallelujah - Donate button placement and toggle
+ * Hallelujah - children layout fix, remove sort feature which is currently not working, fix error in unsubscribe.
+
 = 0.1.20190613b =
  * Hallelujah - bugfix, autosave yes as default on new donation form, allow multiple stripe donation forms same page.
 
@@ -141,6 +153,9 @@ Only details regarding a users address are stored on site. Stripe handles the st
 * Hallelujah, First version on wordpress.com
 
 == Upgrade Notice ==
+
+= 0.1.20190614a =
+ * Hallelujah - Should work well praise Jesus.
 
 = 0.1.20190613a =
  * Hallelujah - bugfix.

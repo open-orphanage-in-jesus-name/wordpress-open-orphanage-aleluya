@@ -59,37 +59,28 @@ function oo_donation_block_shortcode_aleluya_func( $pre_atts_aleluya ) {
   $atts_aleluya = shortcode_atts( array(
     'purpose_aleluya' => 'Cause',
     'expandable_aleluya' => 'yes', //Hallelujah, "no" or "yes"
+    'heading_aleluya' => 'h3',
   ), $pre_atts_aleluya );
 
-  $purpose_aleluya = preg_replace("['\"]","",esc_attr($atts_aleluya['purpose_aleluya']) );
-
+  $purpose_aleluya = preg_replace("['\"]","", esc_attr( $atts_aleluya['purpose_aleluya'] ) );
   $req_uri_aleluya = $_SERVER['REQUEST_URI'];
-
   $rand_aleluya = rand(0,1<<24);
-
   $nonce_aleluya = wp_create_nonce( basename(__FILE__) . $rand_aleluya ); //Aleluya, this should not be needed because of how the ajax is used but jic
 
+  $heading_aleluya = $atts_aleluya["heading_aleluya"];
 
-  $heading_aleluya = "h3";
-
-  $hidable_aleluya = "";
+  $hidable_aleluya = "Donate ";
   $hidable_display_aleluya = "block";
 
   if( $atts_aleluya['expandable_aleluya'] == "yes") {
     $hidable_display_aleluya = "none";
     $hidable_aleluya =<<<ALELUYA
-    <button onclick="document.getElementById('payment-form-aleluya-$rand_aleluya').style.display='block';">Donate <!--Hallelujah--></button>
+    <button onclick="var obj_aleluya=document.getElementById('payment-form-aleluya-$rand_aleluya'); if((oo_tog_form_aleluya_$rand_aleluya ++)% 2 == 0) {obj_aleluya.style.display='block';} else { obj_aleluya.style.display='none';};">Donate <!--Hallelujah--></button>
 
 ALELUYA;
   }
 
-  
-
   $str_aleluya = '<div class="oo_donation_block_aleluya">';
-
-
-
-
 
   //get initial stripe object
   if(! $blockstripe_aleluya) {
@@ -114,7 +105,7 @@ ALELUYA;
 ALELUYA;
   }
     $str_aleluya .= <<<ALELUYA
-  <$heading_aleluya>Donate for $purpose_aleluya <!-- Hallelujah --> $hidable_aleluya</$heading_aleluya>
+  <$heading_aleluya>$hidable_aleluya for $purpose_aleluya <!-- Hallelujah --> </$heading_aleluya>
 
   <form action="/charge" method="post" style="display:$hidable_display_aleluya" class="oo-payment-form-aleluya" id="payment-form-aleluya-$rand_aleluya">
     <div class="form-row card-element-name-aleluya">
@@ -175,6 +166,7 @@ ALELUYA;
   
 
   <script>
+  var oo_tog_form_aleluya_$rand_aleluya = 0;
   // Custom styling can be passed to options when creating an Element.
   var style_aleluya = {
     base: {
