@@ -27,6 +27,7 @@ Praise Jesus, a plugin that works with an Android app, to help orphanages with t
 
 The project is still in early stages. We have are working on an [Android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2) that we are hoping to make it easier for on-site people at the orphanage to keep the children on site updated and able to communicate with sponsors. Right now it allows the creation of children, their listing on a page, and some routing for sponsors to sign up to the site. It can email the website owners about which child a sponsor is interested in, as well as signing up sponsors as stripe customers to register for monthly sponsorships. Currently, no payments are taken on site but we hope to incorporate this in our next release.
 
+
 The basic flow after installing is.
 1. Create the children through the administrator, or soon via the [Android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2) (it still has some work to go). Fill the fields you can, please use the format mentioned for dates for now, you can use an estimated date for Birthday if needed. There is a nickname field so real names are not necessarily displayed publically. In the android app, the picture must have finished uploading before you save the child at this point. 
 2. Use either the Guten block, or the [oo_aleluya/] shortcode to insert the list of children on a page or post.
@@ -36,15 +37,16 @@ The basic flow after installing is.
     2. If they are, and the user is not logged in, then it will take the user to the WordPress registration page. The logo can be over-ridden in the admin with the orphanage logo. And the user will be registered as a supporter/donor, as well as a Stripe customer created. They can log in and manage their profile, and in the future, we pray they can communicate with the children they sponsor.
     3. If they are logged in, it will message the website owners about the child and interested sponsor email.
 5. If Stripe is enabled, once they are registered they can also set their payment details in the User/Your Profile section of the administrator.
+6. If Stripe is enabled, you may also create arbitrary donation forms via [oo_donation_block_aleluya purpose_aleluya="(string)" expandable_aleluya="(yes/no)"/] or Gutenberg.
 
 At this point, you would agree with the person about the child and subscription, where you could start a monthly charge with them on stripe. You could also manually organize communications via email and fund fees with the person if they agree. We hope to further automate these tasks in the next releases, God willing and if we live.
 
 ### Plans
 
 Short Term.
- - Allow sponsors to sign up for monthly donations.
+ - Allow sponsors to sign up for monthly donations. (Works, flow needs improvement)
  - Allow sponsors to have supervised semi-regular communication with their sponsored children, and provide special donations for birthdays and special needs.
- - Allow donations for arbitrary orphanage projects.
+ - Allow donations for arbitrary orphanage projects. (Works)
  - Incorporate into a central hub where people can comment on the orphanages.
 
 We hope Eventually
@@ -92,7 +94,7 @@ Yes, there is no plan to charge for the software.
 
 = How far along is this? =
 
-At this point: you can enter children, display them, get emailed by interested sponsors, link these sponsors as stripe customers, and start and stop support subscriptions. 
+At this point: you can enter children, display them, get emailed by interested sponsors, link these sponsors as stripe customers, start and stop support subscriptions, easily create forms in any page to donate to arbitrary needs without user signing up.
 
 = Are any financial details handled or stored by the plugin? =
 
@@ -103,6 +105,11 @@ Only details regarding a users address are stored on site. Stripe handles the st
 1. ✝ Displaying the children
 
 == Changelog ==
+
+= 0.1.20190613a =
+ * Hallelujah - Insert payment form from outside Admin:  Can create a payment form using Gutenberg or shortcode. It optionally can display the form after button click, and stores which is the purpose of the donation, as well as allowing the supporter to input additional notes, name, etc.
+   * [oo_donation_block_aleluya purpose_aleluya="(string)" expandable_aleluya="(yes/no)"/]
+
 
 = 0.1.20190612b =
  * Hallelujah - bugfix to not overwrite original url in db
@@ -132,6 +139,9 @@ Only details regarding a users address are stored on site. Stripe handles the st
 * Hallelujah, First version on wordpress.com
 
 == Upgrade Notice ==
+
+= 0.1.20190613a =
+ * Hallelujah - Should work well. You now have a new shortcode and gutenberg block you can put in pages.
 
 = 0.1.20190612a =
  * Praise Jesus - This will downsize thumbs to 192x192 pixels
