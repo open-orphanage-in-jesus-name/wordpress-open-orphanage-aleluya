@@ -4,7 +4,8 @@
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
 
-$blockstripe_aleluya = false;
+$blockstripe_aleluya = "praiseJesus";
+
 // [oo_aleluya child_aleluya="child_aleluya-value"]
 wp_enqueue_script( "oo_stripe_aleluya", 'https://js.stripe.com/v3/' );
 //wp_enqueue_script( 'oo_child_admin_aleluya_js', plugins_url( '/public-aleluya/js-aleluya/oo-child-admin-aleluya.js' , __DIR__.'../'), array('jquery'), '0.1' );
@@ -44,7 +45,7 @@ function wp_ajax_oo_stripe_donation_aleluya() {
 
     $data_aleluya["msg_aleluya"] = __("Hallelujah! Success", "open-orphanage") ;
     wp_send_json_success( $data_aleluya );
-    
+
   } catch( Exception $e_aleluya ) {
     $data_aleluya["msg_aleluya"] = $e_aleluya->getMessage();
     error_log("Hallelujah - wp_ajax_oo_stripe_donation_aleluya Error in ". $e_aleluya->getMessage());
@@ -53,9 +54,26 @@ function wp_ajax_oo_stripe_donation_aleluya() {
   }
 }
 
+add_action('wp_head', function() {
+    $stripe_pk_aleluya = get_option("oo_stripe_pk_key_aleluya");
+?>
+<script>
+    var oo_block_stripe_aleluya = Stripe('$stripe_pk_aleluya');
+
+  </script>
+  <style>
+    .card-element-card-aleluya, .card-element-aleluya { padding: 4px; margin: 3px; background: #fefefe; border: 1px solid black; border-radius: 4px;}
+    .card-element-aleluya { padding: 14px; margin: 8px; }
+    .oo-payment-form-aleluya label {text-decoration: underline;}
+  </style>
+<?php
+
+});
+
+
 
 function oo_donation_block_shortcode_aleluya_func( $pre_atts_aleluya ) {
-  global $blockstripe_aleluya;
+	global $blockstripe_aleluya;
   $atts_aleluya = shortcode_atts( array(
     'purpose_aleluya' => 'Cause',
     'expandable_aleluya' => 'yes', //Hallelujah, "no" or "yes"
@@ -83,26 +101,14 @@ ALELUYA;
   $str_aleluya = '<div class="oo_donation_block_aleluya">';
 
   //get initial stripe object
-  if(! $blockstripe_aleluya) {
-    $blockstripe_aleluya = true;
+  if( $blockstripe_aleluya != "aleluya") {
+		$blockstripe_aleluya = "aleluya";
     $stripe_pk_aleluya = get_option("oo_stripe_pk_key_aleluya");
     if(!$stripe_pk_aleluya) {
       $str_aleluya .= <<<ALELUYA
       <h1>Hallelujah - You must still set up stripe</h1>
 ALELUYA;
     }
-
-    $str_aleluya .= <<<ALELUYA
-  <script>
-    var oo_block_stripe_aleluya = Stripe('$stripe_pk_aleluya');
-    
-  </script>
-  <style>
-    .card-element-card-aleluya, .card-element-aleluya { padding: 4px; margin: 3px; background: #fefefe; border: 1px solid black; border-radius: 4px;}
-    .card-element-aleluya { padding: 14px; margin: 8px; }
-    .oo-payment-form-aleluya label {text-decoration: underline;}
-  </style>
-ALELUYA;
   }
     $str_aleluya .= <<<ALELUYA
   <$heading_aleluya>$hidable_aleluya for $purpose_aleluya <!-- Hallelujah --> </$heading_aleluya>
@@ -121,7 +127,7 @@ ALELUYA;
         Your Email
       </label>
       <div id="card-element-email-div-aleluya-$rand_aleluya">
-        <input id="card-element-email-aleluya-$rand_aleluya" type="email"/>       
+        <input id="card-element-email-aleluya-$rand_aleluya" type="email"/>
       </div>
     </div>
     <div class="form-row card-element-phone-aleluya">
@@ -129,7 +135,7 @@ ALELUYA;
         Your Celphone Number
       </label>
       <div id="card-element-phone-div-aleluya-$rand_aleluya">
-        <input id="card-element-phone-aleluya-$rand_aleluya" type="text"/>        
+        <input id="card-element-phone-aleluya-$rand_aleluya" type="text"/>
       </div>
     </div>
     <div class="form-row card-element-notes-aleluya">
@@ -137,7 +143,7 @@ ALELUYA;
         Additional Notes for us:
       </label>
       <div id="card-element-notes-div-aleluya-$rand_aleluya">
-        <input id="card-element-notes-aleluya-$rand_aleluya" type="text"/>        
+        <input id="card-element-notes-aleluya-$rand_aleluya" type="text"/>
       </div>
     </div>
     <div class="form-row card-element-price-aleluya">
@@ -145,7 +151,7 @@ ALELUYA;
         Donation In Dollars
       </label>
       <div id="card-element-price-div-aleluya-$rand_aleluya">
-        $<input id="card-element-price-aleluya-$rand_aleluya" type="number" step="any"/>        
+        $<input id="card-element-price-aleluya-$rand_aleluya" type="number" step="any"/>
       </div>
     </div>
 
@@ -163,7 +169,7 @@ ALELUYA;
 
     <button>Submit Payment</button>
   </form>
-  
+
 
   <script>
   var oo_tog_form_aleluya_$rand_aleluya = 0;

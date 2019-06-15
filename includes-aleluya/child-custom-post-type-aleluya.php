@@ -56,7 +56,7 @@ $public_child_fields_aleluya = array(
 
 add_action( 'admin_enqueue_scripts', 'oo_load_wp_media_files_aleluya' );
 function oo_load_wp_media_files_aleluya( $page_aleluya ) {
- 
+
   // change to the $page where you want to enqueue the script
   if( $page_aleluya == 'post.php' ) {
 
@@ -163,8 +163,8 @@ function oo_show_child_fields_meta_box_aleluya() {
   //'mother_is_alive_aleluya',
   //'avatar_media_id_aleluya',
   //'birth_date_aleluya',
-  
-  $meta = get_post_meta( $post->ID, 'your_fields', true ); 
+
+  $meta = get_post_meta( $post->ID, 'your_fields', true );
 
 //Thank You Jesus for https://wordpress.stackexchange.com/a/236296
   $image_aleluya = get_post_meta($post->ID, 'avatar_media_url_aleluya', true );
@@ -188,7 +188,7 @@ function oo_show_child_fields_meta_box_aleluya() {
       <input type='button' class="button-primary" value="<?php esc_attr_e( 'Select an Image', 'open-orphanage' ); ?>" id="oo_aleluya_media_manager"/><br/><br/>
     </td>
   </tr>
-  <?php 
+  <?php
   foreach($show_child_fields_aleluya as $cf_aleluya) {
   ?>
   <tr>
@@ -199,7 +199,7 @@ function oo_show_child_fields_meta_box_aleluya() {
   }?>
   <tr><?php $cf_aleluya = "gender_aleluya";?>
     <td align="right"><label for="<?php echo $cf_aleluya?>"><?php  _e($cf_aleluya,'open-orphanage')?>: </label>
-    <td>      
+    <td>
       <input type="radio" name="<?php echo $cf_aleluya?>" id="<?php echo $cf_aleluya?>"  value="Female" <?php echo (get_post_meta($post->ID, $cf_aleluya, true) == "Female" ? 'checked="checked"' : ''); ?>/> Female
       <input type="radio" name="<?php echo $cf_aleluya?>" id="<?php echo $cf_aleluya?>"  value="Male" <?php echo (get_post_meta($post->ID, $cf_aleluya, true) == "Male" ? 'checked="checked"' : ''); ?>/> Male
     </td>
@@ -251,26 +251,26 @@ function oo_thumb_dir_aleluya() {
 function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
   global $oo_dir_aleluya;
   //Hallelujah, get resized thumbnail
-  if( get_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true) == 2 ) return;
+  if( get_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true) == 4 ) return;
   $url_aleluya = get_post_meta( $child_post_id_aleluya, "avatar_media_url_aleluya", true );
   if(!$url_aleluya) return false;
 
-  
+
   error_log("Hallelujah working with ".$url_aleluya);
-  
+
   $editor_aleluya = wp_get_image_editor( $url_aleluya, array() );
- 
-  if (is_wp_error($editor_aleluya)) {    
+
+  if (is_wp_error($editor_aleluya)) {
     error_log("Praise Jesus Christ He is Lord - ".$editor_aleluya->get_error_message()." - Error starting image editor for ".$fn_aleluya."\n");
     return;
-     
+
   }
   // Get the dimensions for the size of the current image.
   $dimensions_aleluya = $editor_aleluya->get_size();
   $width_aleluya = $dimensions_aleluya['width'];
   $height_aleluya = $dimensions_aleluya['height'];
   error_log("Aleluya original size $width_aleluya x $height_aleluya");
-  
+
   //Which sizes should we make thumnails for?
   $whs_aleluya = array(array(512,512),array(192,192)); //use descending sizes
 
@@ -278,10 +278,10 @@ function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
     // Calculate the new dimensions for the image.
     $newWidth_aleluya = $wh_aleluya[0];
     $newHeight_aleluya = $wh_aleluya[1];
-    if($width_aleluya > $newWidth_aleluya && $height_aleluya > $newHeight_aleluya) {     
+    if($width_aleluya > $newWidth_aleluya && $height_aleluya > $newHeight_aleluya) {
       // Resize the image.
       $result_aleluya = $editor_aleluya->resize($newWidth_aleluya, $newHeight_aleluya, true);
-      if (is_wp_error($result_aleluya)) { 
+      if (is_wp_error($result_aleluya)) {
         error_log("Praise Jesus Christ He is Lord - ".$result_aleluya->get_error_message(). " Error resizing image for ".$url_aleluya);
       }
     }
@@ -292,7 +292,7 @@ function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
     $editor_aleluya->save($newFile_aleluya);
   }
   //update_post_meta($child_post_id_aleluya, "avatar_media_url_aleluya", $newUrl_aleluya);
-  update_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", 6);
+  update_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", 4);
 
 }
 
