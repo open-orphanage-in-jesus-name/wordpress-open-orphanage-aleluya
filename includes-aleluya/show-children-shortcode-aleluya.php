@@ -3,8 +3,10 @@
  * He gave His only begotten Son, that all who believe in Him should not perish but have everlasting life; */
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
-
+$oo_child_register_js_aleluya_done = false;
 function oo_child_register_js_aleluya() {
+  if( $oo_child_register_js_aleluya_done ) return "";
+  $oo_child_register_js_aleluya_done = true;
    /**
    * add a nonce for the registration
    */
@@ -292,6 +294,7 @@ function oo_after_child_post_content_aleluya($in_content_aleluya){
       $nick_names_aleluya   = get_post_meta( get_the_ID(), "nick_names_aleluya", true );
 
       //$fin_content_aleluya = oo_child_register_js_aleluya().'<button  class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(' .get_the_ID(). ');">Sponsor this Child</button>';
+      $fin_content_aleluya .= oo_child_register_js_aleluya();
       $fin_content_aleluya .= oo_donation_block_shortcode_aleluya_func( array( "heading_aleluya" => "p", "expandable_aleluya" => "yes", "purpose_aleluya" => $nick_names_aleluya ) );
       $fin_content_aleluya .= oo_child_pagestats_htmlstr_aleluya(get_the_ID());
 
