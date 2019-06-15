@@ -113,7 +113,7 @@ ALELUYA;
 
 // [oo_aleluya child_aleluya="child_aleluya-value"]
 function oo_aleluya_func( $atts ) {
-  global $child_fields_aleluya, $public_child_fields_aleluya, $oo_dir_aleluya;
+  global $child_fields_aleluya, $public_child_fields_aleluya, $oo_dir_aleluya, $oo_upload_url_aleluya;
   $a = shortcode_atts( array(
     'child_aleluya' => 'TODO 1 ALeluya',
     'filter_aleluya' => 'aleluya, something else',
@@ -159,7 +159,7 @@ ALELUYA;
   while ( $loop_aleluya->have_posts() ) :
     $loop_aleluya->the_post();
     $id_aleluya  = get_the_ID();
-    $newUrl_aleluya = $oo_dir_aleluya. "public-aleluya/thumbs-aleluya/".$id_aleluya."-192x192-aleluya.jpg";
+    $newUrl_aleluya = $oo_upload_url_aleluya."thumbs-aleluya/".$id_aleluya."-192x192-aleluya.jpg";
 
     oo_make_child_thumb_aleluya($id_aleluya);
     $str_aleluya.="<table class='new_child_aleluya' align='center'>";

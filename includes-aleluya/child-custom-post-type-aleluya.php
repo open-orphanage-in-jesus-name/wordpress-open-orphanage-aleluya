@@ -236,10 +236,22 @@ function oo_show_child_fields_meta_box_aleluya() {
 
 }
 
+function oo_thumb_dir_aleluya() {
+  //$upload_dir_aleluya   = trailingslashit(wp_upload_dir()["path"]);
+  $thumb_dir_aleluya    = trailingslashit(WP_CONTENT_DIR)."uploads/oo-aleluya/thumbs-aleluya/";
+  if ( ! file_exists( $thumb_dir_aleluya ) ) {
+    error_log("Aleluya");
+    wp_mkdir_p( $thumb_dir_aleluya );
+  }
+
+  return $thumb_dir_aleluya;
+
+}
+
 function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
   global $oo_dir_aleluya;
   //Hallelujah, get resized thumbnail
-  if( get_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true) == 2 ) return;
+  if( get_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true) == 5 ) return;
   $url_aleluya = get_post_meta( $child_post_id_aleluya, "avatar_media_url_aleluya", true );
   if(!$url_aleluya) return false;
 
@@ -266,16 +278,14 @@ function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
 
   // If there's no problem, save it; otherwise, print the problem.
   if (!is_wp_error($result_aleluya)) {
-    if (!file_exists( __DIR__."/../public-aleluya/thumbs-aleluya")) {
-        mkdir(__DIR__."/../public-aleluya/thumbs-aleluya", 0777, true);
-    }
-    $newFile_aleluya = __DIR__."/../public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-192x192-aleluya.jpg";//$editor_aleluya->generate_filename();
+    
+    $newFile_aleluya = oo_thumb_dir_aleluya() . $child_post_id_aleluya."-192x192-aleluya.jpg";//$editor_aleluya->generate_filename();
     //$newUrl_aleluya = $oo_dir_aleluya. "public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-192x192-aleluya.jpg";
     error_log("Aleluya - ".$newUrl_aleluya);
     $editor_aleluya->save($newFile_aleluya);
 
     //update_post_meta($child_post_id_aleluya, "avatar_media_url_aleluya", $newUrl_aleluya);
-    update_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", 2);
+    update_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", 4);
   } else {
      // Handle the problem however you deem necessary.
     error_log("Praise Jesus Christ He is Lord - ".$result_aleluya->get_error_message(). " Error resizing image for ".$url_aleluya);
