@@ -112,6 +112,10 @@ God be praised, the makes of wordpress have been doing an excellent job and it s
 
 == Changelog ==
 
+= 0.1.20190614b =
+ * Hallelujah - fix location of uploads
+ * Hallelujah - Praise Jesus, show profile details in child page
+
 = 0.1.20190614a =
  * Hallelujah - Automatically place 1 time donation boxes in children and some profile information.
  * Hallelujah - Donate button placement and toggle

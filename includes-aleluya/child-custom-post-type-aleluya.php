@@ -251,7 +251,7 @@ function oo_thumb_dir_aleluya() {
 function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
   global $oo_dir_aleluya;
   //Hallelujah, get resized thumbnail
-  if( get_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true) == 5 ) return;
+  if( get_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true) == 2 ) return;
   $url_aleluya = get_post_meta( $child_post_id_aleluya, "avatar_media_url_aleluya", true );
   if(!$url_aleluya) return false;
 
@@ -269,27 +269,31 @@ function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
   $dimensions_aleluya = $editor_aleluya->get_size();
   $width_aleluya = $dimensions_aleluya['width'];
   $height_aleluya = $dimensions_aleluya['height'];
-  error_log("Aleluya osize $width_aleluya x $height_aleluya");
-  // Calculate the new dimensions for the image.
-  $newWidth_aleluya = 192;
-  $newHeight_aleluya = 192;
-  // Resize the image.
-  $result_aleluya = $editor_aleluya->resize($newWidth_aleluya, $newHeight_aleluya, false);
+  error_log("Aleluya original size $width_aleluya x $height_aleluya");
+  
+  //Which sizes should we make thumnails for?
+  $whs_aleluya = array(array(512,512),array(192,192)); //use descending sizes
 
-  // If there's no problem, save it; otherwise, print the problem.
-  if (!is_wp_error($result_aleluya)) {
-    
-    $newFile_aleluya = oo_thumb_dir_aleluya() . $child_post_id_aleluya."-192x192-aleluya.jpg";//$editor_aleluya->generate_filename();
+  foreach($whs_aleluya as $wh_aleluya) {
+    // Calculate the new dimensions for the image.
+    $newWidth_aleluya = $wh_aleluya[0];
+    $newHeight_aleluya = $wh_aleluya[1];
+    if($width_aleluya > $newWidth_aleluya && $height_aleluya > $newHeight_aleluya) {     
+      // Resize the image.
+      $result_aleluya = $editor_aleluya->resize($newWidth_aleluya, $newHeight_aleluya, true);
+      if (is_wp_error($result_aleluya)) { 
+        error_log("Praise Jesus Christ He is Lord - ".$result_aleluya->get_error_message(). " Error resizing image for ".$url_aleluya);
+      }
+    }
+
+    $newFile_aleluya = oo_thumb_dir_aleluya() . $child_post_id_aleluya."-".$newWidth_aleluya."x".$newHeight_aleluya."-aleluya.jpg";//$editor_aleluya->generate_filename();
     //$newUrl_aleluya = $oo_dir_aleluya. "public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-192x192-aleluya.jpg";
-    error_log("Aleluya - ".$newUrl_aleluya);
+    error_log("Hallelujah save to: ".$newFile_aleluya." Aleluya - ".$newUrl_aleluya);
     $editor_aleluya->save($newFile_aleluya);
-
-    //update_post_meta($child_post_id_aleluya, "avatar_media_url_aleluya", $newUrl_aleluya);
-    update_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", 4);
-  } else {
-     // Handle the problem however you deem necessary.
-    error_log("Praise Jesus Christ He is Lord - ".$result_aleluya->get_error_message(). " Error resizing image for ".$url_aleluya);
   }
+  //update_post_meta($child_post_id_aleluya, "avatar_media_url_aleluya", $newUrl_aleluya);
+  update_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", 6);
+
 }
 
 
