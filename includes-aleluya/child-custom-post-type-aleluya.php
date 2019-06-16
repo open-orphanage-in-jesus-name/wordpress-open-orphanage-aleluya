@@ -8,28 +8,32 @@
 
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
+class Child_aleluya {
+  static $fields_aleluya = array(
+    'first_names_aleluya',
+    'sur_names_aleluya',
+    'nick_names_aleluya',
+    'other_names_aleluya',
+    'gender_aleluya',
+    'description_aleluya',
+    'school_aleluya',
+    'avatar_media_id_aleluya',
+    'avatar_media_url_aleluya',
+    'birth_date_aleluya',
+    'birth_place_aleluya',
+    'birth_place_district_aleluya',
+    'mother_full_names_aleluya',
+    'mother_contact_info_aleluya',
+    'mother_is_alive_aleluya',
+    'grade_aleluya',
+    'favorite_color_aleluya',
+    'desired_profesion_aleluya',
+    'internal_notes_aleluya'
+  );
+}
 
-$child_fields_aleluya = array(
-  'first_names_aleluya',
-  'sur_names_aleluya',
-  'nick_names_aleluya',
-  'other_names_aleluya',
-  'gender_aleluya',
-  'description_aleluya',
-  'school_aleluya',
-  'avatar_media_id_aleluya',
-  'avatar_media_url_aleluya',
-  'birth_date_aleluya',
-  'birth_place_aleluya',
-  'birth_place_district_aleluya',
-  'mother_full_names_aleluya',
-  'mother_contact_info_aleluya',
-  'mother_is_alive_aleluya',
-  'grade_aleluya',
-  'favorite_color_aleluya',
-  'desired_profesion_aleluya',
-  'internal_notes_aleluya'
-);
+
+$child_fields_aleluya = Child_aleluya::$fields_aleluya;
 
 $public_child_fields_aleluya = array(
   //'first_names_aleluya' ,
@@ -71,7 +75,12 @@ function oo_load_wp_media_files_aleluya( $page_aleluya ) {
 
 add_action("init","create_oo1_post_type_aleluya");
 function create_oo1_post_type_aleluya() {
-  global $child_fields_aleluya;
+  $child_fields_aleluya = Child_aleluya::$fields_aleluya;
+
+  $supports_aleluya = array_merge(
+        array( 'title', 'editor', 'custom-fields', 'thumbnail', 'comments', 'author', 'excerpt', 'revisions'),
+        $child_fields_aleluya
+      );
 
   register_post_type( 'child_aleluya',
     array(
@@ -79,13 +88,7 @@ function create_oo1_post_type_aleluya() {
         'name' => __( 'Children' ),
         'singular_name' => __( 'Child' )
       ),
-      'supports' => array_merge(
-        array( 'title', 'editor', 'custom-fields', 'thumbnail', 'comments', 'author', 'excerpt', 'revisions'),
-        array_merge(
-          $child_fields_aleluya,
-          array("avatar_media_url_aleluya")
-        )
-      ),
+      'supports' => $supports_aleluya,
       'show_in_rest' => true,
       'public' => true,
       'has_archive' => true,
@@ -298,7 +301,7 @@ function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
 
 
 function save_child_fields_meta_aleluya( $post_id_aleluya ) {
-  global $child_fields_aleluya;
+  $child_fields_aleluya = Child_aleluya::$fields_aleluya;
   // verify nonce
   if ( !wp_verify_nonce( $_POST['oo_child_meta_box_nonce_aleluya'], basename(__FILE__) ) ) {
     return $post_id_aleluya;
@@ -340,7 +343,7 @@ add_action( 'save_post', 'save_child_fields_meta_aleluya' );
 
 function add_oo1_custom_fields_aleluya()
 {
-  global $child_fields_aleluya;
+  $child_fields_aleluya = Child_aleluya::$fields_aleluya;
   $args_aleluya = array(
       'type' => 'string',
       'description' => 'First Names aleluya',

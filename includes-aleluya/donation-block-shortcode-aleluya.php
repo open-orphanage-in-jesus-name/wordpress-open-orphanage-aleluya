@@ -7,7 +7,8 @@ defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 $blockstripe_aleluya = "praiseJesus";
 
 // [oo_aleluya child_aleluya="child_aleluya-value"]
-wp_enqueue_script( "oo_stripe_aleluya", 'https://js.stripe.com/v3/' );
+add_action("wp_enqueue_scripts",function() { wp_enqueue_script( "oo_stripe_aleluya", 'https://js.stripe.com/v3/' ) ; });
+
 //wp_enqueue_script( 'oo_child_admin_aleluya_js', plugins_url( '/public-aleluya/js-aleluya/oo-child-admin-aleluya.js' , __DIR__.'../'), array('jquery'), '0.1' );
 
 add_action( 'wp_ajax_oo_stripe_donation_aleluya', 'wp_ajax_oo_stripe_donation_aleluya'   );
