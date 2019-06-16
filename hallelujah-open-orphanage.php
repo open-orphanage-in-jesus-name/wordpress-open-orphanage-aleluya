@@ -3,7 +3,7 @@
 Plugin Name:  ✝ Open Orphanage
 Plugin URI:   https://openorphanage.org
 Description:  Basic Open Source Orphanage Management - Currently used alongside https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2
-Version:      0.1.20190614b
+Version:      0.1.20190615b
 Author:       loveJesus in Jesus name
 Author URI:   https://perffection.com
 License:      GPL2
@@ -16,6 +16,10 @@ Domain Path:  /languages-aleluya
  * He gave His only begotten Son, that all who believe in Him should not perish but have everlasting life; */
 
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
+
+function error_log_aleluya($msg_aleluya, $lvl_aleluya = 0) {
+  if ($lvl_aleluya) error_log( $msg_aleluya );
+}
 
 require __DIR__ . '/vendor/autoload.php';
 

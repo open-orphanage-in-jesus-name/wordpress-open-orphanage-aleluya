@@ -108,10 +108,18 @@ Only details regarding a users email address and name are stored on site. Stripe
 God be praised, the makes of wordpress have been doing an excellent job and it should work just fine out of the box. It does rely on JQuery and the Stripe JS.
 == Screenshots ==
 
-1. ✝ Displaying the children
+1. ✝ Displaying the children in the frontend
+2. ✝ Editing a Child post
+3. ✝ Open Orphanage settings
 
 == Changelog ==
 
+= 0.1.20190615b =
+ * Hallelujah - tame some debug log postings, new screenshots
+
+= 0.1.20190615a =
+ * Hallelujah - bugfix for some templates
+ 
 = 0.1.20190614b =
  * Hallelujah - fix location of uploads
  * Hallelujah - Praise Jesus, show profile details in child page

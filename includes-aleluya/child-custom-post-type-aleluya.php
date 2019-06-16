@@ -64,7 +64,7 @@ function oo_load_wp_media_files_aleluya( $page_aleluya ) {
     wp_enqueue_media();
     // Enqueue custom script that will interact with wp.media
     wp_enqueue_script( 'oo_child_admin_aleluya_js', plugins_url( '/public-aleluya/js-aleluya/oo-child-admin-aleluya.js' , __DIR__.'../'), array('jquery'), '0.1' );
-    error_log("Praise Jesus");
+
   }
 }
 
@@ -240,7 +240,7 @@ function oo_thumb_dir_aleluya() {
   //$upload_dir_aleluya   = trailingslashit(wp_upload_dir()["path"]);
   $thumb_dir_aleluya    = trailingslashit(WP_CONTENT_DIR)."uploads/oo-aleluya/thumbs-aleluya/";
   if ( ! file_exists( $thumb_dir_aleluya ) ) {
-    error_log("Aleluya");
+    error_log_aleluya("Aleluya");
     wp_mkdir_p( $thumb_dir_aleluya );
   }
 
@@ -256,12 +256,12 @@ function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
   if(!$url_aleluya) return false;
 
 
-  error_log("Hallelujah working with ".$url_aleluya);
+  error_log_aleluya("Hallelujah working with ".$url_aleluya);
 
   $editor_aleluya = wp_get_image_editor( $url_aleluya, array() );
 
   if (is_wp_error($editor_aleluya)) {
-    error_log("Praise Jesus Christ He is Lord - ".$editor_aleluya->get_error_message()." - Error starting image editor for ".$fn_aleluya."\n");
+    error_log_aleluya("Praise Jesus Christ He is Lord - ".$editor_aleluya->get_error_message()." - Error starting image editor for ".$fn_aleluya."\n",1);
     return;
 
   }
@@ -269,7 +269,7 @@ function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
   $dimensions_aleluya = $editor_aleluya->get_size();
   $width_aleluya = $dimensions_aleluya['width'];
   $height_aleluya = $dimensions_aleluya['height'];
-  error_log("Aleluya original size $width_aleluya x $height_aleluya");
+  error_log_aleluya("Aleluya original size $width_aleluya x $height_aleluya");
 
   //Which sizes should we make thumnails for?
   $whs_aleluya = array(array(512,512),array(192,192)); //use descending sizes
@@ -282,13 +282,13 @@ function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
       // Resize the image.
       $result_aleluya = $editor_aleluya->resize($newWidth_aleluya, $newHeight_aleluya, true);
       if (is_wp_error($result_aleluya)) {
-        error_log("Praise Jesus Christ He is Lord - ".$result_aleluya->get_error_message(). " Error resizing image for ".$url_aleluya);
+        error_log_aleluya("Praise Jesus Christ He is Lord - ".$result_aleluya->get_error_message(). " Error resizing image for ".$url_aleluya, 1);
       }
     }
 
     $newFile_aleluya = oo_thumb_dir_aleluya() . $child_post_id_aleluya."-".$newWidth_aleluya."x".$newHeight_aleluya."-aleluya.jpg";//$editor_aleluya->generate_filename();
     //$newUrl_aleluya = $oo_dir_aleluya. "public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-192x192-aleluya.jpg";
-    error_log("Hallelujah save to: ".$newFile_aleluya." Aleluya - ".$newUrl_aleluya);
+    error_log_aleluya("Hallelujah save to: ".$newFile_aleluya." Aleluya - ".$newUrl_aleluya);
     $editor_aleluya->save($newFile_aleluya);
   }
   //update_post_meta($child_post_id_aleluya, "avatar_media_url_aleluya", $newUrl_aleluya);
@@ -387,7 +387,6 @@ function add_oo1_custom_fields_aleluya()
 }
 
 function get_oo1_avatar_media_url_post_meta_cb_aleluya($object_aleluya, $field_name_aleluya, $request){
-  error_log(" Aleluya " . $field_name_aleluya . " - ".$object_aleluya['id']);
   $avatar_media_id_aleluya = get_post_meta($object_aleluya['id'], 'avatar_media_id_aleluya')[0];
   if( !$avatar_media_id_aleluya )
     return "";
@@ -395,9 +394,9 @@ function get_oo1_avatar_media_url_post_meta_cb_aleluya($object_aleluya, $field_n
 }
 
 function get_oo1_post_meta_cb_aleluya($object_aleluya, $field_name_aleluya, $request){
-        //$child_aleluya=get_post($object['id']);//[$field_name];//, true);
-error_log(" Aleluya " . $field_name_aleluya . " - ".$object_aleluya['id']);
-        return get_post_meta($object_aleluya['id'], $field_name_aleluya)[0];
+  //$child_aleluya=get_post($object['id']);//[$field_name];//, true);
+  error_log_aleluya(" Aleluya " . $field_name_aleluya . " - ".$object_aleluya['id']);
+  return get_post_meta($object_aleluya['id'], $field_name_aleluya)[0];
 }
 function update_oo1_post_meta_cb_aleluya($value_aleluya, $object_aleluya, $field_name_aleluya){
         #wp_update_post(array(
@@ -405,11 +404,11 @@ function update_oo1_post_meta_cb_aleluya($value_aleluya, $object_aleluya, $field
         #  'first_name_aleluya'
         #);//[$field_name];//, true);
 #return true;
-error_log(" Aleluya " . $field_name_aleluya . " - $value_aleluya - ".$object_aleluya->ID);
-        $ret_aleluya = update_post_meta($object_aleluya->ID, $field_name_aleluya, $value_aleluya)[0];
-        if($field_name_aleluya == "avatar_media_id_aleluya" && $value_aleluya) { //Maintain compatibility with android app
-            update_post_meta($object_aleluya->ID, "avatar_media_url_aleluya", wp_get_attachment_url( $avatar_media_id_aleluya ));
-        }
+  error_log_aleluya(" Aleluya " . $field_name_aleluya . " - $value_aleluya - ".$object_aleluya->ID);
+  $ret_aleluya = update_post_meta($object_aleluya->ID, $field_name_aleluya, $value_aleluya)[0];
+  if($field_name_aleluya == "avatar_media_id_aleluya" && $value_aleluya) { //Maintain compatibility with android app
+      update_post_meta($object_aleluya->ID, "avatar_media_url_aleluya", wp_get_attachment_url( $avatar_media_id_aleluya ));
+  }
 }
 
 add_action( 'rest_api_init', 'add_oo1_custom_fields_aleluya' );

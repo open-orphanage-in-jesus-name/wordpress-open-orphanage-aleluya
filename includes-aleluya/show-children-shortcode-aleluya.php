@@ -322,7 +322,7 @@ function oo_after_child_post_content_aleluya($in_content_aleluya){
     if( get_post_type() == "child_aleluya" ) {
       $nick_names_aleluya   = get_post_meta( get_the_ID(), "nick_names_aleluya", true );
 
-    error_log("Praise Jesus - ".get_the_ID());
+    error_log_aleluya("Praise Jesus - ".get_the_ID());
       //$fin_content_aleluya = oo_child_register_js_aleluya().'<button  class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(' .get_the_ID(). ');">Sponsor this Child</button>';
       $fin_content_aleluya = oo_child_register_js_aleluya();
       $fin_content_aleluya .= oo_donation_block_shortcode_aleluya_func( array( "heading_aleluya" => "p", "expandable_aleluya" => "yes", "purpose_aleluya" => $nick_names_aleluya ) );

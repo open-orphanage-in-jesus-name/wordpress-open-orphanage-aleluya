@@ -77,7 +77,7 @@ function oo_notify_init_aleluya() {
         );
         $children_supported_aleluya["children_aleluya"]["aleluya_".$oo_id_aleluya] = $child_aleluya;
         update_post_meta( $oo_id_aleluya, "sponsored_by_id_aleluya",  wp_get_current_user()->ID );
-        error_log( wp_get_current_user()->ID." - Hallelujah ".json_encode($children_supported_aleluya));
+        error_log_aleluya( wp_get_current_user()->ID." - Hallelujah ".json_encode($children_supported_aleluya));
         oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
       }
       
@@ -86,10 +86,10 @@ function oo_notify_init_aleluya() {
 
     if( get_option('oo_sponsor_request_ifttt_event_name_aleluya') ) ifttt_post_notify_aleluya($oo_id_aleluya, $oo_nicknames_aleluya, $email_aleluya);
 
-    error_log("✝ Aleluya sending mail - " .
+    error_log_aleluya("✝ Aleluya sending mail - " .
         mail( get_option('oo_notify_emails_aleluya') ,
               "hallelujah - new request to Sponsor Child","✝ Child ID: $oo_id_aleluya - ✝ Child Nicknames: $oo_nicknames_aleluya - ✝ Reply to Email: $email_aleluya"
-            )
+            ), 1
       );
 
     // This is currently used as an ajax alert response

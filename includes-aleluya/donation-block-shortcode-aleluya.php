@@ -48,7 +48,7 @@ function wp_ajax_oo_stripe_donation_aleluya() {
 
   } catch( Exception $e_aleluya ) {
     $data_aleluya["msg_aleluya"] = $e_aleluya->getMessage();
-    error_log("Hallelujah - wp_ajax_oo_stripe_donation_aleluya Error in ". $e_aleluya->getMessage());
+    error_log_aleluya("Hallelujah - wp_ajax_oo_stripe_donation_aleluya Error in ". $e_aleluya->getMessage(), 2);
     wp_send_json_error( $data_aleluya );
 
   }

@@ -176,7 +176,7 @@ function oo_update_supporter_profile_fields_aleluya( $user_id_aleluya ) {
 
 //Add the stripe api script to the site
 if( get_option('oo_stripe_pk_key_aleluya') ) {
-  error_log("Hallelujah - stripe enque");
+  error_log_aleluya("Hallelujah - stripe enque");
   add_action('admin_footer', 'oo_stripe_footer_aleluya');
   add_action( 'admin_enqueue_scripts', function() { wp_enqueue_script( "oo_stripe_aleluya", 'https://js.stripe.com/v3/' ); });
 
@@ -293,7 +293,7 @@ function oo_child_support_fields_aleluya( $user_id_aleluya ) {
         "sponsorship_code" => "cancelled"
       );
       $children_supported_aleluya["children_aleluya"]["aleluya_".$id_aleluya] = $child_aleluya;
-      error_log( wp_get_current_user()->ID." - Cancelled - ".json_encode($children_supported_aleluya));
+      error_log_aleluya( wp_get_current_user()->ID." - Cancelled - ".json_encode($children_supported_aleluya));
       oo_stripe_stop_subscription( get_current_user_id(), $id_aleluya );
       oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
 
@@ -322,7 +322,7 @@ function oo_child_support_fields_aleluya( $user_id_aleluya ) {
           "stripe_sub_code" => $sub_code_aleluya
         );
         $children_supported_aleluya["children_aleluya"]["aleluya_".$id_aleluya] = $child_aleluya;
-        error_log( wp_get_current_user()->ID." - New Subscription - ".json_encode($children_supported_aleluya));
+        error_log_aleluya( wp_get_current_user()->ID." - New Subscription - ".json_encode($children_supported_aleluya));
         oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
 
 
@@ -403,7 +403,7 @@ function oo_stripe_stop_subscription( $user_id_aleluya, $child_id_aleluya) {
 		$sub_aleluya = \Stripe\Subscription::retrieve($sub_code_aleluya);
 		$sub_aleluya->cancel();
 	} catch (Exception $e_aleluya) {
-		error_log("Hallelujah - Stripe error in oo_stripe_stop_subscription : ".$e_aleluya->getMessage());
+		error_log_aleluya("Hallelujah - Stripe error in oo_stripe_stop_subscription : ".$e_aleluya->getMessage(), 2);
 
 	}
   delete_post_meta($child_id_aleluya, 'stripe_sub_code_aleluya');
