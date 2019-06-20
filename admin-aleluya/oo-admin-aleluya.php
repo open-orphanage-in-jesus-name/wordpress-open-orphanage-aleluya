@@ -6,5 +6,6 @@ defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
 
 require_once( dirname( __FILE__ ) . '/oo-admin-supporter-aleluya.php' );
+require_once( dirname( __FILE__ ) . '/oo-admin-child-aleluya.php' );
 require_once( dirname( __FILE__ ) . '/oo-option-page1-aleluya.php' );
 

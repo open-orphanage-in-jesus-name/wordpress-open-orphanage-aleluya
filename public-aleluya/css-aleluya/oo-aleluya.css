@@ -1,0 +1,27 @@
+/* For God so loved the world, that He gave His only begotten Son, that all who believe in Him should not perish but have everlasting life */
+
+
+
+div.oo_children_aleluya { 
+  display:         flex;
+  flex-wrap:       wrap;
+  justify-content: center;
+}
+div.oo_children_aleluya td.label_aleluya { width:112px; font-weight:900; text-align: right;padding-right: 8px;}
+div.oo_children_aleluya td.content_aleluya {}
+div.oo_children_aleluya td { vertical-align: top; border:0px; padding: 0px; }
+div.oo_children_aleluya img.child_avatar_aleluya { display: inline-block; vertical-align:top;  height:224px; max-width:224px; width:224px;  border-radius: 4px; border: 1px solid black; padding: 1px;margin: 2px;}
+div.oo_children_aleluya .new_child_aleluya  { dispay: block-inline; max-width:256px; border-radius:8px; margin: 2px; padding-top:2px; border: 1px solid #888; display: block-inline; }
+div.oo_children_aleluya .oo_child_meta_aleluya, .oo_child_desc_aleluya  { margin:4px; padding: 0px; border: 0px; vertical-align: top; width: 240px; margin-top: 0px; display: inline-block;}
+div.oo_children_aleluya td.name_aleluya {text-align: center; font-weight: 900;font-size:larger;}
+div.oo_children_aleluya div.child_description_aleluya { line-height: 2.5ex;  text-align: justify; height: 10ex; min-height: 10ex; overflow: hidden;
+text-overflow: ellipsis;}
+td.label_aleluya, td.content_aleluya { padding:4px; }
+td.label_aleluya, td.name_aleluya{ text-align:center;font-weight:bolder;}
+div.oo_children_aleluya td.content_aleluya { font-weight: bolder;padding:4px; line-height: 2.5ex;  text-align: justify; height: 2.5ex; min-height: 2.5ex; overflow: hidden;
+text-overflow: ellipsis;}
+div.oo_children_aleluya td.child_img_holder_aleluya {text-align: center}
+
+
+
+

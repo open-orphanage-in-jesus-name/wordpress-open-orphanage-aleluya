@@ -7,7 +7,6 @@ defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 $blockstripe_aleluya = "praiseJesus";
 
 // [oo_aleluya child_aleluya="child_aleluya-value"]
-add_action("wp_enqueue_scripts",function() { wp_enqueue_script( "oo_stripe_aleluya", 'https://js.stripe.com/v3/' ) ; });
 
 //wp_enqueue_script( 'oo_child_admin_aleluya_js', plugins_url( '/public-aleluya/js-aleluya/oo-child-admin-aleluya.js' , __DIR__.'../'), array('jquery'), '0.1' );
 
@@ -59,7 +58,7 @@ add_action('wp_head', function() {
     $stripe_pk_aleluya = get_option("oo_stripe_pk_key_aleluya");
 ?>
 <script>
-    var oo_block_stripe_aleluya = Stripe('$stripe_pk_aleluya');
+    var oo_block_stripe_aleluya = Stripe('<?php echo $stripe_pk_aleluya?>');
 
   </script>
   <style>
@@ -100,7 +99,7 @@ ALELUYA;
   }
 
   $str_aleluya = '<div class="oo_donation_block_aleluya">';
-
+  $oo_stripe_sk_key_aleluya = get_option('oo_stripe_sk_key_aleluya');
   //get initial stripe object
   if( $blockstripe_aleluya != "aleluya") {
 		$blockstripe_aleluya = "aleluya";
@@ -112,7 +111,7 @@ ALELUYA;
     }
   }
     $str_aleluya .= <<<ALELUYA
-  <$heading_aleluya>$hidable_aleluya for $purpose_aleluya <!-- Hallelujah --> </$heading_aleluya>
+  <$heading_aleluya>$hidable_aleluya for $purpose_aleluya <!-- Hallelujah -->  </$heading_aleluya>
 
   <form action="/charge" method="post" style="display:$hidable_display_aleluya" class="oo-payment-form-aleluya" id="payment-form-aleluya-$rand_aleluya">
     <div class="form-row card-element-name-aleluya">

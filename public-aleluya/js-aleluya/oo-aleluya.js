@@ -34,3 +34,7 @@ jQuery(document).ready( function($) {
     });
   }
 });
+
+function oo_viewmore_button_clicked_aleluya(url_aleluya) {
+  window.location = url_aleluya;
+}

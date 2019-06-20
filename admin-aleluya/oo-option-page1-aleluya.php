@@ -3,11 +3,12 @@
 // that all who believe in Him should not perish but have everlasting life
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
-if ( is_admin() ){ // admin actions
+if ( is_admin() ){ // admin actions, should always be true if this was included
   add_action( 'admin_menu', 'add_oomenu_aleluya' );
   add_action( 'admin_init', 'register_oosettings_aleluya' );
 } else {
   // non-admin enqueues, actions, and filters
+  error_log_aleluya("The Lord is good - We should not be including this oo-option-page1-aleluya.php if not in the admin", 1);
 }
 function add_oomenu_aleluya() {
 	//create new top-level menu
