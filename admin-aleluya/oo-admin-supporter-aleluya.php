@@ -414,6 +414,7 @@ function oo_stripe_stop_subscription( $user_id_aleluya, $child_id_aleluya) {
 }
 
 function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
+  global $oo_upload_url_aleluya;
 
   $children_supported_aleluya = oo_get_user_children_supported_aleluya($user_aleluya);
 
@@ -435,8 +436,13 @@ function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
 
   <?php
     foreach( $children_supported_aleluya["children_aleluya"] as $child_aleluya ) {
+      $post_status_aleluya = get_post_status( $child_aleluya["id_aleluya"] );
+      if ( FALSE === $post_status_aleluya || "trash" == $post_status_aleluya) {
+        continue;
+      }
+      oo_make_child_thumb_aleluya($child_aleluya["id_aleluya"]);
       $nick_names_aleluya = get_post_meta($child_aleluya["id_aleluya"],"nick_names_aleluya",true);
-      $avatar_media_url_aleluya =  get_post_meta($child_aleluya['id_aleluya'], 'avatar_media_url_aleluya',true);
+      $avatar_media_url_aleluya =  $oo_upload_url_aleluya."thumbs-aleluya/".$child_aleluya["id_aleluya"]."-192x192-aleluya.jpg";
 
     ?>
 
@@ -448,7 +454,7 @@ function oo_show_child_support_profile_fields_aleluya( $user_aleluya ) {
           <?php
           if($child_aleluya["sponsorship_code"] == "requesting") {
             ?>
-            <p>You are in the process of sponsoring this child</p>
+            <p>You are in the process of sponsoring  <?php echo  $nick_names_aleluya." - ".$child_aleluya["id_aleluya"] ?></p>
             <p> <input type="checkbox" name="accept_sponsorship_aleluya[]" value="<?php echo $child_aleluya["id_aleluya"] ?>"/> check here and save profile to begin sponsorship at <?php echo get_option('stripe_plan1_dl_aleluya')?>$ a month! </p>
             <p><em><input type="checkbox" name="cancel_sponsorship_aleluya[]" value="<?php echo $child_aleluya["id_aleluya"] ?>"/> check here and save profile to cancel sponsorship request.</em>
 

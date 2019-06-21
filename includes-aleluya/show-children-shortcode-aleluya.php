@@ -5,7 +5,9 @@ defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
 $oo_child_register_js_aleluya_done = false;
 
-add_action('wp_head', 'oo_child_register_js_aleluya');
+add_action('wp_head', function() {
+  echo oo_child_register_js_aleluya();
+});
 
 
 //Hallelujah - Returns a string, uses output buffering
@@ -64,7 +66,7 @@ function oo_child_register_js_aleluya() {
       <script>
       var oo_children_aleluya = [];
       function oo_sponsor_button_clicked_aleluya(id_aleluya) {
-        alert('We will send you to the registration page, where you can create a user for yourself. If you already have a user then Log In Instead please.');
+        alert('Hallelujah thanks again for you interest! We will send you to the registration page, where you can create a user for yourself. If you already have a user then Log In Instead please. After you do this please come back to this page and click sponsor again. Sorry please be patient as we are working to make this a bit easier.');
         window.location="<?php echo esc_url(  $reg_url_aleluya  ) ?>" + id_aleluya;';
 
       }
@@ -80,9 +82,13 @@ function oo_child_register_js_aleluya() {
       var oo_children_aleluya = [];
       function oo_sponsor_button_clicked_aleluya(id_aleluya) {
         var email_aleluya = "<?php echo $email_aleluya?>";
-        //alert('We are registering this child with you, please confirm your sponsorship and details in the back end. ');
+        
 
-        if (!email_aleluya) return;
+        if (!email_aleluya) {
+          return;
+        } 
+        alert('We are registering this child with you, please confirm your sponsorship and details in the back end. ');
+        
         var xhr_aleluya = new XMLHttpRequest();
         xhr_aleluya.open('POST', '/');
         xhr_aleluya.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
@@ -120,9 +126,10 @@ function oo_aleluya_func( $atts ) {
     'child_aleluya' => 'TODO 1 ALeluya',
     'filter_aleluya' => 'aleluya, something else',
   ), $atts );
+  $js_aleluya = oo_child_register_js_aleluya();
   ob_start();
-
-  echo oo_child_register_js_aleluya();
+  echo $js_aleluya;
+  
 
   ?>
   <div class="oo_children_aleluya">
@@ -280,6 +287,7 @@ function oo_after_child_post_content_aleluya($in_content_aleluya){
 
     error_log_aleluya("Praise Jesus - ".get_the_ID());
       //$fin_content_aleluya = oo_child_register_js_aleluya().'<button  class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(' .get_the_ID(). ');">Sponsor this Child</button>';
+
       $fin_content_aleluya = oo_child_register_js_aleluya();
       $fin_content_aleluya .= oo_donation_block_shortcode_aleluya_func( array( "heading_aleluya" => "p", "expandable_aleluya" => "yes", "purpose_aleluya" => $nick_names_aleluya ) );
       $fin_content_aleluya .= oo_child_pagestats_htmlstr_aleluya(get_the_ID());

@@ -59,24 +59,24 @@ function ifttt_post_notify_aleluya($v1_aleluya, $v2_aleluya, $v3_aleluya) {
 add_action( 'init', 'oo_notify_init_aleluya' );
 
 function oo_notify_init_aleluya() {
-  if( !isset($_POST["oo_name_aleluya"]) && isset($_POST["oo_email_aleluya"])  ) {
+  if( !isset($_POST["oo_name_aleluya"]) && isset($_POST["oo_email_aleluya"])  ) { //TODO: hallelujah Handle via ajax
 
 
     wp_verify_nonce($_POST['wpchild_register_request_nonce_aleluya'], 'wpchild_register_request_nonce_aleluya');
     $email_aleluya = sanitize_email( $_POST["oo_email_aleluya"] );
-    $oo_id_aleluya = intval( $_POST["oo_email_id_aleluya"] );
-    $oo_nicknames_aleluya = get_post_meta( $oo_id_aleluya, "nick_names_aleluya" )[0];
-    $oo_currently_sponsored = get_post_meta( $oo_id_aleluya, "sponsored_by_id_aleluya", true );
-    $notes_aleluya = $oo_currently_sponsored ? "Thankfully this child has a sponsor assigned at this moment, though you can still donate to the child. " : "";
+    $oo_child_id_aleluya = intval( $_POST["oo_email_id_aleluya"] ); //the Lord is good, sorry poorly named param right now
+    $oo_nicknames_aleluya = get_post_meta( $oo_child_id_aleluya, "nick_names_aleluya" )[0];
+    $oo_currently_sponsored_aleluya = get_post_meta( $oo_child_id_aleluya, "sponsored_by_id_aleluya", true );
+    $notes_aleluya = $oo_currently_sponsored_aleluya ? "Thankfully this child has a sponsor assigned at this moment, though you can still donate a one time payment to the child. " : "";
     if(is_user_logged_in()) {
-      if(!$oo_currently_sponsored) {
+      if(!$oo_currently_sponsored_aleluya) {
         $children_supported_aleluya = oo_get_user_children_supported_aleluya( wp_get_current_user() );
         $child_aleluya = array(
-          "id_aleluya" => $oo_id_aleluya,
+          "id_aleluya" => $oo_child_id_aleluya,
           "sponsorship_code" => "requesting"
         );
-        $children_supported_aleluya["children_aleluya"]["aleluya_".$oo_id_aleluya] = $child_aleluya;
-        update_post_meta( $oo_id_aleluya, "sponsored_by_id_aleluya",  wp_get_current_user()->ID );
+        $children_supported_aleluya["children_aleluya"]["aleluya_".$oo_child_id_aleluya] = $child_aleluya;
+        update_post_meta( $oo_child_id_aleluya, "sponsored_by_id_aleluya",  wp_get_current_user()->ID );
         error_log_aleluya( wp_get_current_user()->ID." - Hallelujah ".json_encode($children_supported_aleluya));
         oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
       }
@@ -84,7 +84,7 @@ function oo_notify_init_aleluya() {
       
     }
 
-    if( get_option('oo_sponsor_request_ifttt_event_name_aleluya') ) ifttt_post_notify_aleluya($oo_id_aleluya, $oo_nicknames_aleluya, $email_aleluya);
+    if( get_option('oo_sponsor_request_ifttt_event_name_aleluya') ) ifttt_post_notify_aleluya($oo_child_id_aleluya, $oo_nicknames_aleluya, $email_aleluya);
 
     error_log_aleluya("✝ Aleluya sending mail - " .
         mail( get_option('oo_notify_emails_aleluya') ,

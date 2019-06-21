@@ -144,7 +144,7 @@ function myTheme_setImageFromURL(url, attachmentId, width, height) {
         data.height = height;
     }
 
-    alert("Aleluya - " + attachmentId + " - " + url);
+    //alert("Aleluya - " + attachmentId + " - " + url);
 
     $("#avatar_media_url_aleluya").val( url );
     $("#oo-child-preview-image-aleluya").prop("src", url);        
@@ -152,7 +152,7 @@ function myTheme_setImageFromURL(url, attachmentId, width, height) {
 }
 
 function myTheme_setImageFromAttachment(attachment) {
-alert("No Id - aleluya");
+    alert("No Id - aleluya");
     //$("#heading_picture").val( attachment.url );
     $("#oo-child-preview-image-aleluya").prop("src", attachment.url);             
 
@@ -249,6 +249,7 @@ $("input#oo_aleluya_media_manager").on("click", function(e) {
     });
 
     mediaUploader.on('cropped', function(croppedImage) {
+
 
         var url = croppedImage.url,
             attachmentId = croppedImage.attachment_id,

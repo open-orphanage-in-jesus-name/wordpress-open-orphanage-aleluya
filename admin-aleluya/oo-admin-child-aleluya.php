@@ -22,7 +22,7 @@ function oo_add_child_fields_meta_box_aleluya() {
 add_action( 'add_meta_boxes', 'oo_add_child_fields_meta_box_aleluya' );
 
 function oo_show_child_fields_meta_box_aleluya() {
-  global $post;
+  global $post, $oo_upload_url_aleluya;
   $show_child_fields_aleluya = array(
     'first_names_aleluya',
     'sur_names_aleluya',
@@ -46,7 +46,13 @@ function oo_show_child_fields_meta_box_aleluya() {
   $meta = get_post_meta( $post->ID, 'your_fields', true );
 
 //Thank You Jesus for https://wordpress.stackexchange.com/a/236296
+  $image_disp_aleluya =   $oo_upload_url_aleluya."thumbs-aleluya/".$child_aleluya["id_aleluya"]."-192x192-aleluya.jpg";
   $image_aleluya = get_post_meta($post->ID, 'avatar_media_url_aleluya', true );
+  $sponsored_by_id_aleluya = get_post_meta($post->ID, "sponsored_by_id_aleluya", true);
+  $sponsored_by_user_aleluya = $sponsored_by_id_aleluya ? get_user_by('ID', $sponsored_by_id_aleluya) : null;
+  $sponsored_by_user_name_aleluya = $sponsored_by_user_aleluya ? '('.$sponsored_by_id_aleluya.') - '.$sponsored_by_user_aleluya->last_name . ', '.$sponsored_by_user_aleluya->first_name : '🕆 NONE';
+  $sponsored_by_user_link_aleluya = $sponsored_by_user_aleluya ? get_edit_user_link( $sponsored_by_id_aleluya ) : '#';
+
   /*if( intval( $image_id ) > 0 ) {
       // Change with the image size you want to use
       $image_aleluya = wp_get_attachment_image( $image_id_aleluya, 'medium', false, array( 'id' => 'myprefix-preview-image' ) );
@@ -59,10 +65,11 @@ function oo_show_child_fields_meta_box_aleluya() {
   <input type="hidden" name="oo_child_meta_box_nonce_aleluya" value="<?php echo wp_create_nonce( basename(__FILE__) ); ?>">
   <!-- All fields will go here -->
   <table>
+    <tr><td align="right>">Currently Helped By Sponsor:</td><td><a href="<?php echo $sponsored_by_user_link_aleluya ?>">🕆 <?php echo $sponsored_by_user_name_aleluya?></a></td></tr>
   <tr><?php $cf_aleluya = "avatar_media_id_aleluya";?>
     <td align="right"><label for="<?php echo $cf_aleluya?>"><?php  _e($cf_aleluya,'open-orphanage')?>: </label>
     <td>
-      <img id="oo-child-preview-image-aleluya" style="height:192px;width:192px;" src="<?php echo esc_attr($image_aleluya) ?>"/><br/>
+      <img id="oo-child-preview-image-aleluya" style="height:192px;width:192px;" src="<?php echo esc_attr($image_disp_aleluya) ?>"/><br/>
       <input type="text" name="avatar_media_url_aleluya" id="avatar_media_url_aleluya" value="<?php echo esc_attr( $image_aleluya ); ?>" class="regular-text" />
       <input type='button' class="button-primary" value="<?php esc_attr_e( 'Select an Image', 'open-orphanage' ); ?>" id="oo_aleluya_media_manager"/><br/><br/>
     </td>
