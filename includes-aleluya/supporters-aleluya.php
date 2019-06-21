@@ -8,8 +8,9 @@ function stripeCustSkMetaTag_aleluya() {
 
 
 //Hallelujah
-function oo_get_user_children_supported_aleluya($user_aleluya) {
-  $children_supported_json_aleluya = get_user_meta($user_aleluya->ID, "children_supported_json_aleluya", true);
+function oo_get_user_children_supported_aleluya($user_or_id_aleluya) {
+  $user_id_aleluya = is_a($user_or_id_aleluya, "WP_User") ? $user_or_id_aleluya->ID : $user_or_id_aleluya;
+  $children_supported_json_aleluya = get_user_meta($user_id_aleluya, "children_supported_json_aleluya", true);
 
   if($children_supported_json_aleluya) {
     $children_supported_aleluya = json_decode($children_supported_json_aleluya, true);
@@ -21,8 +22,9 @@ function oo_get_user_children_supported_aleluya($user_aleluya) {
   return $children_supported_aleluya;
 }
 
-function oo_set_user_children_supported_aleluya($user_aleluya, $children_supported_aleluya) {
-  update_user_meta($user_aleluya->ID, "children_supported_json_aleluya", json_encode($children_supported_aleluya) );
+function oo_set_user_children_supported_aleluya($user_or_id_aleluya, $children_supported_aleluya) {
+  $user_id_aleluya = is_a($user_or_id_aleluya, "WP_User") ? $user_or_id_aleluya->ID : $user_or_id_aleluya;
+  update_user_meta($user_id_aleluya, "children_supported_json_aleluya", json_encode($children_supported_aleluya) );
   return $children_supported_aleluya;
 }
 

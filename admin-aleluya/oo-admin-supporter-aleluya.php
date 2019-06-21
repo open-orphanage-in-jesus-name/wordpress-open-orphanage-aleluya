@@ -286,16 +286,8 @@ function oo_child_support_fields_aleluya( $user_id_aleluya ) {
   if(!empty($_POST['cancel_sponsorship_aleluya'])) {
     update_user_meta(get_current_user_id(), 'cancel_sponsorship_aleluya', true);
     foreach($_POST['cancel_sponsorship_aleluya'] as $id_aleluya) {
-      $oo_currently_sponsored = update_post_meta( $id_aleluya, "sponsored_by_id_aleluya", false );
-      $children_supported_aleluya = oo_get_user_children_supported_aleluya( wp_get_current_user() );
-      $child_aleluya = array(
-        "id_aleluya" => $id_aleluya,
-        "sponsorship_code" => "cancelled"
-      );
-      $children_supported_aleluya["children_aleluya"]["aleluya_".$id_aleluya] = $child_aleluya;
-      error_log_aleluya( wp_get_current_user()->ID." - Cancelled - ".json_encode($children_supported_aleluya));
-      oo_stripe_stop_subscription( get_current_user_id(), $id_aleluya );
-      oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
+      $child_aleluya = new Child_aleluya($id_aleluya);
+      $child_aleluya->set_child_sponsor_id_aleluya(wp_get_current_user()->ID,"cancelled");
 
     }
   }
@@ -313,19 +305,8 @@ function oo_child_support_fields_aleluya( $user_id_aleluya ) {
       if(! $cancel_aleluya ) {
         //Ok child is being accepted, begin subscription!
         update_user_meta(get_current_user_id(), 'begin_sponsorship_aleluya', true);
-
-        $children_supported_aleluya = oo_get_user_children_supported_aleluya( wp_get_current_user() );
-        $sub_code_aleluya = oo_stripe_start_subscription( get_current_user_id(), $id_aleluya );
-        $child_aleluya = array(
-          "id_aleluya" => $id_aleluya,
-          "sponsorship_code" => "sponsored",
-          "stripe_sub_code" => $sub_code_aleluya
-        );
-        $children_supported_aleluya["children_aleluya"]["aleluya_".$id_aleluya] = $child_aleluya;
-        error_log_aleluya( wp_get_current_user()->ID." - New Subscription - ".json_encode($children_supported_aleluya));
-        oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
-
-
+        $child_aleluya = new Child_aleluya($id_aleluya);
+        $child_aleluya->set_child_sponsor_id_aleluya(wp_get_current_user()->ID," sponsored", $sub_code_aleluya);
       }
     }
   }

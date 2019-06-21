@@ -113,57 +113,11 @@ function oo_child_get_image_aleluya() {
 
 
 
-
+// Hallelujah, functional shortcut
 function oo_make_child_thumb_aleluya( $child_post_id_aleluya) {
-  global $oo_dir_aleluya;
-  //Hallelujah, get resized thumbnail
-  if( get_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", true) == 4 ) return;
-  $url_aleluya = get_post_meta( $child_post_id_aleluya, "avatar_media_url_aleluya", true );
-  if(!$url_aleluya) return false;
-
-
-  error_log_aleluya("Hallelujah working with ".$url_aleluya);
-
-  $editor_aleluya = wp_get_image_editor( $url_aleluya, array() );
-
-  if (is_wp_error($editor_aleluya)) {
-    error_log_aleluya("Praise Jesus Christ He is Lord - ".$editor_aleluya->get_error_message()." - Error starting image editor for ".$fn_aleluya."\n",1);
-    return;
-
-  }
-  // Get the dimensions for the size of the current image.
-  $dimensions_aleluya = $editor_aleluya->get_size();
-  $width_aleluya = $dimensions_aleluya['width'];
-  $height_aleluya = $dimensions_aleluya['height'];
-  error_log_aleluya("Aleluya original size $width_aleluya x $height_aleluya");
-
-  //Which sizes should we make thumnails for?
-  $whs_aleluya = array(array(512,512),array(192,192)); //use descending sizes
-
-  foreach($whs_aleluya as $wh_aleluya) {
-    // Calculate the new dimensions for the image.
-    $newWidth_aleluya = $wh_aleluya[0];
-    $newHeight_aleluya = $wh_aleluya[1];
-    if($width_aleluya > $newWidth_aleluya && $height_aleluya > $newHeight_aleluya) {
-      // Resize the image.
-      $result_aleluya = $editor_aleluya->resize($newWidth_aleluya, $newHeight_aleluya, true);
-      if (is_wp_error($result_aleluya)) {
-        error_log_aleluya("Praise Jesus Christ He is Lord - ".$result_aleluya->get_error_message(). " Error resizing image for ".$url_aleluya, 1);
-      }
-    }
-
-    $newFile_aleluya = oo_thumb_dir_aleluya() . $child_post_id_aleluya."-".$newWidth_aleluya."x".$newHeight_aleluya."-aleluya.jpg";//$editor_aleluya->generate_filename();
-    //$newUrl_aleluya = $oo_dir_aleluya. "public-aleluya/thumbs-aleluya/".$child_post_id_aleluya."-192x192-aleluya.jpg";
-    error_log_aleluya("Hallelujah save to: ".$newFile_aleluya." Aleluya - ".$newUrl_aleluya);
-    $editor_aleluya->save($newFile_aleluya);
-  }
-  //update_post_meta($child_post_id_aleluya, "avatar_media_url_aleluya", $newUrl_aleluya);
-  update_post_meta($child_post_id_aleluya, "avatar_noremake_aleluya", 4);
-
+  $curChild_aleluya = new Child_aleluya($child_post_id_aleluya);
+  $curChild_aleluya->make_child_thumb_aleluya();
 }
-
-
-
 
 function get_oo1_avatar_media_url_post_meta_cb_aleluya($object_aleluya, $field_name_aleluya, $request){
   $avatar_media_id_aleluya = get_post_meta($object_aleluya['id'], 'avatar_media_id_aleluya')[0];

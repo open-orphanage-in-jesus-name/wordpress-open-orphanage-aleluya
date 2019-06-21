@@ -65,23 +65,15 @@ function oo_notify_init_aleluya() {
     wp_verify_nonce($_POST['wpchild_register_request_nonce_aleluya'], 'wpchild_register_request_nonce_aleluya');
     $email_aleluya = sanitize_email( $_POST["oo_email_aleluya"] );
     $oo_child_id_aleluya = intval( $_POST["oo_email_id_aleluya"] ); //the Lord is good, sorry poorly named param right now
-    $oo_nicknames_aleluya = get_post_meta( $oo_child_id_aleluya, "nick_names_aleluya" )[0];
-    $oo_currently_sponsored_aleluya = get_post_meta( $oo_child_id_aleluya, "sponsored_by_id_aleluya", true );
+    $child_aleluya = new Child_aleluya($oo_child_id_aleluya);
+    $oo_nicknames_aleluya = $child_aleluya->nick_names_aleluya;
+    $oo_currently_sponsored_aleluya = $child_aleluya->sponsored_by_id_aleluya;
+
     $notes_aleluya = $oo_currently_sponsored_aleluya ? "Thankfully this child has a sponsor assigned at this moment, though you can still donate a one time payment to the child. " : "";
     if(is_user_logged_in()) {
       if(!$oo_currently_sponsored_aleluya) {
-        $children_supported_aleluya = oo_get_user_children_supported_aleluya( wp_get_current_user() );
-        $child_aleluya = array(
-          "id_aleluya" => $oo_child_id_aleluya,
-          "sponsorship_code" => "requesting"
-        );
-        $children_supported_aleluya["children_aleluya"]["aleluya_".$oo_child_id_aleluya] = $child_aleluya;
-        update_post_meta( $oo_child_id_aleluya, "sponsored_by_id_aleluya",  wp_get_current_user()->ID );
-        error_log_aleluya( wp_get_current_user()->ID." - Hallelujah ".json_encode($children_supported_aleluya));
-        oo_set_user_children_supported_aleluya(wp_get_current_user(), $children_supported_aleluya);
-      }
-      
-      
+        $child_aleluya->set_child_sponsor_id_aleluya(wp_get_current_user()->ID);
+      }      
     }
 
     if( get_option('oo_sponsor_request_ifttt_event_name_aleluya') ) ifttt_post_notify_aleluya($oo_child_id_aleluya, $oo_nicknames_aleluya, $email_aleluya);
