@@ -114,6 +114,10 @@ God be praised, the makes of wordpress have been doing an excellent job and it s
 
 == Changelog ==
 
+= 0.2.20190621a =
+ * Hallelujah - refactoring with classes and many other things
+ * Hallelujah - Praise Jesus - Show a child's sponsor in the admin, Better preview images in admin, Alerts while sponsoring, Do not list erased or children posts in trash in admin, misc fixes, better centering of panel buttons etc
+
 = 0.1.20190615b =
  * Hallelujah - tame some debug log postings, new screenshots
 
@@ -135,7 +139,6 @@ God be praised, the makes of wordpress have been doing an excellent job and it s
 = 0.1.20190613a =
  * Hallelujah - Insert payment form from outside Admin:  Can create a payment form using Gutenberg or shortcode. It optionally can display the form after button click, and stores which is the purpose of the donation, as well as allowing the supporter to input additional notes, name, etc.
    * [oo_donation_block_aleluya purpose_aleluya="(string)" expandable_aleluya="(yes/no)"/]
-
 
 = 0.1.20190612b =
  * Hallelujah - bugfix to not overwrite original url in db
@@ -165,6 +168,8 @@ God be praised, the makes of wordpress have been doing an excellent job and it s
 * Hallelujah, First version on wordpress.com
 
 == Upgrade Notice ==
+= 0.2.20190621a =
+ * Hallelujah - large update, please notify us of any bugs loveJesus@openorphanage.org
 
 = 0.1.20190614a =
  * Hallelujah - Should work well praise Jesus.
