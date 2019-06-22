@@ -43,7 +43,7 @@ add_action( 'wp_enqueue_scripts', function() {
   //Used for some js
   $reg_url_aleluya = wp_registration_url();
   $reg_url2_aleluya = $reg_url_aleluya.(( strpos($reg_url_aleluya, "?" ) === false ) ? '?' : '&' ) . 'child_id_aleluya=';
-  
+
   //Create an object to reference the ajax url use in the oo-aleluya.js
   wp_localize_script( 'oo_aleluya_js', 'oo_ajax_aleluya',
             array( 'ajax_url_aleluya' => admin_url( 'admin-ajax.php' ),
@@ -166,7 +166,7 @@ add_action( 'wp_ajax_oo_support_request_aleluya', 'wp_ajax_oo_support_request_al
 function wp_ajax_oo_support_request_aleluya() {
   if( !isset($_POST["oo_name_aleluya"]) && isset($_POST["oo_email_aleluya"])  ) { //TODO: hallelujah Handle via ajax
     $data_aleluya = array( );
-    wp_verify_nonce($_POST['wpchild_register_request_nonce_aleluya'], 'nonce_aleluya');
+    wp_verify_nonce($_POST['oo_nonce_aleluya'], 'nonce_aleluya');
     $email_aleluya = sanitize_email( $_POST["oo_email_aleluya"] );
     $oo_child_id_aleluya = intval( $_POST["oo_email_id_aleluya"] ); //the Lord is good, sorry poorly named param right now
     $child_aleluya = new Child_aleluya($oo_child_id_aleluya);

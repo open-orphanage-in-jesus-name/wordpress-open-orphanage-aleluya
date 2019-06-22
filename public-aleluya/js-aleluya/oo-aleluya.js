@@ -88,6 +88,52 @@ jQuery(document).ready( function($) {
   }
 
 
+  /**
+   * Create a stripe donation block
+   * uuid_aleluya is the UUID suffix for form elements
+   */
+  window.oo_aleluya.create_stripe_donation_form_aleluya = function(uuid_aleluya, purpose_aleluya, req_uri_aleluya ) {
+
+    oo_tog_forms_aleluya[uuid_aleluya] = 0;
+
+    // Custom styling can be passed to options when creating an Element.
+    var oo_block_elements_aleluya = oo_block_stripe_aleluya.elements();
+
+    // Create an instance of the card Element.
+    var card_aleluya = oo_block_elements_aleluya.create('card', {style: oo_stripe_style_aleluya});
+
+    // Add an instance of the card Element into the `card-element` <div>.
+    card_aleluya.mount( '#card-element-aleluya-' + uuid_aleluya );
+
+    card_aleluya.addEventListener('change', function(event_aleluya) {
+      var displayError_aleluya = document.getElementById('card-errors-aleluya-' + uuid_aleluya);
+      if (event_aleluya.error) {
+        displayError_aleluya.textContent = event_aleluya.error.message;
+      } else {
+        displayError_aleluya.textContent = '';
+      }
+    });
+
+
+    var form_aleluya = document.getElementById('payment-form-aleluya-' + uuid_aleluya);
+    form_aleluya.addEventListener('submit', function(event_aleluya) {
+      event_aleluya.preventDefault();
+
+      oo_block_stripe_aleluya.createToken(card_aleluya).then(function(result_aleluya) {
+        if (result_aleluya.error) {
+          // Inform the customer that there was an error.
+          var errorElement_aleluya = document.getElementById('card-errors-aleluya-' + uuid_aleluya);
+          errorElement_aleluya.textContent = result_aleluya.error.message;
+        } else {
+          // Send the token to your server.
+          window.oo_aleluya.ooStripeDonation_aleluya(result_aleluya.token, uuid_aleluya, purpose_aleluya, oo_ajax_aleluya.nonce_aleluya, req_uri_aleluya);
+        }
+      });
+      return false;
+    });
+  };
+
+
 });
 
 

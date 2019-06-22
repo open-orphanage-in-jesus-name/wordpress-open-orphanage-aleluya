@@ -15,7 +15,7 @@ function wp_ajax_oo_stripe_donation_aleluya() {
 
   try {
 
-    if ( !wp_verify_nonce( $_POST['oo_nonce_aleluya'], basename(__FILE__).$_POST['oo_rand_aleluya'] ) ) {
+    if ( !wp_verify_nonce( $_POST['oo_nonce_aleluya'], 'oo_nonce_aleluya' ) ) {
       $data_aleluya["msg_aleluya"] = __("Invalid Nonce","open-orphanage");
       wp_send_json_error( $data_aleluya );
       return;
@@ -55,9 +55,16 @@ function wp_ajax_oo_stripe_donation_aleluya() {
 add_action('wp_head', function() {
     $stripe_pk_aleluya = get_option("oo_stripe_pk_key_aleluya");
 ?>
-<script>
+  <script>
     var oo_block_stripe_aleluya = Stripe('<?php echo $stripe_pk_aleluya?>');
-
+    var oo_tog_forms_aleluya = new Object();
+    var oo_stripe_style_aleluya = {
+      base: {
+        // Add your base input styles here. For example:
+        fontSize: '16px',
+        color: "#32325d",
+      }
+    };
   </script>
   <style>
     .card-element-card-aleluya, .card-element-aleluya { padding: 4px; margin: 3px; background: #fefefe; border: 1px solid black; border-radius: 4px;}
@@ -81,7 +88,7 @@ function oo_donation_block_shortcode_aleluya_func( $pre_atts_aleluya ) {
   $purpose_aleluya = preg_replace("['\"]","", esc_attr( $atts_aleluya['purpose_aleluya'] ) );
   $req_uri_aleluya = $_SERVER['REQUEST_URI'];
   $rand_aleluya = rand(0,1<<24);
-  $nonce_aleluya = wp_create_nonce( basename(__FILE__) . $rand_aleluya ); //Aleluya, this should not be needed because of how the ajax is used but jic
+   //Aleluya, this should not be needed because of how the ajax is used but jic
 
   $heading_aleluya = $atts_aleluya["heading_aleluya"];
 
@@ -91,7 +98,7 @@ function oo_donation_block_shortcode_aleluya_func( $pre_atts_aleluya ) {
   if( $atts_aleluya['expandable_aleluya'] == "yes") {
     $hidable_display_aleluya = "none";
     $hidable_aleluya =<<<ALELUYA
-    <button onclick="var obj_aleluya=document.getElementById('payment-form-aleluya-$rand_aleluya'); if((oo_tog_form_aleluya_$rand_aleluya ++)% 2 == 0) {obj_aleluya.style.display='block';} else { obj_aleluya.style.display='none';};">Donate <!--Hallelujah--></button>
+    <button onclick="var obj_aleluya=document.getElementById('payment-form-aleluya-$rand_aleluya'); if((oo_tog_forms_aleluya['$rand_aleluya'] ++)% 2 == 0) {obj_aleluya.style.display='block';} else { obj_aleluya.style.display='none';};">Donate <!--Hallelujah--></button>
 
 ALELUYA;
   }
@@ -170,50 +177,10 @@ ALELUYA;
 
 
   <script>
-  var oo_tog_form_aleluya_$rand_aleluya = 0;
-  // Custom styling can be passed to options when creating an Element.
-  var style_aleluya = {
-    base: {
-      // Add your base input styles here. For example:
-      fontSize: '16px',
-      color: "#32325d",
-    }
-  };
-
-  var oo_block_elements_aleluya_$rand_aleluya = oo_block_stripe_aleluya.elements();
-
-  // Create an instance of the card Element.
-  var card_aleluya_$rand_aleluya = oo_block_elements_aleluya_$rand_aleluya.create('card', {style: style_aleluya});
-
-  // Add an instance of the card Element into the `card-element` <div>.
-  card_aleluya_$rand_aleluya.mount('#card-element-aleluya-$rand_aleluya');
-
-  card_aleluya_$rand_aleluya.addEventListener('change', function(event_aleluya) {
-    var displayError_aleluya = document.getElementById('card-errors-aleluya-$rand_aleluya');
-    if (event_aleluya.error) {
-      displayError_aleluya.textContent = event_aleluya.error.message;
-    } else {
-      displayError_aleluya.textContent = '';
-    }
-  });
-
-
-  var form_aleluya = document.getElementById('payment-form-aleluya-$rand_aleluya');
-  form_aleluya.addEventListener('submit', function(event_aleluya) {
-    event_aleluya.preventDefault();
-
-    oo_block_stripe_aleluya.createToken(card_aleluya_$rand_aleluya).then(function(result_aleluya) {
-      if (result_aleluya.error) {
-        // Inform the customer that there was an error.
-        var errorElement_aleluya = document.getElementById('card-errors-aleluya-$rand_aleluya');
-        errorElement_aleluya.textContent = result_aleluya.error.message;
-      } else {
-        // Send the token to your server.
-        window.oo_aleluya.ooStripeDonation_aleluya(result_aleluya.token, '$rand_aleluya', '$purpose_aleluya', '$nonce_aleluya', '$req_uri_aleluya');
-      }
-    });
-    return false;
-  });
+  jQuery( 
+    function(){ 
+      window.oo_aleluya.create_stripe_donation_form_aleluya( '$rand_aleluya', '$purpose_aleluya', '$req_uri_aleluya');
+      });
 
   </script>
 
