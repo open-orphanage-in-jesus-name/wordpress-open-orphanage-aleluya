@@ -129,5 +129,90 @@ function update_oo1_post_meta_cb_aleluya($value_aleluya, $object_aleluya, $field
   }
 }
 
+/**
+ * Show the statistics of a child in a table like format, meant for the full width of a post
+ **/
+
+function oo_child_pagestats_htmlstr_aleluya($id_aleluya) {
+  global $public_child_fields_aleluya,$oo_upload_url_aleluya;
+  $newUrl_aleluya = $oo_upload_url_aleluya."thumbs-aleluya/".$id_aleluya."-512x512-aleluya.jpg";
+  $nick_names_aleluya  = get_post_meta($id_aleluya, "nick_names_aleluya", true);
+  $description_aleluya = get_post_meta($id_aleluya, "description_aleluya", true);
+  $morelink_aleluya    = esc_url(get_post_permalink($id_aleluya));
+  oo_make_child_thumb_aleluya($id_aleluya);
+
+  ob_start(); // Since we return a string
+  ?>
+
+
+  <div class='oo_child_pagestats' align='center'>
+    <div class="child_img_holder_aleluya" align="center" style="width:45%;min-width:256px;min-height:256px;background: url(<?php echo  $newUrl_aleluya ?>);">&nbsp;</div>
+    <table style="display:block-inline;max-width:45%;min-width:256px;">
+        <tr><td colspan='2' class='name_aleluya' align="center"> <?php echo  $nick_names_aleluya ?> </td></tr>
+        <tr><td align='center'>
+          <div class='oo_child_desc_aleluya'>
+           
+              <div class="child_description_aleluya" > <?php echo  $description_aleluya ?></div><br/>
+              <div class="show_content" align="center"><button class="btn btn-primary" onclick="window.oo_aleluya.sponsor_button_clicked_aleluya(<?php echo $id_aleluya ?>);">Sponsor this Child</button></div>
+           
+          </div>
+        </tr></td>
+        <tr><td align='center'>
+          <table class='oo_child_meta_aleluya'>
+<?php
+    foreach($public_child_fields_aleluya as $cf_aleluya => $cf_desc_aleluya) {
+      $cf_val_aleluya = get_post_meta($id_aleluya, $cf_aleluya)[0];
+      ?>      
+        <tr><td class='label_aleluya'><?php echo $cf_desc_aleluya ?>: </td><td class='content_aleluya'>
+          <?php echo $cf_val_aleluya ?>
+        </td></tr>
+<?php
+    }
+  $bd_val_aleluya = get_post_meta($id_aleluya, "birth_date_aleluya")[0] . "";
+  $bd_date_aleluya = DateTime::createFromFormat('Y/n/j', $bd_val_aleluya);
+  $now_aleluya    = new DateTime();
+
+  $age_aleluya   = $bd_date_aleluya ? $now_aleluya->diff($bd_date_aleluya) : "";
+
+  ?>
+      <tr><td class='label_aleluya'>Age: </td><td class='content_aleluya'> <?php echo $age_aleluya->y ?></td></tr>
+      </table>
+    </tr></td>
+    </table>
+    
+  </div>
+<?php
+  $str_aleluya = ob_get_contents(); 
+  ob_end_clean();
+  return $str_aleluya;
+
+
+}
+
+
+
+/**
+ * Hallelujah, modify the content of child_aleluya custom posts, after the header
+ **/
+//Thank You Jesus for https://www.wpbeginner.com/wp-tutorials/how-add-signature-ads-post-content-wordpress/
+function oo_after_child_post_content_aleluya($in_content_aleluya){
+    //if (is_single()) {
+    if( get_post_type() == "child_aleluya" ) {
+      $nick_names_aleluya   = get_post_meta( get_the_ID(), "nick_names_aleluya", true );
+
+    error_log_aleluya("Praise Jesus - ".get_the_ID());
+      //$fin_content_aleluya = oo_child_register_js_aleluya().'<button  class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(' .get_the_ID(). ');">Sponsor this Child</button>';
+
+      $fin_content_aleluya = oo_child_register_js_aleluya();
+      $fin_content_aleluya .= oo_donation_block_shortcode_aleluya_func( array( "heading_aleluya" => "p", "expandable_aleluya" => "yes", "purpose_aleluya" => $nick_names_aleluya ) );
+      $fin_content_aleluya .= oo_child_pagestats_htmlstr_aleluya(get_the_ID());
+
+      return $fin_content_aleluya . $in_content_aleluya;
+    } else {
+      return $in_content_aleluya;
+    }
+
+}
+add_filter( "the_content", "oo_after_child_post_content_aleluya" );
 
 

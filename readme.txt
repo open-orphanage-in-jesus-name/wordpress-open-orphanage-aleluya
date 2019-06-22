@@ -114,6 +114,9 @@ God be praised, the makes of wordpress have been doing an excellent job and it s
 
 == Changelog ==
 
+= 0.2.20190622a =
+ * Hallelujah - Attempt to fix responsiveness for child post image and some moving of functions between files
+
 = 0.2.20190621b =
  * Hallelujah - continue major refactoring with classes and externalize scripts and many other things
  * Hallelujah - image fix
@@ -176,7 +179,11 @@ God be praised, the makes of wordpress have been doing an excellent job and it s
 
 
 == Upgrade Notice ==
-= 0.2.20190621a =
+
+= 0.2.20190622a =
+ * Hallelujah - Attempt to fix responsiveness for child post image and some moving of functions between files
+
+= 0.2.20190621b =
  * Hallelujah - continue refactoring, please notify us of any bugs loveJesus@openorphanage.org
 
 = 0.2.20190621a =
