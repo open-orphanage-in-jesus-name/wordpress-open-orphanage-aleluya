@@ -3,121 +3,10 @@
  * He gave His only begotten Son, that all who believe in Him should not perish but have everlasting life; */
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
-$oo_child_register_js_aleluya_done = false;
-
-add_action('wp_head', function() {
-  echo oo_child_register_js_aleluya();
-});
-
 
 //Hallelujah - Returns a string, uses output buffering
 function oo_child_register_js_aleluya() {
-	global $oo_child_register_js_aleluya_done;
-  if( $oo_child_register_js_aleluya_done ) return "";
-  $oo_child_register_js_aleluya_done = true;
-   /**
-   * add a nonce for the registration
-   */
-
-  $wpchild_register_request_nonce_aleluya = wp_create_nonce('wpchild_register_request_nonce_aleluya');
-
-  ob_start();
-  ?>
-  <script> var wpchild_register_request_nonce_aleluya = "<?php echo $wpchild_register_request_nonce_aleluya ?>"; </script> 
-
-  <?php
-  if( ! is_user_logged_in() ) {
-    // If the user is not logged in, check to see if registrations are enabled
-    //Thanks Jesus for Robert hue  @ https://wordpress.stackexchange.com/a/167834
-    if ( ! get_option( 'users_can_register' ) ) {
-      // If we cannot register, at least allow sending an email
-?>
-        <script>
-        var oo_children_aleluya = [];
-        function oo_sponsor_button_clicked_aleluya(id_aleluya) {
-          var email_aleluya = prompt('Please enter your email, we will use this to contact you regarding sponsoring the requested child:');
-
-          if (!email_aleluya) return;
-
-          var data_aleluya = {
-            'action': 'oo_support_request_aleluya',
-            'oo_email_id_aleluya': id_aleluya,
-            'oo_email_aleluya': email_aleluya,
-            'wpchild_register_request_nonce_aleluya': wpchild_register_request_nonce_aleluya,
-          };
-
-          console.log("Hallelujah Support Request - " + JSON.stringify(data_aleluya));
-          jQuery.post(oo_ajax_aleluya.ajax_url_aleluya, data_aleluya, function(response_aleluya) {
-          console.log("Hallelujah Support Response - " + JSON.stringify(response_aleluya));
-            if(response_aleluya.success === true) {
-              alert( "Aleluya Success - " + response_aleluya.data.msg_aleluya );
-            } else {
-              alert( "Aleluya Error - " + response_aleluya.data.msg_aleluya );
-            }
-          });
-
-        }
-        </script>
-<?php
-    } else {
-      // Ok we can register so send to registration page
-      $reg_url_aleluya = wp_registration_url();
-      $reg_url_aleluya .= (( strpos($reg_url_aleluya, "?" ) === false ) ? '?' : '&' ) . 'child_id_aleluya=';
-?>
-      <script>
-      var oo_children_aleluya = [];
-      function oo_sponsor_button_clicked_aleluya(id_aleluya) {
-        alert('Hallelujah thanks again for you interest! We will send you to the registration page, where you can create a user for yourself. If you already have a user then Log In Instead please. After you do this please come back to this page and click sponsor again. Sorry please be patient as we are working to make this a bit easier.');
-        window.location="<?php echo esc_url(  $reg_url_aleluya  ) ?>" + id_aleluya;';
-
-      }
-<?php
-    }
-  } else {
-    //If here, then we are logged in and we should assign the child to the user
-    $email_aleluya = wp_get_current_user()->user_email;
-    $profile_page_aleluya = get_edit_user_link(); ;
-    //WIP
-?>
-      <script>
-      var oo_children_aleluya = [];
-      function oo_sponsor_button_clicked_aleluya(id_aleluya) {
-        var email_aleluya = "<?php echo $email_aleluya?>";
-        
-
-        if (!email_aleluya) {
-          return;
-        } 
-        alert('We are registering this child with you, please confirm your sponsorship and details in the back end. ');
-        var data_aleluya = {
-            'action': 'oo_support_request_aleluya',
-            'oo_email_id_aleluya': id_aleluya,
-            'oo_email_aleluya': email_aleluya,
-            'wpchild_register_request_nonce_aleluya': wpchild_register_request_nonce_aleluya,
-          };
-
-          console.log("Hallelujah Support Request - " + JSON.stringify(data_aleluya));
-          jQuery.post(oo_ajax_aleluya.ajax_url_aleluya, data_aleluya, function(response_aleluya) {
-          console.log("Hallelujah Support Response - " + JSON.stringify(response_aleluya));
-          if(response_aleluya.success === true) {
-            //alert( "Aleluya Success - " + response_aleluya.data.msg_aleluya );
-            console.log('Hallelujah: ' + response_aleluya.data.msg_aleluya);
-            window.location="<?php echo $profile_page_aleluya?>";
-          } else {
-            alert( "Aleluya Error - " + response_aleluya.data.msg_aleluya );
-            window.location="<?php echo $profile_page_aleluya?>";
-          }
-        });
-
-      }
-      </script>
-<?php
-    }
-
-
-  $str_aleluya = ob_get_contents(); 
-  ob_end_clean();
-  return $str_aleluya;
+	return "";
 }
 
 // [oo_aleluya child_aleluya="child_aleluya-value"]
@@ -181,7 +70,7 @@ function oo_child_minipagestats_htmlstr_aleluya($id_aleluya) {
       <div class='oo_child_desc_aleluya'>
         
           <div class="child_description_aleluya" ><?php echo $description_aleluya ?></div><br/>
-          <div class="show_content" align="center"><button class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(<?php echo $id_aleluya ?>);">Sponsor this Child</button></div>
+          <div class="show_content" align="center"><button class="btn btn-primary" onclick="window.oo_aleluya.sponsor_button_clicked_aleluya(<?php echo $id_aleluya ?>);">Sponsor this Child</button></div>
         
       </div>
     </tr></td>
@@ -209,7 +98,7 @@ function oo_child_minipagestats_htmlstr_aleluya($id_aleluya) {
   </tr></td>
   <tr><td>
     <div class="show_content" align="center">
-      <button class="btn btn-secondary" onclick="oo_viewmore_button_clicked_aleluya('<?php echo $morelink_aleluya?>');">
+      <button class="btn btn-secondary" onclick="window.oo_aleluya.viewmore_button_clicked_aleluya('<?php echo $morelink_aleluya?>');">
         More About this Child
       </button><br/><br/>
     </div>
@@ -246,7 +135,7 @@ function oo_child_pagestats_htmlstr_aleluya($id_aleluya) {
           <div class='oo_child_desc_aleluya'>
            
               <div class="child_description_aleluya" > <?php echo  $description_aleluya ?></div><br/>
-              <div class="show_content" align="center"><button class="btn btn-primary" onclick="oo_sponsor_button_clicked_aleluya(<?php echo $id_aleluya ?>);">Sponsor this Child</button></div>
+              <div class="show_content" align="center"><button class="btn btn-primary" onclick="window.oo_aleluya.sponsor_button_clicked_aleluya(<?php echo $id_aleluya ?>);">Sponsor this Child</button></div>
            
           </div>
         </tr></td>

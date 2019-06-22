@@ -40,9 +40,22 @@ add_action( 'wp_enqueue_scripts', function() {
   //  - Late Calling, ease of use
   wp_enqueue_script( 'oo_aleluya_js', plugins_url( '/public-aleluya/js-aleluya/oo-aleluya.js' , __DIR__.'../'), array('jquery'), '0.1' );
 
+  //Used for some js
+  $reg_url_aleluya = wp_registration_url();
+  $reg_url2_aleluya = $reg_url_aleluya.(( strpos($reg_url_aleluya, "?" ) === false ) ? '?' : '&' ) . 'child_id_aleluya=';
+  
   //Create an object to reference the ajax url use in the oo-aleluya.js
   wp_localize_script( 'oo_aleluya_js', 'oo_ajax_aleluya',
-            array( 'ajax_url_aleluya' => admin_url( 'admin-ajax.php' ) ) );
+            array( 'ajax_url_aleluya' => admin_url( 'admin-ajax.php' ),
+                   'nonce_aleluya' => wp_create_nonce('oo_nonce_aleluya'),
+                   'reg_url_aleluya' => $reg_url_aleluya,
+                   'reg_url2_aleluya' => $reg_url2_aleluya,
+                   'can_reg_aleluya' => get_option( 'users_can_register' ),
+                   'is_logged_in_aleluya' => is_user_logged_in(),
+                   'user_email_aleluya' => wp_get_current_user()->user_email,
+                   'edit_user_link_aleluya' => get_edit_user_link(),
+                    ) 
+          );
 
   // Stripe library
   wp_enqueue_script( "oo_stripe_aleluya", 'https://js.stripe.com/v3/' ) ;
@@ -151,11 +164,9 @@ function ifttt_post_notify_aleluya($v1_aleluya, $v2_aleluya, $v3_aleluya) {
 add_action( 'wp_ajax_oo_support_request_aleluya', 'wp_ajax_oo_support_request_aleluya' );
 
 function wp_ajax_oo_support_request_aleluya() {
-  error_log_aleluya("PRAISE JESUS - ajax in 1",2);
   if( !isset($_POST["oo_name_aleluya"]) && isset($_POST["oo_email_aleluya"])  ) { //TODO: hallelujah Handle via ajax
     $data_aleluya = array( );
-    error_log_aleluya("PRAISE JESUS - ajax in 2",2);
-    wp_verify_nonce($_POST['wpchild_register_request_nonce_aleluya'], 'wpchild_register_request_nonce_aleluya');
+    wp_verify_nonce($_POST['wpchild_register_request_nonce_aleluya'], 'nonce_aleluya');
     $email_aleluya = sanitize_email( $_POST["oo_email_aleluya"] );
     $oo_child_id_aleluya = intval( $_POST["oo_email_id_aleluya"] ); //the Lord is good, sorry poorly named param right now
     $child_aleluya = new Child_aleluya($oo_child_id_aleluya);

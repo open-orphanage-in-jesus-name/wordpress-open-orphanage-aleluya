@@ -6,6 +6,7 @@
 dist/
 vendor/
 svn-aleluya/
+bin/mktest-aleluya.sh
 
 # Numerous always-ignore extensions
 *.diff
