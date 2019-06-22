@@ -7,13 +7,13 @@ defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 require_once( dirname( __FILE__ ) . '/classes-aleluya/classes-includes-aleluya.php');
 
 require_once( dirname( __FILE__ ) . '/functions-aleluya.php' );
-require_once( dirname( __FILE__ ) . '/child-custom-post-type-aleluya.php' );
+
 require_once( dirname( __FILE__ ) . '/roles-aleluya.php' );
 require_once( dirname( __FILE__ ) . '/basic-auth-aleluya.php' );
-require_once( dirname( __FILE__ ) . '/show-children-shortcode-aleluya.php');
-require_once( dirname( __FILE__ ) . '/donation-block-shortcode-aleluya.php');
-require_once( dirname( __FILE__ ) . '/notify1-aleluya.php');
 require_once( dirname( __FILE__ ) . '/charges-aleluya.php');
 require_once( dirname( __FILE__ ) . '/supporters-aleluya.php');
-require_once( dirname( __FILE__ ) . '/bible-verse-widget-aleluya.php');
+require_once( dirname( __FILE__ ) . '/custom-post-types-aleluya/child-custom-post-type-aleluya.php' );
+require_once( dirname( __FILE__ ) . '/shortcodes-aleluya/show-children-shortcode-aleluya.php');
+require_once( dirname( __FILE__ ) . '/shortcodes-aleluya/donation-block-shortcode-aleluya.php');
+require_once( dirname( __FILE__ ) . '/widgets-aleluya/bible-verse-widget-aleluya.php');
 

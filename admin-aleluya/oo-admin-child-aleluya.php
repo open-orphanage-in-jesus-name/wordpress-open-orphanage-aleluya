@@ -44,9 +44,10 @@ function oo_show_child_fields_meta_box_aleluya() {
   //'birth_date_aleluya',
 
   $meta = get_post_meta( $post->ID, 'your_fields', true );
+  
 
 //Thank You Jesus for https://wordpress.stackexchange.com/a/236296
-  $image_disp_aleluya =   $oo_upload_url_aleluya."thumbs-aleluya/".$child_aleluya["id_aleluya"]."-192x192-aleluya.jpg";
+  $image_disp_aleluya =   $oo_upload_url_aleluya."thumbs-aleluya/".$post->ID."-192x192-aleluya.jpg";
   $image_aleluya = get_post_meta($post->ID, 'avatar_media_url_aleluya', true );
   $sponsored_by_id_aleluya = get_post_meta($post->ID, "sponsored_by_id_aleluya", true);
   $sponsored_by_user_aleluya = $sponsored_by_id_aleluya ? get_user_by('ID', $sponsored_by_id_aleluya) : null;

@@ -40,7 +40,7 @@ class Child_aleluya {
 
   function __get($field_name_aleluya) {
     if(  !$this->ID_aleluya) throw new Exception("Hallelujah - blank child ID for object");
-    if( ! in_array($field_name_aleluya, $this::$fields_aleluya) ) throw new Exception("Hallelujah - invalid field for object");
+    if( ! in_array($field_name_aleluya, $this::$fields_aleluya) ) throw new Exception("Hallelujah - invalid field for oo child object");
     if( ! isset($field_data_aleluya[$field_name_aleluya]) ) {
         $field_data_aleluya[$field_name_aleluya] = get_post_meta($this->ID_aleluya, $field_name_aleluya, true);
     }
@@ -49,7 +49,7 @@ class Child_aleluya {
 
   function __set($field_name_aleluya, $value_aleluya) {
     if( !$this->ID_aleluya) throw new Exception("Hallelujah - blank child ID for object");
-    if( ! in_array($field_name_aleluya, $this::$fields_aleluya) ) throw new Exception("Hallelujah - invalid field for object");
+    if( ! in_array($field_name_aleluya, $this::$fields_aleluya) ) throw new Exception("Hallelujah - invalid field for oo child object");
     $field_data_aleluya[$field_name_aleluya] = $value_aleluya;
     return update_post_meta($this->ID_aleluya, $field_name_aleluya, $value_aleluya);
   }
@@ -71,7 +71,7 @@ class Child_aleluya {
     if(!in_array($level_aleluya, Child_aleluya::$valid_levels_aleluya)) throw new Exception("Invalid level set for child sponsorship type");
 
     //Unset previous sponsor, hallelujah
-    if($this->sponsored_by_id_aleluya != $sponsor_id_aleluya) {
+    if($this->sponsored_by_id_aleluya && ($this->sponsored_by_id_aleluya != $sponsor_id_aleluya)) {
       $prev_sponsor_id_aleluya = $this->sponsored_by_id_aleluya;
       $children_supported_aleluya = oo_get_user_children_supported_aleluya( $prev_sponsor_id_aleluya );
       $child_arr_aleluya = array(

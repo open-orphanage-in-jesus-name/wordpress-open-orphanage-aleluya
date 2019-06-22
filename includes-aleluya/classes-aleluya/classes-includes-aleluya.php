@@ -4,4 +4,5 @@
 defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
 
 require_once( dirname( __FILE__ ) . '/child-aleluya.php');
-
+require_once( dirname( __FILE__ ) . '/oo-supporter-aleluya.php');
+require_once( dirname( __FILE__ ) . '/oo-stripe-charge-aleluya.php');

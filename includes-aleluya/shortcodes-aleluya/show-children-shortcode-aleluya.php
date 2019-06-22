@@ -38,23 +38,24 @@ function oo_child_register_js_aleluya() {
           var email_aleluya = prompt('Please enter your email, we will use this to contact you regarding sponsoring the requested child:');
 
           if (!email_aleluya) return;
-          var xhr_aleluya = new XMLHttpRequest();
-          xhr_aleluya.open('POST', '/');
-          xhr_aleluya.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-          xhr_aleluya.onload = function() {
-            if (xhr_aleluya.status === 200) {
-                alert('Hallelujah: ' + xhr_aleluya.responseText);
-            }
-            else {
-                alert('Hallelujah Request failed.  Returned status of ' + xhr_aleluya.status);
-            }
+
+          var data_aleluya = {
+            'action': 'oo_support_request_aleluya',
+            'oo_email_id_aleluya': id_aleluya,
+            'oo_email_aleluya': email_aleluya,
+            'wpchild_register_request_nonce_aleluya': wpchild_register_request_nonce_aleluya,
           };
-          xhr_aleluya.send(encodeURI(
-            'oo_email_id_aleluya='+id_aleluya+
-            '&oo_email_aleluya='+email_aleluya+
-            '&wpchild_register_request_nonce_aleluya='+wpchild_register_request_nonce_aleluya
-            )
-          );
+
+          console.log("Hallelujah Support Request - " + JSON.stringify(data_aleluya));
+          jQuery.post(oo_ajax_aleluya.ajax_url_aleluya, data_aleluya, function(response_aleluya) {
+          console.log("Hallelujah Support Response - " + JSON.stringify(response_aleluya));
+            if(response_aleluya.success === true) {
+              alert( "Aleluya Success - " + response_aleluya.data.msg_aleluya );
+            } else {
+              alert( "Aleluya Error - " + response_aleluya.data.msg_aleluya );
+            }
+          });
+
         }
         </script>
 <?php
@@ -88,25 +89,26 @@ function oo_child_register_js_aleluya() {
           return;
         } 
         alert('We are registering this child with you, please confirm your sponsorship and details in the back end. ');
-        
-        var xhr_aleluya = new XMLHttpRequest();
-        xhr_aleluya.open('POST', '/');
-        xhr_aleluya.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-        xhr_aleluya.onload = function() {
-          if (xhr_aleluya.status === 200) {
-              console.log('Hallelujah: ' + xhr_aleluya.responseText);
-              window.location="<?php echo $profile_page_aleluya?>";
+        var data_aleluya = {
+            'action': 'oo_support_request_aleluya',
+            'oo_email_id_aleluya': id_aleluya,
+            'oo_email_aleluya': email_aleluya,
+            'wpchild_register_request_nonce_aleluya': wpchild_register_request_nonce_aleluya,
+          };
+
+          console.log("Hallelujah Support Request - " + JSON.stringify(data_aleluya));
+          jQuery.post(oo_ajax_aleluya.ajax_url_aleluya, data_aleluya, function(response_aleluya) {
+          console.log("Hallelujah Support Response - " + JSON.stringify(response_aleluya));
+          if(response_aleluya.success === true) {
+            //alert( "Aleluya Success - " + response_aleluya.data.msg_aleluya );
+            console.log('Hallelujah: ' + response_aleluya.data.msg_aleluya);
+            window.location="<?php echo $profile_page_aleluya?>";
+          } else {
+            alert( "Aleluya Error - " + response_aleluya.data.msg_aleluya );
+            window.location="<?php echo $profile_page_aleluya?>";
           }
-          else {
-              window.location="<?php echo $profile_page_aleluya?>";
-          }
-        };
-          xhr_aleluya.send(encodeURI(
-            'oo_email_id_aleluya=' + id_aleluya +
-            '&oo_email_aleluya=' + email_aleluya +
-            '&wpchild_register_request_nonce_aleluya=' + wpchild_register_request_nonce_aleluya
-            )
-          );
+        });
+
       }
       </script>
 <?php

@@ -9,42 +9,15 @@ defined( 'ABSPATH' ) or die( 'Jesus Christ is the Lord . ' );
  **/
 
 function chargeStripeCustomer_aleluya($customer_code_aleluya, $price_aleluya, $description_aleluya) {
-  if(! get_option('oo_stripe_sk_key_aleluya') ) return false;
-
-  \Stripe\Stripe::setApiKey( get_option('oo_stripe_sk_key_aleluya') );
-
-  $charge_aleluya = \Stripe\Charge::create([
-      'amount' => $price_aleluya,
-      'currency' => 'usd',
-      'customer' => $customer_code_aleluya,
-      'description' => $description_aleluya,
-  ]);
-
-  return $charge_aleluya;
-
+  $stripe_charge_aleluya = new OO_StripeCharge_aleluya();
+  return $stripe_charge_aleluya->chargeStripeCustomer_aleluya($customer_code_aleluya, $price_aleluya, $description_aleluya);
+  
 }
 
 function chargeStripeWithToken_aleluya($token_aleluya, $price_aleluya, $name_aleluya, $email_aleluya, $phone_aleluya, $description_aleluya, $notes_aleluya, $req_uri_aleluya) {
-  if(! get_option('oo_stripe_sk_key_aleluya') ) return false;
-
-  \Stripe\Stripe::setApiKey( get_option('oo_stripe_sk_key_aleluya') );
-
-  $charge_aleluya = \Stripe\Charge::create([
-      'amount' => $price_aleluya,
-      'currency' => 'usd',
-      'source' => $token_aleluya,
-      'metadata' => array(
-        "email_aleluya" => $email_aleluya,
-        "name_aleluya" => $name_aleluya,
-        "phone_aleluya" => $phone_aleluya,
-        "notes_aleluya" => $notes_aleluya,
-        "req_uri_aleluya" => $req_uri_aleluya,
-      ),
-      'description' => $description_aleluya,
-  ]);
-
-  return $charge_aleluya;
-
+  $stripe_charge_aleluya = new OO_StripeCharge_aleluya();
+  return $stripe_charge_aleluya->chargeStripeWithToken_aleluya($token_aleluya, $price_aleluya, $name_aleluya, $email_aleluya, $phone_aleluya, $description_aleluya, $notes_aleluya, $req_uri_aleluya);
+  
 }
 
 
