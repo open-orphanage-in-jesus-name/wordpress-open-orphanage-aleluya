@@ -10,6 +10,32 @@ Praise Jesus, this is a Wordpress plug-in. We hope to make many additions, right
 
 
 
+### Getting Started
+
+#### Requirements for dev version
+ * A working wordpress installation 5.0+ with mysql etc...
+ * Composer
+ * PHP 7.0 +
+
+##### Optional Requirements
+ * nodejs and npm for Guten Block generation
+ * [wp-cli](https://wp-cli.org)
+ * phpunit
+
+#### Steps
+
+Make sure you have composer installed.
+From your wordpress installation
+`
+  cd wp-content/plugins
+  git clone https://github.com/open-orphanage-in-jesus-name/wordpress-open-orphanage-aleluya.git
+  mv wordpress-open-orphanage-aleluya open-orphanage
+  cd open-orphanage
+  composer install
+`
+Then in the administrator activate the plugin. You will want to configure the Open Orphanage settings such as adding test stripe api keys and enabling user registrations, and add children. There additionally are some setting in each user's profile.
+
+
 ### External Services
 
 The plug-in can optionally work with both IFTTT and with Stripe. 
@@ -25,7 +51,17 @@ If you place an [IFTTT](https://www.ifttt.com) web service key and event name, t
  - View the [IFTTT Privacy Policy](https://ifttt.com/privacy)
  
  
+
+
 ## Additional Development Notes:
+
+### Composer
+Hallelujah, as stated above we need to run composer install in the plugin directory for it to run.
+
+### PHPUnit
+The github distribution has phpunit testing enabled. Make sure you have phpunit and wp-cli installed, use the bin/install-wp-tests.sh to set up the testing db and install and then run phpunit in the root of the plugin directory. More tutorials are available online.
+
+### Create Guten Block
 
 This project was bootstrapped with [Create Guten Block](https://github.com/ahmadawais/create-guten-block).
 

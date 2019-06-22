@@ -114,6 +114,10 @@ God be praised, the makes of wordpress have been doing an excellent job and it s
 
 == Changelog ==
 
+= 0.2.20190621b =
+ * Hallelujah - continue major refactoring with classes and externalize scripts and many other things
+ * Hallelujah - image fix
+
 = 0.2.20190621a =
  * Hallelujah - refactoring with classes and many other things
  * Hallelujah - Praise Jesus - Show a child's sponsor in the admin, Better preview images in admin, Alerts while sponsoring, Do not list erased or children posts in trash in admin, misc fixes, better centering of panel buttons etc
@@ -167,7 +171,14 @@ God be praised, the makes of wordpress have been doing an excellent job and it s
 = 0.1.20190603 =
 * Hallelujah, First version on wordpress.com
 
+
+
+
+
 == Upgrade Notice ==
+= 0.2.20190621a =
+ * Hallelujah - continue refactoring, please notify us of any bugs loveJesus@openorphanage.org
+
 = 0.2.20190621a =
  * Hallelujah - large update, please notify us of any bugs loveJesus@openorphanage.org
 

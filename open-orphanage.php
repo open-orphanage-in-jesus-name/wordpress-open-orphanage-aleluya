@@ -3,7 +3,7 @@
 Plugin Name:  ✝ Open Orphanage
 Plugin URI:   https://openorphanage.org
 Description:  Basic Open Source Orphanage Management - Currently used alongside https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2
-Version:      0.2.20190621a
+Version:      0.2.20190621b
 Author:       loveJesus in Jesus name
 Author URI:   https://perffection.com
 License:      GPL2
@@ -38,13 +38,15 @@ require_once( dirname( __FILE__ ) . '/includes-aleluya/includes-aleluya.php' );
 if ( is_admin() ) {
     // we are in admin mode
     require_once( dirname( __FILE__ ) . '/admin-aleluya/oo-admin-aleluya.php' );
+
+    /**  In progress
+    *  Gutenberg Block Initializer.
+    **/
+    require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
 }
 
 
-/**  In progress
-	*  Gutenberg Block Initializer.
-	**/
-require_once plugin_dir_path( __FILE__ ) . 'src/init.php';
+
 
 
 
