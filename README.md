@@ -1,6 +1,6 @@
 # For God So loved the world, that He gave His only begotten Son, that all who believe in Him should not perish but have everlasting life.
 
-Praise Jesus, this is a Wordpress plug-in. We hope to make many additions, right now it is meant to work alongside the [Android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2)
+Praise [Jesus Christ](https://www.jesusfilm.org/watch/jesus.html/english.html), this is a Wordpress plug-in. We hope to make many additions, right now it is meant to work alongside the [Android app](https://play.google.com/store/apps/details?id=org.openorphanage.m1aleluya2)
 
 ### Mission
 🕆 Serve the Lord, Jesus, by providing free and open source software for orphanages, to help manage their operations and communications and to aid with meeting needs through fund raising and sponsorship.
